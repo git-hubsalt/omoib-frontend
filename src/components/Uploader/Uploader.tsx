@@ -3,8 +3,7 @@ import CameraIcon from '../../assets/camera.svg';
 import ClothesIcon from '../../assets/clothes.svg';
 import {
   IconButtonContainer,
-  UploaderContainer,
-  UploadButton
+  UploadButton, UploaderLayout
 } from "./UploaderStyle";
 import {useIsReactNativeWebview} from "../../hooks/useIsReactNativeWebview";
 import {sendMessageToReactNative} from "../../utils/reactNativeMessage";
@@ -42,7 +41,7 @@ const Uploader: FC<UploaderProps> = ({ width, height, hasButton, buttonText, typ
   }
 
   return (
-    <UploaderContainer
+    <UploaderLayout
       width={width}
       height={height}
       onClick={handleContainerClick(hasButton)}
@@ -61,7 +60,7 @@ const Uploader: FC<UploaderProps> = ({ width, height, hasButton, buttonText, typ
           : null
         }
       </IconButtonContainer>
-    </UploaderContainer>
+    </UploaderLayout>
   );
 }
 

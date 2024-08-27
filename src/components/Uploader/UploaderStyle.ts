@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 
-interface ContainerProps {
+interface UploaderLayoutProps {
   width: number;
   height: number;
 }
 
-export const UploaderContainer = styled.div<ContainerProps>`
+export const UploaderLayout = styled.div<UploaderLayoutProps>`
     width: ${({ width }) => width}px;
     height: ${({ height }) => height}px;
     display: flex;
@@ -22,17 +22,6 @@ export const UploaderContainer = styled.div<ContainerProps>`
             repeating-linear-gradient(270deg, var(--gray--5), var(--gray--5) 10px, transparent 10px, transparent 25px); // bottom
     border-image: repeating-linear-gradient(0deg, var(--gray--5), var(--gray--5) 10px, transparent 10px, transparent 25px);
     border-radius: 10px;
-`;
-
-export const IconContainer = styled.div`
-    width: 155px;
-    height: 155px;
-    background-color: rgba(226, 244, 255, 0.50);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    border-radius: 100px;
 `;
 
 export const IconButtonContainer = styled.div`
