@@ -1,6 +1,7 @@
 // src/App.tsx
 import React from 'react';
 import { GlobalStyles } from './styles/GlobalStyles';
+import Button from "./components/button/Button";
 
 
 const App: React.FC = () => {
