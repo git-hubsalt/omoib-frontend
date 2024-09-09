@@ -3,24 +3,31 @@ import styled from 'styled-components';
 
 type ButtonProps = {
     className?: string;
-    children?: ReactNode;
+    // children?: ReactNode;
     name: string;
 };
 
 const TagButton =({className, name}:ButtonProps) => {
-    const isSeason = name === '#가을' || name === '#겨울' || name === '#봄' || name === '#여름';
-    const isClothing = name === '#상의' || name === '#하의' || name === '#드레스/원피스';
-    //기본값은 옷 등록했던 태그
-    let backgroundColor = 'transparent'; 
+    const isHashtag = name.startsWith('#');  // 태그가 #으로 시작하는지 확인
+    let backgroundColor = 'transparent'; //아닐 경우 기본 배경은 투명색
     let color = 'var(--black)'; 
+    let tagContent = name;
 
-    if (isSeason) {
-        backgroundColor = '#D07C2E';
-        color = 'var(--white)';
-    } else if (isClothing) {
-        backgroundColor = 'var(--blue)';
-        color = 'var(--white)';
+    if (isHashtag) {
+        tagContent = name.substring(1); 
+
+        const isSeason = tagContent === '가을' || tagContent === '겨울' || tagContent === '봄' || tagContent === '여름';
+        const isClothing = tagContent === '상의' || tagContent === '하의' || tagContent === '드레스/원피스';
+
+        if (isSeason) {
+            backgroundColor = '#D07C2E';
+            color = 'var(--white)';
+        } else if (isClothing) {
+            backgroundColor = 'var(--blue)';
+            color = 'var(--white)';
+        }
     }
+
 
     return(
         <TagBox className={className} backgroundColor={backgroundColor}>
