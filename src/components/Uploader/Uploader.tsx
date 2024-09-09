@@ -1,4 +1,4 @@
-import {FC, ReactElement, useEffect, useState} from "react";
+import {ReactNode, useEffect, useState} from "react";
 import {ContentsBox, IconButtonContainer, UploadButton, UploaderLayout} from "./UploaderStyle";
 import CameraIcon from "../../assets/camera.svg";
 import ClothesIcon from "../../assets/clothes.svg";
@@ -9,13 +9,18 @@ import {sendMessageToReactNative} from "../../utils/reactNativeMessage";
 interface UploaderProps {
   width: number;
   height: number;
-  children: ReactElement;
+  children: ReactNode;
 }
 
 interface ImageUploaderProps {
   hasButton: boolean;
   buttonText?: string;
   onImageChange: (imageBase64: string) => void;
+}
+
+interface ClothesUploaderProps {
+  buttonText: string;
+  onClothesChange: (clothes: string) => void;
 }
 
 const Uploader = ({ width, height, children }: UploaderProps) => {
@@ -26,6 +31,35 @@ const Uploader = ({ width, height, children }: UploaderProps) => {
     >
         {children}
     </UploaderLayout>
+  );
+}
+
+const Clothes = ({ buttonText, onClothesChange }: ClothesUploaderProps) => {
+  const [clothes, setClothes] = useState<string | null>(null);
+
+  const handleBoxUpload = () => {
+    if (clothes === null) return;
+
+    handleClothesUpload();
+  }
+
+  const handleClothesUpload = () => {
+    //TODO: 옷 업로드
+  }
+
+  return (
+    <ContentsBox onClick={handleBoxUpload}>
+      {(clothes === null) ?
+        <IconButtonContainer>
+          <img src={ClothesIcon} alt={'clothes'} />
+            <UploadButton onClick={() => {}}>
+              {buttonText}
+            </UploadButton>
+        </IconButtonContainer>
+        :
+        <img src={'temp_clothes'} alt={"uploaded"} />
+      }
+    </ContentsBox>
   );
 }
 
@@ -64,9 +98,7 @@ const Image = ({ hasButton, buttonText, onImageChange }: ImageUploaderProps) => 
           <IconButtonContainer>
             <img src={CameraIcon} alt={'camera'} />
             {(hasButton) ?
-                <UploadButton
-                  onClick={handleImageUpload}
-                >
+                <UploadButton onClick={handleImageUpload}>
                   {buttonText}
                 </UploadButton>
                 : null
@@ -81,4 +113,5 @@ const Image = ({ hasButton, buttonText, onImageChange }: ImageUploaderProps) => 
 
 export default Uploader;
 
+Uploader.Clothes = Clothes;
 Uploader.Image = Image;
