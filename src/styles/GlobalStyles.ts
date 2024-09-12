@@ -87,5 +87,8 @@ export const GlobalStyles = createGlobalStyle`
     --main: #89CEFA;
     --sky--blue: #E3ECF2;
     --kakao: #FFDD00;
+    //민주 추가 색상
+    --white: #fff;
+    --blue: #89CEFA;
   }
 `;
