@@ -68,6 +68,8 @@ const Image = ({ hasButton, buttonText, onImageChange }: ImageUploaderProps) => 
   const isNative = useIsReactNativeWebview();
 
   const messageHandler = (event: MessageEvent) => {
+    if (!isNative) return;
+
     const { type, data } = JSON.parse(event.data);
     if (type === 'IMAGE') {
       setImageBase64(data);
