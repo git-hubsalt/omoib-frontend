@@ -2,6 +2,7 @@
 import React from 'react';
 import { GlobalStyles } from './styles/GlobalStyles';
 import Card from "./components/card/Card";
+import Header from "./components/header/Header";
 
 
 const App: React.FC = () => {
@@ -10,6 +11,7 @@ const App: React.FC = () => {
         <GlobalStyles />
         <h1>App</h1>
           <Card/>
+        <Header text="안녕"/>
       </>
   );
 };
