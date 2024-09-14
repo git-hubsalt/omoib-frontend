@@ -1,20 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ReactComponent as Back  } from '../../assets/back.svg'
 
 type HeaderProps = {
-  text: string; // 가운데 텍스트를 전달하는 props
+  text: string;
 };
 
 const Header = ({ text }: HeaderProps) => {
   return (
     <HeaderContainer>
-      <BackButton>◀</BackButton>
+      <BackWrapper><Back/></BackWrapper>
       <HeaderText>{text}</HeaderText>
     </HeaderContainer>
   );
 };
 
-// Header 전체 컨테이너
 const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
@@ -26,7 +26,7 @@ const HeaderContainer = styled.div`
 `;
 
 // 왼쪽 화살표 버튼
-const BackButton = styled.div`
+const BackWrapper = styled.div`
   position: absolute;
   left: 16px;
   font-size: 18px;
