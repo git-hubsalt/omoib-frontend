@@ -103,9 +103,13 @@ export const GlobalStyles = createGlobalStyle`
     --gray--2: #E3E3E3;
     --gray--3: #9B9B9B;
     --gray--4: #575757;
+    --gray--5: #979797;  
     --black: #000000;
     --main: #89CEFA;
     --sky--blue: #E3ECF2;
     --kakao: #FFDD00;
+    //민주 추가 색상
+    --white: #fff;
+    --blue: #89CEFA;
   }
 `;
