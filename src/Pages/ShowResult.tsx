@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TagButton from '../components/Button/TagButton';
 import Header from '../components/header/Header';
+import ClickButton from '../components/Button/ClickButton';
 
 interface RecommendationData {
   date: string;
@@ -43,6 +44,10 @@ const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtua
       </InfoWrapper>
     );
   };
+
+  const handleClick = () => {
+    console.log('Button clicked!');
+  };
   
   return (
     <div>
@@ -58,6 +63,12 @@ const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtua
         </InfoContainer>
         </DateText>
       </Container>
+      {!isVirtualFitting && (
+      <ClickButton variant='footerButton' onClick={handleClick}>
+        코디 추천 결과
+      </ClickButton>
+    )}
+      {/* <ClickButton variant='footerButton' onClick={handleClick}>{isVirtualFitting ? '가상 피팅 결과' : '코디 추천 결과'}</ClickButton> */}
     </div>
 
   );
