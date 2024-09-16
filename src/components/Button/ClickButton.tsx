@@ -41,6 +41,7 @@ const buttonVariants = {
         border: 1px solid var(--main);
         border-radius: 14px;
         color: #919191;
+        margin-top: 10px;
     `,
 };
 

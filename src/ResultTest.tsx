@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom'; 
 import ShowResultPage from './Pages/ShowResult';
+import History from './Pages/History';
 
 import { recommendationData, fittingData } from './data';
 
@@ -16,11 +17,12 @@ const ResultTest: React.FC = () => {
 
             <Routes>
                 <Route path="/" element={
-                    <ShowResultPage 
-                        isVirtualFitting={isVirtualFitting}
-                        recommendationData={recommendationData} 
-                        fittingData={fittingData} 
-                    />
+                    // <ShowResultPage 
+                    //     isVirtualFitting={isVirtualFitting}
+                    //     recommendationData={recommendationData} 
+                    //     fittingData={fittingData} 
+                    // />
+                    <History recommendationData={recommendationData}  />
                 } />
             </Routes>
         </>
