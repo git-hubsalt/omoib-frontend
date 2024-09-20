@@ -6,6 +6,7 @@ import Header from '../components/header/Header';
 import ClickButton from '../components/Button/ClickButton';
 
 interface RecommendationData {
+  id: number;
   date: string;
   categories: {
       category: string;
@@ -18,18 +19,26 @@ interface RecommendationData {
 }
 
 interface Props {
-  recommendationData: RecommendationData;
-  fittingData: RecommendationData;
+  recommendationData: RecommendationData[];
+  fittingData: RecommendationData[];
   isVirtualFitting: boolean;
+  currentId: number;
 }
 
-const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFitting }) => {
+const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFitting, currentId }) => {
   const data = isVirtualFitting ? fittingData : recommendationData;
+
+  const Id = data.find(item => item.id === currentId);
+
+    // 데이터가 없을 때의 처리
+    if (!Id) {
+      return <div>No data found</div>;
+    }
 
   //데이터 받아오는 공통 함수 (상의, 하의, 기타)
   const renderCategory = (categoryName: string) => {
-    const category = data.categories.find(category => category.category === categoryName);
-    
+    const category = Id?.categories.find(category => category.category === categoryName);
+
     return (
       <InfoWrapper>
         <InfoBoldText>{categoryName}</InfoBoldText>
@@ -55,20 +64,19 @@ const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtua
       <Container>
         <Result />
         <DateText>
-        {data.date}에 추천 받았어요.
+        {Id.date}에 추천 받았어요.
+        </DateText>
         <InfoContainer>
           {renderCategory('상의')}
           {renderCategory('하의')}
           {renderCategory('기타')}
         </InfoContainer>
-        </DateText>
       </Container>
       {!isVirtualFitting && (
       <ClickButton variant='footerButton' onClick={handleClick}>
         코디 추천 결과
       </ClickButton>
     )}
-      {/* <ClickButton variant='footerButton' onClick={handleClick}>{isVirtualFitting ? '가상 피팅 결과' : '코디 추천 결과'}</ClickButton> */}
     </div>
 
   );

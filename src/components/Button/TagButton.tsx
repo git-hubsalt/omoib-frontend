@@ -9,7 +9,6 @@ type ButtonProps = {
 const TagButton = ({ className, name, withHash = true }: ButtonProps) => {
     const tagContent = withHash ? `#${name}` : name; // withHash가 true이면 # 추가
     const { backgroundColor, color } = getTagStyles(name);
-    console.log('color:', color);
 
     return (
       <TagBox className={className} backgroundColor={backgroundColor} withHash={withHash}>
