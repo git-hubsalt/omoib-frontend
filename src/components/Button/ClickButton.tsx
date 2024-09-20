@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import * as C from "../../styles/ClickButtonStyles";
 
 // 버튼 스타일에 따른 속성 정의
 type ButtonVariant = "footerButton" | "registerButton" | "historyButton" | "reviewButton";
@@ -8,44 +9,15 @@ interface ButtonStyleProps {
     variant: ButtonVariant;
 }
 
-// 각 variant에 따른 스타일 정의
 const buttonVariants = {
-    footerButton: `
-        width: 100%;
-        height: 82px;
-        padding: 30px 120px;
-        background-color: #89CEFA;
-        border: none;
-        color: white;
-    `,
-    registerButton: `
-        width: 208px;
-        height: 56px;
-        background-color: #89CEFA;
-        color: white;
-        border-radius: 14px;
-        border: none;
-    `,
-    historyButton: `
-        width: 100%;
-        height: 56px;
-        background-color: #89CEFA;
-        color: white;
-        border-radius: 14px;
-        border: none;
-    `,
-    reviewButton: `
-        width: 100%;
-        height: 56px;
-        background-color: transparent;
-        border: 1px solid var(--main);
-        border-radius: 14px;
-        color: #919191;
-        margin-top: 10px;
-    `,
+    footerButton: C.ClickButtonStyles.footerButton,
+    registerButton: C.ClickButtonStyles.registerButton,
+    historyButton: C.ClickButtonStyles.historyButton,
+    reviewButton: C.ClickButtonStyles.reviewButton,
 };
 
-// 버튼 스타일 컴포넌트
+
+// 버튼 스타일 컴포넌트 (공통)
 const ButtonStyle = styled.button<ButtonStyleProps>`
     display: flex;
     justify-content: center;
