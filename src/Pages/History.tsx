@@ -1,4 +1,3 @@
-// 코디 추천 결과랑 가상피팅 결과를 조건문 써서 2개 렌더링하기
 import React, { useState } from 'react';
 import * as H from "../styles/HistoryStyles";
 import TagButton from '../components/Button/TagButton';
