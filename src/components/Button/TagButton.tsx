@@ -1,34 +1,18 @@
 import styled from 'styled-components';
-import {useState} from "react";
 
 type ButtonProps = {
     className?: string;
     name: string;
     withHash?: boolean;
-    onClick?: () => void;
 };
 
-const TagButton = ({ className, name, withHash = true, onClick }: ButtonProps) => {
-    const [selected, setSelected] = useState<boolean>(false);
+const TagButton = ({ className, name, withHash = true }: ButtonProps) => {
     const tagContent = withHash ? `#${name}` : name; // withHash가 true이면 # 추가
-    const { backgroundColor, color } = getTagStyles(name);
-    const defaultColor = '#F4F4F4';
-    const defaultTextColor = '#989898';
-
-    const handleTagClick = () => {
-        setSelected((current) => !current);
-        if (onClick) {
-            onClick();
-        }
-    }
+    const { backgroundColor, color } = getTagStyles(name); // 태그의 기본 색상
 
     return (
-      <TagBox className={className}
-              backgroundColor={(selected) ? backgroundColor : defaultColor}
-              withHash={withHash}
-              onClick={handleTagClick}
-      >
-          <StyledTag color={(selected) ? color : defaultTextColor}>{tagContent}</StyledTag>
+      <TagBox className={className} backgroundColor={backgroundColor} withHash={withHash}>
+          <StyledTag color={color}>{tagContent}</StyledTag>
       </TagBox>
     );
 };
@@ -65,9 +49,8 @@ const TagBox = styled.div<{ backgroundColor: string; withHash: boolean }>`
     justify-content: center;
     border-radius: 20px;
     background-color: ${(props) => props.backgroundColor};
-    //padding: 2px 4px;
     min-width: ${(props) => (props.withHash ? '32px' : '50px')};
-    max-width: ${(props) => (props.withHash ? '32px' : '50px')}; //적용 안돼서 수정
+    max-width: ${(props) => (props.withHash ? '32px' : '50px')}; 
     min-height: ${(props) => (props.withHash ? '16px' : '30px')};
     max-height: ${(props) => (props.withHash ? '16px' : '30px')};
 `;
