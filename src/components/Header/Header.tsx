@@ -1,7 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { ReactComponent as Back  } from '../../assets/back.svg'
-import { HeaderContainer, BackWrapper, HeaderText } from './HeaderStyle';
+import {HeaderContainer, BackWrapper, HeaderText, DummyBox} from './HeaderStyle';
 
 type HeaderProps = {
   text: string;
@@ -12,6 +11,7 @@ const Header = ({ text }: HeaderProps) => {
     <HeaderContainer>
       <BackWrapper><Back/></BackWrapper>
       <HeaderText>{text}</HeaderText>
+      <DummyBox></DummyBox>
     </HeaderContainer>
   );
 };
