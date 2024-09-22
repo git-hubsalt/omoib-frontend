@@ -7,7 +7,7 @@ import {
   Date,
   TagsWrapper,
 } from './CardStyle';
-// import Tag from '../tag/Tag';
+import TagButton from '../Button/TagButton';
 
 interface CardProps {
   title: string;
@@ -24,8 +24,11 @@ const Card: React.FC<CardProps> = ({ title, date, tags }) => {
         <Date>{date}</Date>
         <TagsWrapper>
           {tags.map((tag, index) => (
-            // <Tag key={index} text={tag} />
-            <p>태그</p>
+            <TagButton
+              key={index}
+              name={tag}
+              withHash
+            />
           ))}
         </TagsWrapper>
       </ContentWrapper>
