@@ -1,5 +1,5 @@
 import React from 'react';
-import { WeatherContainer, TemperatureBox } from './WeatherCardStyle';
+import { WeatherContainer, TemperatureBox, InfoBox } from './WeatherCardStyle';
 import { ReactComponent as Cloud } from '../../../assets/weathers/cloud.svg';
 import { ReactComponent as Sun } from '../../../assets/weathers/sun.svg';
 import { ReactComponent as CloudRain } from '../../../assets/weathers/cloud-with-rain.svg';
@@ -8,7 +8,6 @@ import { ReactComponent as Snow } from '../../../assets/weathers/snowman.svg';
 
 interface WeatherCardProps {
   temperature: number;
-  weather: string;
   icon: React.ElementType; // 컴포넌트 타입으로 받음
   description: string;
   highTemp: number;
@@ -17,7 +16,7 @@ interface WeatherCardProps {
 
 const WeatherCard: React.FC<WeatherCardProps> = ({
                                                    temperature,
-                                                   weather,
+
                                                    icon: IconComponent, // 아이콘을 컴포넌트로 받음
                                                    description,
                                                    highTemp,
@@ -35,15 +34,16 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
 
   return (
     <WeatherContainer backgroundColor={getBackgroundColor()}>
-      <div style={{ fontSize: '40px' }}>
-        <IconComponent /> {/* 전달된 컴포넌트를 렌더링 */}
-      </div>
-      <TemperatureBox>
-        {temperature} ℃
-      </TemperatureBox>
-      <div>{weather}</div>
-      <div>{description}</div>
-      <div>최고 {highTemp}℃ 최저 {lowTemp}℃</div>
+      <InfoBox>
+        <div style={{ fontSize: '40px' }}>
+          <IconComponent /> {/* 전달된 컴포넌트를 렌더링 */}
+        </div>
+        <TemperatureBox>
+          {temperature} ℃
+        </TemperatureBox>
+        <div>{description}</div>
+        <div>최고 {highTemp}℃ 최저 {lowTemp}℃</div>
+      </InfoBox>
     </WeatherContainer>
   );
 };
