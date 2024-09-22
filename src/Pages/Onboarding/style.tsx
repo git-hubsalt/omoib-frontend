@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const JoinLayout = styled.div`
   height: 100vh;
   flex-direction: column;
-  padding-left: 24px;
-  padding-right: 24px;
   padding-top: 67px;
 `;
 
@@ -13,6 +11,7 @@ export const ContentsBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 24px;
   gap: 41px;
 `
 
