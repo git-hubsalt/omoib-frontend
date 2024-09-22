@@ -1,15 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import { MainParagraph } from './MainListStyle';
+import { useNavigate } from 'react-router-dom';
+import { MainParagraph, IconBox, ListLayout } from './MainListStyle';
 
 interface MainListProps {
-  icon: React.ReactNode; // 아이콘 컴포넌트를 props로 받음
-  text: string; // 텍스트를 props로 받음
+  icon: React.ReactNode;
+  text: string;
+  route: string; // 새로운 route prop 추가
 }
 
-const MainList: React.FC<MainListProps> = ({ icon, text }) => {
+const MainList: React.FC<MainListProps> = ({ icon, text, route }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(route); // route로 이동
+  };
+
   return (
-    <ListLayout>
+    <ListLayout onClick={handleClick}>
       <IconBox>
         {icon}
       </IconBox>
@@ -22,20 +30,3 @@ const MainList: React.FC<MainListProps> = ({ icon, text }) => {
 
 export default MainList;
 
-const IconBox = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 31px;
-    height: 31px;
-    background-color: #F4F4F4;
-    border-radius: 5px;
-`;
-
-const ListLayout = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0;
-    width: 100%;
-`;

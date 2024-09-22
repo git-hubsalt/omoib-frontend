@@ -1,14 +1,13 @@
 import WeatherCard from '../MainPage/WeatherCard/WeatherCard';
 import MainList from './MainList/MainList';
-import { ReactComponent as Cloud } from '../../assets/weathers/cloud.svg'
-import { ReactComponent as Sun } from '../../assets/weathers/sun.svg'
+import { ReactComponent as Cloud } from '../../assets/weathers/cloud.svg';
+import { ReactComponent as Sun } from '../../assets/weathers/sun.svg';
 import { PageLayout, MainListWrapper, ProfileBox, TextBox } from './style';
-import { ReactComponent as TshirtIcon } from '../../assets/main/t-shirt.svg'
+import { ReactComponent as TshirtIcon } from '../../assets/main/t-shirt.svg';
 import { ReactComponent as BubbleIcon} from '../../assets/main/bubble.svg';
 import { ReactComponent as ClosetIcon } from '../../assets/main/closet.svg';
 import { ReactComponent as WishIcon } from '../../assets/main/heart.svg';
 import { ReactComponent as HistoryIcon } from '../../assets/main/file-box.svg';
-
 
 export default function MainPage() {
   return (
@@ -24,16 +23,16 @@ export default function MainPage() {
         lowTemp={22}
       />
       <MainListWrapper>
-        <MainList icon={<TshirtIcon />} text="코디 추천" />
-        <MainList icon={<BubbleIcon />} text="가상 피팅" />
-        <MainList icon={<ClosetIcon/>} text="옷장" />
-        <MainList icon={<WishIcon />} text="위시" />
-        <MainList icon={<HistoryIcon />} text="히스토리" />
+        <MainList icon={<TshirtIcon />} text="코디 추천" route="/coordination" />
+        <MainList icon={<BubbleIcon />} text="가상 피팅" route="/virtual-fitting" />
+        <MainList icon={<ClosetIcon />} text="옷장" route="/closet" />
+        <MainList icon={<WishIcon />} text="위시" route="/wish" />
+        <MainList icon={<HistoryIcon />} text="히스토리" route="/history" />
       </MainListWrapper>
 
       <TextBox>
         <p>@DXW 컨퍼런스 Service Team 2</p>
       </TextBox>
     </PageLayout>
-  )
+  );
 }
