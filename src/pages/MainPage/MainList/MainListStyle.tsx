@@ -19,7 +19,7 @@ export const ListLayout = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 10px;
+  padding: 10px 0;
   width: 100%;
   cursor: pointer; // 클릭 가능하게 마우스 포인터 추가
 `;
