@@ -10,6 +10,7 @@ export const TabContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #F2F3F5;
+    margin: 0 auto;
 `;
 
 // 버튼 스타일
