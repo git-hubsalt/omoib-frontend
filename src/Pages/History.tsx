@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import * as H from "../styles/HistoryStyles";
 import TagButton from '../components/Button/TagButton';
-import Header from '../components/header/Header';
+import Header from '../components/Header/Header';
 import ClickButton from '../components/Button/ClickButton';
 import { ReviewData } from '../data';
 
-interface recommendationData {  
+interface recommendationData {
   id: number;
   date: string;
   categories: {
@@ -33,7 +33,7 @@ const History: React.FC<Props> = ({ recommendationData, onClickDelete, currentId
     // 데이터가 없을 때의 처리(에러 처리 안할 시 오류 발생)
     if (!data) {
       return <div>No data found</div>;
-    } 
+    }
 
 
   //데이터 받아오는 공통 함수 (상의, 하의, 기타)
@@ -53,7 +53,7 @@ const History: React.FC<Props> = ({ recommendationData, onClickDelete, currentId
             ))}
           </H.InfoWrapper>
         ))}
-      </H.InfoWrapper> 
+      </H.InfoWrapper>
     );
   };
   //푸터 버튼 이벤트

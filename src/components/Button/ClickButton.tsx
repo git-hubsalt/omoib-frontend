@@ -24,6 +24,9 @@ const ButtonStyle = styled.button<ButtonStyleProps>`
     align-items: center;
     cursor: pointer;
     font-size: 17px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: -0.43px;
     ${(props) => buttonVariants[props.variant]}
 `;
 
