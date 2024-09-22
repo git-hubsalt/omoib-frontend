@@ -1,4 +1,6 @@
+// src/App.tsx
 import React from 'react';
+import styled from 'styled-components';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -7,8 +9,23 @@ import KakaoCallback from "./pages/KakaoCallback";
 import RegisterPage from "./pages/Register";
 import OnboardingPage from "./pages/Onboarding";
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Onboarding from "./pages/Onboarding/Onboarding"
+import or from "./pages/OutfitRecommendations/OutfitRecommendations"
+import OutfitRecommendations from "./pages/OutfitRecommendations/OutfitRecommendations";
+import VirtualFitting from "./pages/VirtualFitting/VirtualFitting";
 const App: React.FC = () => {
   return (
+      <>
+        <GlobalStyles />
+          <BrowserRouter>
+              <Routes>
+                  <Route path='/' element={<Onboarding />} />
+                  <Route path='/or' element={<OutfitRecommendations/>}/>
+                  <Route path='/vf' element={<VirtualFitting/>}/>
+              </Routes>
+          </BrowserRouter>
+      </>
       <div className="App">
         <BrowserRouter>
           <GlobalStyles />
@@ -28,6 +45,5 @@ const App: React.FC = () => {
       </div>
   );
 };
-
 
 export default App;
