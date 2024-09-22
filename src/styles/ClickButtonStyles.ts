@@ -1,6 +1,8 @@
 export const ClickButtonStyles = {
     footerButton: `
         width: 100%;
+        position: fixed;
+        bottom: 0;
         height: 82px;
         padding: 30px 120px;
         background-color: #89CEFA;

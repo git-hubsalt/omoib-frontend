@@ -1,18 +1,34 @@
 import styled from 'styled-components';
+import {useState} from "react";
 
 type ButtonProps = {
     className?: string;
     name: string;
     withHash?: boolean;
+    onClick?: () => void;
 };
 
-const TagButton = ({ className, name, withHash = true }: ButtonProps) => {
+const TagButton = ({ className, name, withHash = true, onClick }: ButtonProps) => {
+    const [selected, setSelected] = useState<boolean>(false);
     const tagContent = withHash ? `#${name}` : name; // withHash가 true이면 # 추가
     const { backgroundColor, color } = getTagStyles(name);
+    const defaultColor = '#F4F4F4';
+    const defaultTextColor = '#989898';
+
+    const handleTagClick = () => {
+        setSelected((current) => !current);
+        if (onClick) {
+            onClick();
+        }
+    }
 
     return (
-      <TagBox className={className} backgroundColor={backgroundColor} withHash={withHash}>
-          <StyledTag color={color}>{tagContent}</StyledTag>
+      <TagBox className={className}
+              backgroundColor={(selected) ? backgroundColor : defaultColor}
+              withHash={withHash}
+              onClick={handleTagClick}
+      >
+          <StyledTag color={(selected) ? color : defaultTextColor}>{tagContent}</StyledTag>
       </TagBox>
     );
 };
