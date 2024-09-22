@@ -9,17 +9,27 @@ import {
 } from './CardStyle';
 // import Tag from '../tag/Tag';
 
-const Card: React.FC = () => {
+interface CardProps {
+  title: string;
+  date: string;
+  tags: string[];
+}
+
+const Card: React.FC<CardProps> = ({ title, date, tags }) => {
   return (
-      <CardWrapper>
-        <ImagePlaceholder />
-        <ContentWrapper>
-          <Title>빨간 후드티</Title>
-          <Date>2024.07.29</Date>
-          <TagsWrapper>
-          </TagsWrapper>
-        </ContentWrapper>
-      </CardWrapper>
+    <CardWrapper>
+      <ImagePlaceholder />
+      <ContentWrapper>
+        <Title>{title}</Title>
+        <Date>{date}</Date>
+        <TagsWrapper>
+          {tags.map((tag, index) => (
+            // <Tag key={index} text={tag} />
+            <p>태그</p>
+          ))}
+        </TagsWrapper>
+      </ContentWrapper>
+    </CardWrapper>
   );
 };
 
