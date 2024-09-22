@@ -6,5 +6,7 @@ export const Text =styled.div`
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    font-weight:400;
+    font-weight:500;
+    margin-top: 30px;
+    margin-bottom:25px;
 `
