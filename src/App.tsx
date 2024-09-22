@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
