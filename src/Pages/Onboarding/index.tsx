@@ -9,8 +9,9 @@ import {
 import Uploader from "../../components/Uploader/Uploader";
 import {ChangeEvent, useState} from "react";
 import Input from "../../components/Input/Input";
+import ClickButton from "../../components/Button/ClickButton";
 
-const JoinPage = () => {
+const OnboardingPage = () => {
   const [nickname, setNickname] = useState<string>("");
 
   const handleBodyImageChange = (imageBase64: string) => {
@@ -19,7 +20,10 @@ const JoinPage = () => {
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNickname(event.target.value);
-  }
+  };
+  const handleButtonClick = () => {
+
+  };
 
   return (
     <JoinLayout>
@@ -46,8 +50,11 @@ const JoinPage = () => {
           </Uploader>
         </ImageUploaderBox>
       </ContentsBox>
+      <ClickButton variant={'footerButton'} onClick={handleButtonClick}>
+        회원 가입 완료
+      </ClickButton>
     </JoinLayout>
   )
 };
 
-export default JoinPage;
+export default OnboardingPage;
