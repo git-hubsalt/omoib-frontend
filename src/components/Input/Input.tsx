@@ -1,19 +1,21 @@
-import React, { useState } from "react";
-import InputStyle from "./InputStyle";  
+import React, {FC} from "react";
+import {InputBox, StyledInput} from "./InputStyle";
 
-const Input: React.FC = () => {
-  const [inputValue, setInputValue] = useState<string>("");
+interface InputProps {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  placeholder?: string;
+}
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
+const Input: FC<InputProps> = ({ onChange, value, placeholder }) => {
   return (
-    <InputStyle
-      onChange={handleChange} 
-      value={inputValue} 
-      placeholder="이름을 입력해주세요" 
-    />
+    <InputBox>
+      <StyledInput
+        onChange={onChange}
+        value={value}
+        placeholder={placeholder}
+      />
+    </InputBox>
   );
 };
 
