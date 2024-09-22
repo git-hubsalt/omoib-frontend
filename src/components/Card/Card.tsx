@@ -6,8 +6,8 @@ import {
   Title,
   Date,
   TagsWrapper,
-} from './Card.styles';
-import Tag from '../tag/Tag';
+} from './CardStyle';
+// import Tag from '../tag/Tag';
 
 const Card: React.FC = () => {
   return (
@@ -17,7 +17,6 @@ const Card: React.FC = () => {
           <Title>빨간 후드티</Title>
           <Date>2024.07.29</Date>
           <TagsWrapper>
-            <Tag/>
           </TagsWrapper>
         </ContentWrapper>
       </CardWrapper>

@@ -20,16 +20,16 @@ const TagButton = ({ className, name, withHash = true }: ButtonProps) => {
 // 계절에 따른 색상 반환
 const getTagStyles = (tagContent: string) => {
     const seasonColors: Record<string, { backgroundColor: string; color: string }> = {
-        가을: { backgroundColor: '#D07C2E', color: 'var(--white)' },
-        겨울: { backgroundColor: '#89CEFA', color: 'var(--white)' },
-        봄: { backgroundColor: '#FFABEC', color: 'var(--white)' },
-        여름: { backgroundColor: '#A5E189', color: 'var(--white)' },
+        가을: { backgroundColor: '#D07C2E', color: 'white' },
+        겨울: { backgroundColor: '#89CEFA', color: 'white' },
+        봄: { backgroundColor: '#FFABEC', color: 'white' },
+        여름: { backgroundColor: '#A5E189', color: 'white' },
     };
 
     const clothingColors: Record<string, { backgroundColor: string; color: string }> = {
-        상의: { backgroundColor: '#FBE56B', color: 'var(--white)' },
-        하의: { backgroundColor: '#FBE56B', color: 'var(--white)' },
-        '드레스/원피스': { backgroundColor: '#FBE56B', color: 'var(--white)' },
+        상의: { backgroundColor: '#FBE56B', color: 'white' },
+        하의: { backgroundColor: '#FBE56B', color: 'white' },
+        '드레스/원피스': { backgroundColor: '#FBE56B', color: 'white' },
     };
 
     if (seasonColors[tagContent]) {
@@ -51,7 +51,7 @@ const TagBox = styled.div<{ backgroundColor: string; withHash: boolean }>`
     background-color: ${(props) => props.backgroundColor};
     //padding: 2px 4px;
     min-width: ${(props) => (props.withHash ? '32px' : '50px')};
-    max-width: 100%; // 크기 고정 대신 내용에 맞게
+    max-width: ${(props) => (props.withHash ? '32px' : '50px')}; //적용 안돼서 수정
     min-height: ${(props) => (props.withHash ? '16px' : '30px')};
     max-height: ${(props) => (props.withHash ? '16px' : '30px')};
 `;
