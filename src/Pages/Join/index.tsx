@@ -11,7 +11,7 @@ import {ChangeEvent, useState} from "react";
 import Input from "../../components/Input/Input";
 import ClickButton from "../../components/Button/ClickButton";
 
-const OnboardingPage = () => {
+const JoinPage = () => {
   const [nickname, setNickname] = useState<string>("");
 
   const handleBodyImageChange = (imageBase64: string) => {
@@ -57,4 +57,4 @@ const OnboardingPage = () => {
   )
 };
 
-export default OnboardingPage;
+export default JoinPage;
