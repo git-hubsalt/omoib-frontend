@@ -17,6 +17,13 @@ export const ImagePlaceholder = styled.div`
     align-items: center;
 `;
 
+export const Image = styled.img`
+  width: 110px;
+  height: 110px;
+  border-radius: 10px;
+  object-fit: cover;  // 이미지가 영역에 맞게 조정됨
+`;
+
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
