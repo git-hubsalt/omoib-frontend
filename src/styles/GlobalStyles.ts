@@ -86,6 +86,7 @@ export const GlobalStyles = createGlobalStyle`
   @media screen and (max-width: 393px) {
     body {
       width: 100%; /* 화면 너비에 맞춤 */
+      margin: 0 auto;
     }
   }
 
