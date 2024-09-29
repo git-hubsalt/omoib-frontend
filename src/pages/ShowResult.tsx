@@ -2,7 +2,7 @@
 import React from 'react';
 import * as S from "../styles/ShowResultStyles";
 import TagButton from '../components/Button/TagButton';
-import Header from '../components/header/Header';
+import Header from '../components/Header/Header';
 import ClickButton from '../components/Button/ClickButton';
 
 interface RecommendationData {
@@ -58,9 +58,9 @@ const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtua
   const handleClick = () => {
     console.log('Button clicked!');
   };
-  
+
   return (
-    <div>
+    <S.ShowResultBox>
       <Header text={isVirtualFitting ? '가상 피팅 결과' : '코디 추천 결과'} />
       <S.Container>
         <S.Result />
@@ -78,7 +78,7 @@ const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtua
         코디 추천 결과
       </ClickButton>
     )}
-    </div>
+    </S.ShowResultBox>
 
   );
 };

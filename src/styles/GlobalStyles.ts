@@ -86,11 +86,12 @@ export const GlobalStyles = createGlobalStyle`
   @media screen and (max-width: 393px) {
     body {
       width: 100%; /* 화면 너비에 맞춤 */
+      margin: 0 auto;
     }
   }
 
   /* 393px보다 화면이 큰 경우 */
-  @media screen and (min-width: 394px) {
+  @media screen and (min-width: 393px) {
     body {
       width: 393px; /* 화면 너비를 393px로 고정 */
       margin: 0 auto; /* 화면 중앙에 위치 */

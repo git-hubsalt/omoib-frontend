@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import * as H from "../styles/HistoryStyles";
 import TagButton from '../components/Button/TagButton';
-import Header from '../components/header/Header';
+import Header from '../components/Header/Header';
 import ClickButton from '../components/Button/ClickButton';
 import { ReviewData } from '../data';
 
-interface recommendationData {  
+interface recommendationData {
   id: number;
   date: string;
   categories: {
@@ -20,20 +20,20 @@ interface recommendationData {
 
 interface Props {
   recommendationData: recommendationData[];
+  fittingData: recommendationData[];
+  isVirtualFitting: boolean;
   onClickDelete: (id: number) => void;
   currentId: number;
 }
 
-const History: React.FC<Props> = ({ recommendationData, onClickDelete, currentId }) => {
-  // const [currentId, setCurrentId] = useState(recommendationData[0]?.id || -1);
-
-  //data=현재 Id / currentId는 현재 선택된 아이디를 나타낸 것
-  const data = recommendationData.find(item => item.id === currentId);
+const History: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFitting, onClickDelete, currentId }) => {
+  //data=현재 Id / currentId는 현재 선택된 아이디를 나타낸 것 / 가상피팅이랑 코디추천이랑 다르게 데이터 받아와야 함 히스토리도
+  const data = isVirtualFitting ? fittingData.find(item => item.id === currentId) : recommendationData.find(item => item.id === currentId);
 
     // 데이터가 없을 때의 처리(에러 처리 안할 시 오류 발생)
     if (!data) {
       return <div>No data found</div>;
-    } 
+    }
 
 
   //데이터 받아오는 공통 함수 (상의, 하의, 기타)
@@ -53,7 +53,7 @@ const History: React.FC<Props> = ({ recommendationData, onClickDelete, currentId
             ))}
           </H.InfoWrapper>
         ))}
-      </H.InfoWrapper> 
+      </H.InfoWrapper>
     );
   };
   //푸터 버튼 이벤트
@@ -68,7 +68,7 @@ const History: React.FC<Props> = ({ recommendationData, onClickDelete, currentId
         <H.Result />
         <H.InfoWrapper>
           <H.DateText>
-          {data.date}에 추천 받았어요.
+          {isVirtualFitting ? `${data.date}에 가상피팅했어요` : `${data.date}에 추천 받았어요`}
           </H.DateText>
           <H.Delete onClick={() => onClickDelete(data.id)}>삭제</H.Delete>
         </H.InfoWrapper>

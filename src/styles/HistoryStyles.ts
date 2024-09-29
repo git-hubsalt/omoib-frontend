@@ -56,3 +56,8 @@ export const ReviewWrapper = styled.div`
   gap: 20px;
   margin: 28px 0px;
 `;
+
+export const HistoryBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
