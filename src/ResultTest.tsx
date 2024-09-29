@@ -45,13 +45,13 @@ const ResultTest: React.FC = () => {
 
             <Routes>
                 <Route path="/" element={
-                    // <ShowResultPage 
-                    //     isVirtualFitting={isVirtualFitting}
-                    //     recommendationData={recommendationData} 
-                    //     fittingData={fittingData} 
-                    //     currentId={currentId}
-                    // />
-                    <History recommendationData={recommendationData} onClickDelete={onClickDelete} currentId={currentIdForPage} />
+                    <ShowResultPage 
+                        isVirtualFitting={isVirtualFitting}
+                        recommendationData={recommendationData} 
+                        fittingData={fittingData} 
+                        currentId={currentId}
+                    />
+                    // <History recommendationData={recommendationData} onClickDelete={onClickDelete} currentId={currentIdForPage} />
                 } />
             </Routes>
         </>

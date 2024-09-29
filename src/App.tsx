@@ -1,16 +1,15 @@
-// src/App.tsx
 import React from 'react';
-import styled from 'styled-components';
-import { GlobalStyles } from './styles/GlobalStyles';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
+import ResultTest from './ResultTest';
 
 const App: React.FC = () => {
-  return (
-      <>
-        <GlobalStyles />
-        <h1>App</h1>
-      </>
-  );
+    return (
+        <BrowserRouter> 
+            <Routes>
+                <Route path="/Result" element={<ResultTest />} />
+            </Routes>
+        </BrowserRouter>
+    );
 };
 
 export default App;
