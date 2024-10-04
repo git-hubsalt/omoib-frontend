@@ -44,7 +44,7 @@ const Clothes = ({ buttonText, onClothesChange }: ClothesUploaderProps) => {
   }
 
   const handleClothesUpload = () => {
-    //TODO: 옷 업로드
+
   }
 
   return (
@@ -80,6 +80,11 @@ const Image = ({ hasButton, buttonText, onImageChange }: ImageUploaderProps) => 
   useEffect(() => {
     window.addEventListener('message', messageHandler);
     document.addEventListener('message', messageHandler as EventListener);
+
+    return () => {
+      window.removeEventListener('message', messageHandler);
+      document.removeEventListener('message', messageHandler as EventListener);
+    }
   }, []);
 
   const handleBoxUpload = () => {
