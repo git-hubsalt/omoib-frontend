@@ -18,13 +18,12 @@ export const ContentsContainer = styled.div`
   flex-direction: column;
   padding: 0 14px;
   box-sizing: border-box;
-  gap: 30px;
+  gap: 20px;
 `
 
 export const TagSelectionBox = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   gap: 15px;
@@ -36,14 +35,31 @@ export const TagBox = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap
 `
 
 export const NoticeText = styled.p`
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: normal;
   align-self: start;
 `
+export const Input = styled.input`
+  width: 365px;
+  height: 52px;
+  border: 1px solid #D1D3D8;
+  border-radius: 5px ;
+`
+export const UploaderBox = styled.div`
+  width: 64px;
+  height: 64px;
+  border: 1px solid #D1D3D8;
+  border-radius: 4px;
+  display: flex;
+  align-self: flex-start;
+  margin-left: 14px;
+  margin-top: 40px;
+`
+
 
 
 

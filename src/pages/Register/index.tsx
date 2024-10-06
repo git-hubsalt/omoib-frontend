@@ -1,15 +1,13 @@
-import {ContentsContainer, NoticeText, RegisterLayout, TagBox, TagSelectionBox} from "./style";
+import {ContentsContainer, NoticeText, RegisterLayout, TagBox, TagSelectionBox, Input, UploaderBox} from "./style";
 import Header from "../../components/Header/Header";
 import Uploader from "../../components/Uploader/Uploader";
 import {useParams} from "react-router-dom";
-import Input from "../../components/Input/Input";
 import {ChangeEvent, useState} from "react";
 import TagButton from "../../components/Button/TagButton";
-import Tab from "../../components/Tab/Tab";
 import ClickButton from "../../components/Button/ClickButton";
 
 const seasons: string[] = ['봄', '여름', '가을', '겨울'];
-const categories: string[] = ['상의', '하의', '기타'];
+const categories: string[] = ['상의', '하의', '한벌옷', '신발', '가방', '모자', '기타', '기타'];
 
 const RegisterPage = () => {
   const params = useParams();
@@ -31,13 +29,21 @@ const RegisterPage = () => {
   return (
     <RegisterLayout>
       <Header text={`${type}에 옷 등록하기`}/>
+
+      <UploaderBox>
+        {/*<Uploader width={64} height={64}>*/}
+        {/*  <Uploader.Image*/}
+        {/*    hasButton={false}*/}
+        {/*    onImageChange={handleClothesImageChange}/>*/}
+        {/*</Uploader>*/}
+      </UploaderBox>
+
       <ContentsContainer>
-        <Uploader width={310} height={305}>
-          <Uploader.Image
-            hasButton={false}
-            onImageChange={handleClothesImageChange}/>
-        </Uploader>
-        <Input onChange={handleInputChange} value={name} placeholder={'예) 빨간 후드티'}/>
+        <TagSelectionBox>
+          <NoticeText>제목을 입력해주세요.</NoticeText>
+          <Input onChange={handleInputChange} value={name}/>
+        </TagSelectionBox>
+
         <TagSelectionBox>
           <NoticeText>계절을 골라주세요</NoticeText>
           <TagBox>
@@ -46,6 +52,7 @@ const RegisterPage = () => {
             })}
           </TagBox>
         </TagSelectionBox>
+
         <TagSelectionBox>
           <NoticeText>태그를 추가해주세요</NoticeText>
           <TagBox>
