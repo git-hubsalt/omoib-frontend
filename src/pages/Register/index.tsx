@@ -30,19 +30,19 @@ const RegisterPage = () => {
 
   return (
     <RegisterLayout>
-      <Header text={`${type}에 옷 등록하기`} />
+      <Header text={`${type}에 옷 등록하기`}/>
       <ContentsContainer>
         <Uploader width={310} height={305}>
           <Uploader.Image
             hasButton={false}
-            onImageChange={handleClothesImageChange} />
+            onImageChange={handleClothesImageChange}/>
         </Uploader>
-        <Input onChange={handleInputChange} value={name} placeholder={'예) 빨간 후드티'} />
+        <Input onChange={handleInputChange} value={name} placeholder={'예) 빨간 후드티'}/>
         <TagSelectionBox>
           <NoticeText>계절을 골라주세요</NoticeText>
           <TagBox>
             {seasons.map((season: string, index: number) => {
-              return <TagButton key={index} name={season} withHash={false} />
+              return <TagButton key={index} name={season} withHash={false}/>
             })}
           </TagBox>
         </TagSelectionBox>
@@ -50,7 +50,7 @@ const RegisterPage = () => {
           <NoticeText>태그를 추가해주세요</NoticeText>
           <TagBox>
             {categories.map((category: string, index: number) => {
-              return <TagButton key={index} name={category} withHash={false} />
+              return <TagButton key={index} name={category} withHash={false}/>
             })}
           </TagBox>
         </TagSelectionBox>

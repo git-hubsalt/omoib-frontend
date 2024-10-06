@@ -9,11 +9,11 @@ interface RecommendationData {
   id: number;
   date: string;
   categories: {
-      category: string;
-      items: {
-          name: string;
-          tags: string[];
-      }[];
+    category: string;
+    items: {
+      name: string;
+      tags: string[];
+    }[];
   }[];
 
 }
@@ -26,15 +26,15 @@ interface Props {
 }
 
 //현재 태그 정보 데이터는 이전 페이지에서 props로 받고 있고, 리뷰결과는 바로 더미데이터 페이지에서 받아오고 있음. 뭐가 더 좋을까
-const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFitting, currentId }) => {
+const ShowResult: React.FC<Props> = ({recommendationData, fittingData, isVirtualFitting, currentId}) => {
   const data = isVirtualFitting ? fittingData : recommendationData;
 
   const Id = data.find(item => item.id === currentId);
 
-    // 데이터가 없을 때의 처리
-    if (!Id) {
-      return <div>No data found</div>;
-    }
+  // 데이터가 없을 때의 처리
+  if (!Id) {
+    return <div>No data found</div>;
+  }
 
   //데이터 받아오는 공통 함수 (상의, 하의, 기타)
   const renderCategory = (categoryName: string) => {
@@ -47,7 +47,7 @@ const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtua
           <S.InfoWrapper key={index}>
             <S.InfoNormalText>{item.name}</S.InfoNormalText>
             {item.tags.map((tag, tagIndex) => (
-              <TagButton key={tagIndex} name={tag} withHash={true} />
+              <TagButton key={tagIndex} name={tag} withHash={true}/>
             ))}
           </S.InfoWrapper>
         ))}
@@ -61,11 +61,11 @@ const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtua
 
   return (
     <S.ShowResultBox>
-      <Header text={isVirtualFitting ? '가상 피팅 결과' : '코디 추천 결과'} />
+      <Header text={isVirtualFitting ? '가상 피팅 결과' : '코디 추천 결과'}/>
       <S.Container>
-        <S.Result />
+        <S.Result/>
         <S.DateText>
-        {Id.date}에 추천 받았어요.
+          {Id.date}에 추천 받았어요.
         </S.DateText>
         <S.InfoContainer>
           {renderCategory('상의')}
@@ -74,10 +74,10 @@ const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtua
         </S.InfoContainer>
       </S.Container>
       {!isVirtualFitting && (
-      <ClickButton variant='footerButton' onClick={handleClick}>
-        코디 추천 결과
-      </ClickButton>
-    )}
+        <ClickButton variant='footerButton' onClick={handleClick}>
+          코디 추천 결과
+        </ClickButton>
+      )}
     </S.ShowResultBox>
 
   );
