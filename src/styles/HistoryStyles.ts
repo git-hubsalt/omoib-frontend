@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
   margin: 20px 25px 25px 25px;
   font-family: Pretendard;
 `;
@@ -10,7 +12,7 @@ export const Container = styled.div`
 export const Result = styled.div`
   margin: 0px 0px 17px 0px;
   border-radius: 10px;
-  min-height: 432px; /* 또는 auto */
+  height: 432px; 
   background-color: var(--gray--2);
 `;
 
@@ -57,8 +59,7 @@ export const ReviewWrapper = styled.div`
   margin: 28px 0px;
 `;
 
-export const HistoryBox = styled.div`
+export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;

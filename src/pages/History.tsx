@@ -62,39 +62,39 @@ const History: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFi
   };
 
   return (
-    <H.HistoryBox>
+    <H.Container>
       <Header text='히스토리' />
-      <H.Container>
-        <H.Result />
+      <H.Result />
+      <H.InfoWrapper>
+        <H.DateText>
+        {isVirtualFitting ? `${data.date}에 가상피팅했어요` : `${data.date}에 추천 받았어요`}
+        </H.DateText>
+        <H.Delete onClick={() => onClickDelete(data.id)}>삭제</H.Delete>
+      </H.InfoWrapper>
+      <H.InfoContainer>
+        {renderCategory('상의')}
+        {renderCategory('하의')}
+        {renderCategory('기타')}
+      </H.InfoContainer>
+      <H.ReviewWrapper>
         <H.InfoWrapper>
-          <H.DateText>
-          {isVirtualFitting ? `${data.date}에 가상피팅했어요` : `${data.date}에 추천 받았어요`}
-          </H.DateText>
-          <H.Delete onClick={() => onClickDelete(data.id)}>삭제</H.Delete>
+          <img src={ReviewData.temperature[0].emojiSrc} alt="추웠어요" />
+          {ReviewData.temperature[0].label}
         </H.InfoWrapper>
-        <H.InfoContainer>
-          {renderCategory('상의')}
-          {renderCategory('하의')}
-          {renderCategory('기타')}
-        </H.InfoContainer>
-        <H.ReviewWrapper>
-          <H.InfoWrapper>
-            <img src={ReviewData.temperature[0].emojiSrc} alt="추웠어요" />
-            {ReviewData.temperature[0].label}
-          </H.InfoWrapper>
-          <H.InfoWrapper>
-            <img src={ReviewData.likeability[0].emojiSrc} alt="별로예요" />
-            {ReviewData.likeability[0].label}
-          </H.InfoWrapper>
-        </H.ReviewWrapper>
+        <H.InfoWrapper>
+          <img src={ReviewData.likeability[0].emojiSrc} alt="별로예요" />
+          {ReviewData.likeability[0].label}
+        </H.InfoWrapper>
+      </H.ReviewWrapper>
+      <H.ButtonWrapper>
         <ClickButton variant='historyButton' onClick={handleClick}>
-         완료
+          완료
         </ClickButton>
         <ClickButton variant='reviewButton' onClick={handleClick}>
-         리뷰 기록하기
+          리뷰 기록하기
         </ClickButton>
-      </H.Container>
-    </H.HistoryBox>
+      </H.ButtonWrapper>
+    </H.Container>
   );
 };
 
