@@ -1,61 +1,36 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import * as H from "../styles/HistoryStyles";
-import TagButton from '../components/Button/TagButton';
 import Header from '../components/Header/Header';
 import ClickButton from '../components/Button/ClickButton';
-import { ReviewData } from '../data';
+import { recommendationData, fittingData } from '../data';
 
-interface recommendationData {
-  id: number;
-  date: string;
-  categories: {
-      category: string;
-      items: {
-          name: string;
-          tags: string[];
-      }[];
-  }[];
+const History: React.FC = () => {
+  // 쿼리 파라미터를 가져옴
+  // const location = useLocation();
+  const searchParams = new URLSearchParams(window.location.search);
 
-}
+  // 쿼리 파라미터에서 id와 isVirtualFitting 값을 가져옴
+  const id = parseInt(searchParams.get('id') || '1', 10); // 기본값 1
+  const isVirtualFittingParam = searchParams.get('isVirtualFitting'); 
 
-interface Props {
-  recommendationData: recommendationData[];
-  fittingData: recommendationData[];
-  isVirtualFitting: boolean;
-  onClickDelete: (id: number) => void;
-  currentId: number;
-}
-
-const History: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFitting, onClickDelete, currentId }) => {
-  //data=현재 Id / currentId는 현재 선택된 아이디를 나타낸 것 / 가상피팅이랑 코디추천이랑 다르게 데이터 받아와야 함 히스토리도
-  const data = isVirtualFitting ? fittingData.find(item => item.id === currentId) : recommendationData.find(item => item.id === currentId);
+  const data = isVirtualFittingParam
+    ? fittingData.find(item => item.id === id)
+    : recommendationData.find(item => item.id === id);
 
     // 데이터가 없을 때의 처리(에러 처리 안할 시 오류 발생)
     if (!data) {
       return <div>No data found</div>;
     }
 
+    const renderCategories = () => {
+      return data.categories.map((category, index) => (
+        <H.InfoContainer key={index}>
+          <H.InfoBoldText>{category.category}</H.InfoBoldText>
+          <H.InfoNormalText>{category.itemName}</H.InfoNormalText>
+        </H.InfoContainer>
+      ))};
 
-  //데이터 받아오는 공통 함수 (상의, 하의, 기타)
-  const renderCategory = (categoryName: string) => {
-    const category = data?.categories.find(category => category.category === categoryName);
-    console.log("category", category)
-    console.log(data)
-
-    return (
-      <H.InfoWrapper>
-        <H.InfoBoldText>{categoryName}</H.InfoBoldText>
-        {category?.items.map((item, index) => (
-          <H.InfoWrapper key={index}>
-            <H.InfoNormalText>{item.name}</H.InfoNormalText>
-            {item.tags.map((tag, tagIndex) => (
-              <TagButton key={tagIndex} name={tag} withHash={true} />
-            ))}
-          </H.InfoWrapper>
-        ))}
-      </H.InfoWrapper>
-    );
-  };
   //푸터 버튼 이벤트
   const handleClick = () => {
     console.log('Button clicked!');
@@ -67,25 +42,13 @@ const History: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFi
       <H.Result />
       <H.InfoWrapper>
         <H.DateText>
-        {isVirtualFitting ? `${data.date}에 가상피팅했어요` : `${data.date}에 추천 받았어요`}
+          {data.Title}
         </H.DateText>
-        <H.Delete onClick={() => onClickDelete(data.id)}>삭제</H.Delete>
+        <H.Delete>삭제</H.Delete>
       </H.InfoWrapper>
-      <H.InfoContainer>
-        {renderCategory('상의')}
-        {renderCategory('하의')}
-        {renderCategory('기타')}
-      </H.InfoContainer>
-      <H.ReviewWrapper>
-        <H.InfoWrapper>
-          <img src={ReviewData.temperature[0].emojiSrc} alt="추웠어요" />
-          {ReviewData.temperature[0].label}
-        </H.InfoWrapper>
-        <H.InfoWrapper>
-          <img src={ReviewData.likeability[0].emojiSrc} alt="별로예요" />
-          {ReviewData.likeability[0].label}
-        </H.InfoWrapper>
-      </H.ReviewWrapper>
+      <H.InfoLayout>
+        {renderCategories()}
+      </H.InfoLayout>
       <H.ButtonWrapper>
         <ClickButton variant='historyButton' onClick={handleClick}>
           완료

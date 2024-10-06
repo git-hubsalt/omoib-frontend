@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const ShowResultBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 20px 25px 25px 25px;
-  font-family: Pretendard;
+  height: 100vh;
+  justify-content: space-between;
 `;
 
+
 export const Result = styled.div`
-  margin: 0px 0px 17px 0px;
+  margin: 20px 25px 25px 25px;
   border-radius: 10px;
   height: 432px;
   background-color : var(--gray--2);
@@ -17,12 +18,15 @@ export const Result = styled.div`
 export const DateText = styled.div`
   font-size: 18px;
   font-weight: 600;
+  margin: 0px 25px;
 `;
 
 export const InfoBoldText = styled.div`
   font-size: 13px;
   font-weight: 600;
   margin-right: 20px;
+  width: 45px;
+
 `;
 
 export const InfoNormalText = styled.div`
@@ -32,9 +36,9 @@ export const InfoNormalText = styled.div`
 
 export const InfoContainer = styled.div` //정보 담은 컨테이너
   display:flex;
-  margin-top: 24px;
   flex-direction: column;
   gap: 15px;
+  margin: 20px 25px 25px 25px;
 `;
 
 export const InfoWrapper = styled.div` //정보 한줄 씩
@@ -42,7 +46,3 @@ export const InfoWrapper = styled.div` //정보 한줄 씩
   gap: 4px;
 `;
 
-export const ShowResultBox = styled.div`
-  display: flex;
-  flex-direction: column;
-`;

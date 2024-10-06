@@ -5,12 +5,11 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
-  margin: 20px 25px 25px 25px;
   font-family: Pretendard;
 `;
 
 export const Result = styled.div`
-  margin: 0px 0px 17px 0px;
+  margin: 20px 25px 25px 25px;
   border-radius: 10px;
   height: 432px; 
   background-color: var(--gray--2);
@@ -24,7 +23,7 @@ export const DateText = styled.div`
 export const InfoBoldText = styled.div`
   font-size: 13px;
   font-weight: 600;
-  margin-right: 20px;
+  width: 45px;
 `;
 
 export const InfoNormalText = styled.div`
@@ -32,20 +31,26 @@ export const InfoNormalText = styled.div`
   font-weight: 500;
 `;
 
-export const InfoContainer = styled.div` //정보 담은 컨테이너
+export const InfoLayout = styled.div` //정보 담은 컨테이너
   display:flex;
-  margin-top: 24px;
+  margin-top: 19px;
   flex-direction: column;
   gap: 15px;
+  margin: 20px 25px 25px 25px;
+`;
+
+export const InfoContainer = styled.div` //태그 정보 한줄 씩
+  display: flex;
+  gap: 19px;
 `;
 
 export const InfoWrapper = styled.div` //태그 정보 한줄 씩
   display: flex;
-  gap: 4px;
-  align-items: center;
+  justify-content: space-between;
+  margin: 0px 25px;
 `;
 
-export const Delete = styled.div`
+export const Delete = styled.button`
   color: var(--black);
   font-size: 14px;
   font-weight: 500;
@@ -62,4 +67,5 @@ export const ReviewWrapper = styled.div`
 export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 20px 25px 25px 25px;
 `;
