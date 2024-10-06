@@ -6,7 +6,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // import MainPage from './pages/MainPage/index';
 // import KakaoCallback from "./pages/KakaoCallback";
 // import RegisterPage from "./pages/Register";
-// import OnboardingPage from "./pages/Onboarding/Onboarding";
 
 import Onboarding from "./Pages/Onboarding/Onboarding"
 import OutfitRecommendations from "./Pages/OutfitRecommendations/OutfitRecommendations";
