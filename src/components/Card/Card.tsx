@@ -6,20 +6,37 @@ import {
   Title,
   Date,
   TagsWrapper,
+  Image,
 } from './CardStyle';
-// import Tag from '../tag/Tag';
+import TagButton from '../Button/TagButton';
 
-const Card: React.FC = () => {
+interface CardProps {
+  title: string;
+  date: string;
+  tags: string[];
+  imageSrc?: string; // 이미지 소스를 받는 props 추가
+}
+
+const Card: React.FC<CardProps> = ({ title, date, tags, imageSrc }) => {
   return (
-      <CardWrapper>
+    <CardWrapper>
+      {/* 이미지 소스가 있으면 이미지를 보여주고, 없으면 기본 Placeholder를 보여줌 */}
+
+      {imageSrc ? (
+        <Image src={imageSrc} alt={title} />
+      ) : (
         <ImagePlaceholder />
-        <ContentWrapper>
-          <Title>빨간 후드티</Title>
-          <Date>2024.07.29</Date>
-          <TagsWrapper>
-          </TagsWrapper>
-        </ContentWrapper>
-      </CardWrapper>
+      )}
+      <ContentWrapper>
+        <Title>{title}</Title>
+        <Date>{date}</Date>
+        <TagsWrapper>
+          {tags.map((tag, index) => (
+            <TagButton key={index} name={tag} withHash />
+          ))}
+        </TagsWrapper>
+      </ContentWrapper>
+    </CardWrapper>
   );
 };
 
