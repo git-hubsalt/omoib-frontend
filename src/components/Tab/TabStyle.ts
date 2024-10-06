@@ -6,8 +6,6 @@ export const TabContainer = styled.div`
   height: 40px;
   border-radius: 10px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: #F2F3F5;
   position: relative;
   margin: 30px auto;
