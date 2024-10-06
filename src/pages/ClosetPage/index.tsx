@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '../../components/Card/Card';
 import { ClosetContainer } from './style';
 import AddClothesButton from '../../components/Button/AddClothesButton';
+import Header from '../../components/Header/Header';
 
 export default function ClosetPage() {
   // 여러 카드에 대한 데이터를 배열로 저장
@@ -14,7 +15,7 @@ export default function ClosetPage() {
 
   return (
     <div>
-      <h1>ClosetPage</h1>
+      <Header text="옷장"/>
       <ClosetContainer>
         {cardData.map((item, index) => (
           <Card
