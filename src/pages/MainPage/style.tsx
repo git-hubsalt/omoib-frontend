@@ -2,9 +2,6 @@ import styled from 'styled-components';
 
 export const PageLayout = styled.div`
     height: 100vh;
-    border-color: #282c34;
-    border-style: solid;
-    border-width: 1px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

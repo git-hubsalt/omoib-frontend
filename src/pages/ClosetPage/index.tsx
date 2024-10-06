@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../../components/Header/Header'; // Header 컴포넌트의 경로를 맞게 설정하세요
 import Card from '../../components/Card/Card';
 import { ClosetContainer } from './style';
 import AddClothesButton from '../../components/Button/AddClothesButton';
@@ -14,7 +15,7 @@ export default function ClosetPage() {
 
   return (
     <div>
-      <h1>ClosetPage</h1>
+        <Header text="옷장" /> {/* 헤더에 텍스트 전달 */}
       <ClosetContainer>
         {cardData.map((item, index) => (
           <Card
