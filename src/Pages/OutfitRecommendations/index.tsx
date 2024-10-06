@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Header from '../../components/Header/Header'; // Header 컴포넌트의 경로를 맞게 설정하세요
 import Uploader from "../../components/Uploader/Uploader";
-import * as style from './OutfitRecommendationsStyle'; // 스타일 경로를 맞게 설정하세요
+import * as style from './style'; // 스타일 경로를 맞게 설정하세요
 import FooterButton from "../../components/Button/ClickButton"; // ClickButton import
 
 const OutfitRecommendations: React.FC = () => {

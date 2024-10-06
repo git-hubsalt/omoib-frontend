@@ -1,9 +1,9 @@
 import React from 'react';
 import logo from '../../assets/logo.svg';
 import kakao from '../../assets/logo/kakao.svg';
-import * as style from './OnboardingStyle';
+import * as style from './style';
 
-const Onboarding: React.FC = () => {
+const Index: React.FC = () => {
     return (
         <div>
             <style.LogoContainer>
@@ -26,4 +26,4 @@ const Onboarding: React.FC = () => {
     );
 };
 
-export default Onboarding;
+export default Index;

@@ -3,11 +3,12 @@ import Header from '../../components/Header/Header'; // Header 컴포넌트의 �
 import Uploader from "../../components/Uploader/Uploader";
 import Tab from "../../components/Tab/Tab";
 import FooterButton from "../../components/Button/ClickButton";
+import {Container} from "./style";
 
-const VirtualFitting: React.FC = () => {
+const Index: React.FC = () => {
 
     return (
-        <div>
+        <Container>
             <Header text="가상피팅" /> {/* 헤더에 텍스트 전달 */}
             {/* Tab 컴포넌트에서 tabs prop을 배열로 전달 */}
             <Tab tabs={['추천코디', '직접선택']} />
@@ -21,8 +22,8 @@ const VirtualFitting: React.FC = () => {
             <FooterButton variant="footerButton" >
                 완료
             </FooterButton>
-        </div>
+        </Container>
     );
 };
 
-export default VirtualFitting;
+export default Index;
