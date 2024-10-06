@@ -61,7 +61,3 @@ export const ImageUploaderBox = styled.div`
   align-items: center;
   gap: 18px;
 `
-export const FooterBox = styled.div`
-  display: flex;
-  justify-content: center;
-`
