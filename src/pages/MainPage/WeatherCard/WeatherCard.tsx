@@ -33,7 +33,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   };
 
   return (
-    <WeatherContainer backgroundColor={getBackgroundColor()}>
+    <WeatherContainer $backgroundColor={getBackgroundColor()}>
       <InfoBox>
         <div style={{ fontSize: '40px' }}>
           <IconComponent /> {/* 전달된 컴포넌트를 렌더링 */}

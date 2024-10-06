@@ -42,3 +42,7 @@ export const InfoWrapper = styled.div` //정보 한줄 씩
   gap: 4px;
 `;
 
+export const ShowResultBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

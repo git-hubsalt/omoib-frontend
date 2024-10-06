@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
-const Index = () => {
+const KakaoCallback = () => {
   const navigate = useNavigate();
   const token = new URLSearchParams(window.location.search).get('token');
 
@@ -20,4 +20,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default KakaoCallback;
