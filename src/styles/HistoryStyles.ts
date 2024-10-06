@@ -10,8 +10,8 @@ export const Container = styled.div`
 export const Result = styled.div`
   margin: 0px 0px 17px 0px;
   border-radius: 10px;
-  height: 432px;
-  background-color : var(--gray--2);
+  min-height: 432px; /* 또는 auto */
+  background-color: var(--gray--2);
 `;
 
 export const DateText = styled.div`
@@ -60,4 +60,5 @@ export const ReviewWrapper = styled.div`
 export const HistoryBox = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `;

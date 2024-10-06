@@ -62,7 +62,7 @@ const History: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFi
   };
 
   return (
-    <div>
+    <H.HistoryBox>
       <Header text='히스토리' />
       <H.Container>
         <H.Result />
@@ -94,7 +94,7 @@ const History: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFi
          리뷰 기록하기
         </ClickButton>
       </H.Container>
-    </div>
+    </H.HistoryBox>
   );
 };
 
