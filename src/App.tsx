@@ -10,6 +10,9 @@ import JoinPage from "./pages/Join";
 import History from './pages/History';
 import ClosetPage from './pages/ClosetPage/index';
 import WishPage from './pages/WishPage/index'
+import Notice from './pages/Notice';
+import MyPage from './pages/MyPage';
+
 
 const App: React.FC = () => {
   const [isVirtualFitting, setIsVirtualFitting] = useState(false); 
@@ -46,6 +49,8 @@ const App: React.FC = () => {
             <Route path="/closet" element={<MainPage/>}/> // 옷장
             <Route path="/wish" element={<MainPage/>}/> // 위시
             <Route path="/history" element={<History recommendationData={recommendationData} fittingData={fittingData} isVirtualFitting={false} onClickDelete={onClickDelete} currentId={currentIdForPage}/>}/> // 히스토리
+            <Route path="/notice" element={<Notice/>}/> // 알림
+            <Route path="/my-page" element={<MyPage/>}/> // 마이페이지
           </Routes>
         </BrowserRouter>
 
