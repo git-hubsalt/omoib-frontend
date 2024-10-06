@@ -2,12 +2,13 @@ import React, {useState} from 'react';
 import Header from '../../components/Header/Header'; // Header 컴포넌트의 경로를 맞게 설정하세요
 import Uploader from "../../components/Uploader/Uploader";
 import * as style from './style'; // 스타일 경로를 맞게 설정하세요
-import FooterButton from "../../components/Button/ClickButton"; // ClickButton import
+import FooterButton from "../../components/Button/ClickButton";
+import {Container} from "./style"; // ClickButton import
 
 const OutfitRecommendations: React.FC = () => {
 
     return (
-        <div>
+        <Container>
             <Header text="코디추천"/> {/* 헤더에 텍스트 전달 */}
             <style.Text>이 아이템은 꼭 넣고 싶어요!</style.Text>
             <Uploader width={310} height={466}>
@@ -21,7 +22,7 @@ const OutfitRecommendations: React.FC = () => {
             <FooterButton variant="footerButton" >
                 완료
             </FooterButton>
-        </div>
+        </Container>
     );
 };
 

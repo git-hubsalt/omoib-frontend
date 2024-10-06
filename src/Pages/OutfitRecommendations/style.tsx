@@ -10,3 +10,8 @@ export const Text =styled.div`
     margin-top: 30px;
     margin-bottom:25px;
 `
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+    align-items: center;
+`;
