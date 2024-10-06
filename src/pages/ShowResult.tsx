@@ -60,7 +60,7 @@ const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtua
   };
 
   return (
-    <div>
+    <S.ShowResultBox>
       <Header text={isVirtualFitting ? '가상 피팅 결과' : '코디 추천 결과'} />
       <S.Container>
         <S.Result />
@@ -78,7 +78,7 @@ const ShowResult: React.FC<Props> = ({ recommendationData, fittingData, isVirtua
         코디 추천 결과
       </ClickButton>
     )}
-    </div>
+    </S.ShowResultBox>
 
   );
 };
