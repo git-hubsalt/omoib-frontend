@@ -3,27 +3,27 @@ import Header from '../../components/Header/Header'; // Header 컴포넌트의 �
 import Uploader from "../../components/Uploader/Uploader";
 import * as style from './style'; // 스타일 경로를 맞게 설정하세요
 import FooterButton from "../../components/Button/ClickButton";
-import {Container} from "./style"; // ClickButton import
+import {OutfitRecommendationsLayout} from "./style"; // ClickButton import
 
 const OutfitRecommendations: React.FC = () => {
 
-    return (
-        <Container>
-            <Header text="코디추천"/> {/* 헤더에 텍스트 전달 */}
-            <style.Text>이 아이템은 꼭 넣고 싶어요!</style.Text>
-            <Uploader width={310} height={466}>
-                <Uploader.Clothes
-                    buttonText={'아이템 등록하기'}
-                    onClothesChange={(clothes: string) => {
-                    }}
-                />
-            </Uploader>
-            <style.Text>오늘의 키워드를 말해주세요.</style.Text>
-            <FooterButton variant="footerButton" >
-                완료
-            </FooterButton>
-        </Container>
-    );
+  return (
+    <OutfitRecommendationsLayout>
+      <Header text="코디추천"/> {/* 헤더에 텍스트 전달 */}
+      <style.Text>이 아이템은 꼭 넣고 싶어요!</style.Text>
+      <Uploader width={310} height={466}>
+        <Uploader.Clothes
+          buttonText={'아이템 등록하기'}
+          onClothesChange={(clothes: string) => {
+          }}
+        />
+      </Uploader>
+      <style.Text>오늘의 키워드를 말해주세요.</style.Text>
+      <FooterButton variant="footerButton">
+        완료
+      </FooterButton>
+    </OutfitRecommendationsLayout>
+  );
 };
 
 export default OutfitRecommendations;
