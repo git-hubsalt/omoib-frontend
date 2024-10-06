@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo/logo.svg';
 import kakao from '../../assets/logo/kakao.svg';
 import * as style from './style';
 import {useNavigate} from 'react-router-dom';
