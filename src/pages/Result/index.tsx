@@ -1,10 +1,9 @@
 // 코디 추천 결과랑 가상피팅 결과를 조건문 써서 2개 렌더링하기
 import React from 'react';
-import * as S from "../styles/ShowResultStyles";
-import Header from '../components/Header/Header';
-import ClickButton from '../components/Button/ClickButton';
-import { recommendationData, fittingData } from '../data';
-import { InfoContainer } from '../styles/HistoryStyles';
+import * as S from './style';
+import Header from '../../components/Header/Header';
+import ClickButton from '../../components/Button/ClickButton';
+import { recommendationData, fittingData } from '../../data'
 
 //현재 태그 정보 데이터는 이전 페이지에서 props로 받고 있고, 리뷰결과는 바로 더미데이터 페이지에서 받아오고 있음. 뭐가 더 좋을까
 const ShowResult: React.FC= () => {

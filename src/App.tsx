@@ -6,8 +6,8 @@ import MainPage from './pages/MainPage/index';
 import KakaoCallback from "./pages/KakaoCallback";
 import RegisterPage from "./pages/Register";
 import JoinPage from "./pages/Join";
-import History from './pages/History';
-import ShowResult from './pages/ShowResult';
+import History from './pages/History/index';
+import ShowResult from './pages/Result/index';
 
 const App: React.FC = () => {
   return (

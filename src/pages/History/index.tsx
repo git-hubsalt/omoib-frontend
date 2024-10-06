@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import * as H from "../styles/HistoryStyles";
-import Header from '../components/Header/Header';
-import ClickButton from '../components/Button/ClickButton';
-import { recommendationData, fittingData } from '../data';
+import * as H from "./style";
+import Header from '../../components/Header/Header';
+import ClickButton from '../../components/Button/ClickButton';
+import { recommendationData, fittingData } from '../../data';
 
 const History: React.FC = () => {
   // 쿼리 파라미터를 가져옴
