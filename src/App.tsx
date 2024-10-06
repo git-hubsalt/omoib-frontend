@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
 import { recommendationData, fittingData } from './data';
-
 import MainPage from './pages/MainPage/index';
 import KakaoCallback from "./pages/KakaoCallback";
 import RegisterPage from "./pages/Register";
 import JoinPage from "./pages/Join";
 import History from './pages/History';
+import ClosetPage from './pages/ClosetPage/index';
+import WishPage from './pages/WishPage/index'
 
 const App: React.FC = () => {
   const [isVirtualFitting, setIsVirtualFitting] = useState(false); 

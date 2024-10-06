@@ -25,7 +25,6 @@ interface Props {
   onClickDelete: (id: number) => void;
   currentId: number;
 }
-
 const History: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFitting, onClickDelete, currentId }) => {
   //data=현재 Id / currentId는 현재 선택된 아이디를 나타낸 것 / 가상피팅이랑 코디추천이랑 다르게 데이터 받아와야 함 히스토리도
   const data = isVirtualFitting ? fittingData.find(item => item.id === currentId) : recommendationData.find(item => item.id === currentId);
