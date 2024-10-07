@@ -5,7 +5,6 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
-  font-family: Pretendard;
 `;
 
 export const Result = styled.div`
@@ -48,20 +47,6 @@ export const InfoWrapper = styled.div` //태그 정보 한줄 씩
   display: flex;
   justify-content: space-between;
   margin: 0px 25px;
-`;
-
-export const Delete = styled.button`
-  color: var(--black);
-  font-size: 14px;
-  font-weight: 500;
-  margin-left: 65px;
-  cursor: pointer;
-`;
-
-export const ReviewWrapper = styled.div`
-  display: flex;
-  gap: 20px;
-  margin: 28px 0px;
 `;
 
 export const ButtonWrapper = styled.div`

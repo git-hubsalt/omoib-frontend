@@ -7,7 +7,6 @@ export const ShowResultBox = styled.div`
   justify-content: space-between;
 `;
 
-
 export const Result = styled.div`
   margin: 20px 25px 25px 25px;
   border-radius: 10px;

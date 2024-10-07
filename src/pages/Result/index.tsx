@@ -5,11 +5,10 @@ import Header from '../../components/Header/Header';
 import ClickButton from '../../components/Button/ClickButton';
 import { recommendationData, fittingData } from '../../data'
 
-//현재 태그 정보 데이터는 이전 페이지에서 props로 받고 있고, 리뷰결과는 바로 더미데이터 페이지에서 받아오고 있음. 뭐가 더 좋을까
 const ShowResult: React.FC= () => {
   const searchParams = new URLSearchParams(window.location.search);
-  const id = parseInt(searchParams.get('id') || '1', 10); // 기본값 1
-  const isVirtualFittingParam = searchParams.get('isVirtualFitting'); 
+  const id = parseInt(searchParams.get('id') || '1', 10); // 기본값 1 , 십진수로 받아올 것
+  const isVirtualFittingParam = searchParams.get('isVirtualFitting'); //isVirtualFitting 값 가져오기
 
 
   const data = isVirtualFittingParam

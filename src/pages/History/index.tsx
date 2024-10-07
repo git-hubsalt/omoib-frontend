@@ -44,7 +44,6 @@ const History: React.FC = () => {
         <H.DateText>
           {data.Title}
         </H.DateText>
-        <H.Delete>삭제</H.Delete>
       </H.InfoWrapper>
       <H.InfoLayout>
         {renderCategories()}
