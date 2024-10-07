@@ -25,12 +25,12 @@ interface ClothesUploaderProps {
 
 const Uploader = ({ width, height, children }: UploaderProps) => {
   return (
-    <UploaderLayout
-      width={width}
-      height={height}
-    >
-        {children}
-    </UploaderLayout>
+        <UploaderLayout
+            width={width}
+            height={height}
+        >
+          {children}
+        </UploaderLayout>
   );
 }
 
