@@ -18,7 +18,6 @@ const JoinPage = () => {
   const navigate = useNavigate(); // useNavigate 훅 사용
 
   const handleBodyImageChange = (imageBase64: string) => {
-
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
