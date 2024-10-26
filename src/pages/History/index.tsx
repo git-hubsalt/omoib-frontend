@@ -5,7 +5,7 @@ import Header from '../../components/Header/Header';
 import ClickButton from '../../components/Button/ClickButton';
 import { recommendationData, fittingData } from '../../data';
 
-const History: React.FC = () => {
+const History: React.FC = () => { 
   // 쿼리 파라미터를 가져옴
   // const location = useLocation();
   const searchParams = new URLSearchParams(window.location.search);
@@ -43,7 +43,7 @@ const History: React.FC = () => {
       <H.InfoWrapper>
         <H.DateText>
           {data.Title}
-        </H.DateText>
+        </H.DateText> 
       </H.InfoWrapper>
       <H.InfoLayout>
         {renderCategories()}
