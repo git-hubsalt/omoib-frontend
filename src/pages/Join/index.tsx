@@ -6,11 +6,11 @@ import {
   InputTextBox,
   WelcomeTitle, ContentsBox, FooterBox
 } from "./style";
-import Uploader from "../../components/Uploader/Uploader";
 import {ChangeEvent, useState} from "react";
 import Input from "../../components/Input/Input";
 import ClickButton from "../../components/Button/ClickButton";
-import {useNavigate} from 'react-router-dom'; // useNavigate 추가
+import {useNavigate} from 'react-router-dom';
+import BodyImageUploader from '../../components/Uploader/BodyImageUploader'; // useNavigate 추가
 
 const JoinPage = () => {
   const [nickname, setNickname] = useState<string>("");
@@ -45,12 +45,12 @@ const JoinPage = () => {
             <NoticeText>가상 피팅을 위한</NoticeText>
             <NoticeText>신체 사진을 등록해주세요.</NoticeText>
           </FittingTextBox>
-          <Uploader width={310} height={376}>
-            <Uploader.Image
-              hasButton={true}
-              buttonText='신체 사진 등록하기'
-              onImageChange={handleBodyImageChange}/>
-          </Uploader>
+          <BodyImageUploader
+            width={345}
+            height={376}
+            buttonText={'신체 사진 등록하기'}
+            onImageChange={handleBodyImageChange}
+          />
         </ImageUploaderBox>
       </ContentsBox>
       <FooterBox>
