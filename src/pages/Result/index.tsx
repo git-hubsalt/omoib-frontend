@@ -1,6 +1,7 @@
 // 코디 추천 결과랑 가상피팅 결과를 조건문 써서 2개 렌더링하기
 import React from 'react';
-import * as S from './style';
+import { useLocation, useNavigate } from 'react-router-dom';
+import {ShowResultBox, Result, DateText, InfoBoldText, InfoNormalText, InfoContainer, InfoWrapper, Line, ReviewWrapper, WriteReviewBox, ReviewButton} from './style';
 import Header from '../../components/Header/Header';
 import ClickButton from '../../components/Button/ClickButton';
 import { recommendationData, fittingData } from '../../data'
@@ -9,46 +10,61 @@ const ShowResult: React.FC= () => {
   const searchParams = new URLSearchParams(window.location.search);
   const id = parseInt(searchParams.get('id') || '1', 10); // 기본값 1 , 십진수로 받아올 것
   const isVirtualFittingParam = searchParams.get('isVirtualFitting'); //isVirtualFitting 값 가져오기
-
+  const navigate = useNavigate();
 
   const data = isVirtualFittingParam
     ? fittingData.find(item => item.id === id)
     : recommendationData.find(item => item.id === id);
 
     // 데이터가 없을 때의 처리
-    if (!data) {
-      return <div>No data found</div>;
-    }
+  if (!data) {
+    return <div>No data found</div>;
+  }
 
-    const renderCategories = () => {
-      return data.categories.map((category, index) => (
-        <S.InfoWrapper key={index}>
-          <S.InfoBoldText>{category.category}</S.InfoBoldText>
-          <S.InfoNormalText>{category.itemName}</S.InfoNormalText>
-        </S.InfoWrapper>
-      ))};
+  const handleClickButton = () => {
+    navigate(`/review?id=${id}&isVirtualFitting=${isVirtualFittingParam}`);
+  };
+
+  const renderCategories = () => {
+    return data.categories.map((category, index) => (
+      <InfoWrapper key={index}>
+        <InfoBoldText>{category.category}</InfoBoldText>
+        <InfoNormalText>{category.itemName}</InfoNormalText>
+      </InfoWrapper>
+    ))};
 
   const handleClick = () => {
     console.log('Button clicked!');
   };
 
   return (
-    <S.ShowResultBox>
+    <ShowResultBox>
       <Header text={isVirtualFittingParam ? '가상 피팅 결과' : '코디 추천 결과'} />
-      <S.Result />
-      <S.DateText>
+      <Result />
+      <DateText>
         {data.Title}
-      </S.DateText>
-      <S.InfoContainer>
+      </DateText>
+      <InfoContainer>
         {renderCategories()}
-      </S.InfoContainer>
+        <Line />
+      </InfoContainer>
+      <ReviewWrapper>
+        <WriteReviewBox>
+          <InfoBoldText>리뷰</InfoBoldText>
+          {!data.Review && (
+            <ReviewButton onClick={handleClickButton}>리뷰 남기러 가기{'>'}</ReviewButton>
+          )}
+        </WriteReviewBox>
+        <InfoNormalText>
+          {data.Review || '아직 리뷰를 남기지 않았어요!'}
+        </InfoNormalText>
+      </ReviewWrapper>
     {!isVirtualFittingParam && (
     <ClickButton variant='footerButton' onClick={handleClick}>
-      코디 추천 결과
+      가상 피팅 하러 가기
     </ClickButton>
     )}
-    </S.ShowResultBox>
-
+    </ShowResultBox>
   );
 };
 

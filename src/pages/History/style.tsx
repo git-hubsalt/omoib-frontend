@@ -70,3 +70,10 @@ export const ReviewWrapper = styled.div`
   gap: 7px;
   margin: 0px 25px;
 `;
+
+export const TimeText = styled.div`
+  color: #575757;
+  font-size: 10px;
+  margin: 0px 25px;
+  text-align: right;
+`;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import * as H from './style';
+import {Container, Result, DateText, InfoBoldText, InfoNormalText, InfoLayout, InfoContainer, InfoWrapper, ButtonWrapper, Line, ReviewWrapper, TimeText} from './style';
 import Header from '../../components/Header/Header';
 import ClickButton from '../../components/Button/ClickButton';
 import { recommendationData, fittingData } from '../../data';
@@ -57,10 +57,10 @@ const History: React.FC = () => {
 
   const renderCategories = () => {
     return data.categories.map((category, index) => (
-      <H.InfoContainer key={index}>
-        <H.InfoBoldText>{category.category}</H.InfoBoldText>
-        <H.InfoNormalText>{category.itemName}</H.InfoNormalText>
-      </H.InfoContainer>
+      <InfoContainer key={index}>
+        <InfoBoldText>{category.category}</InfoBoldText>
+        <InfoNormalText>{category.itemName}</InfoNormalText>
+      </InfoContainer>
     ));
   };
 
@@ -70,31 +70,32 @@ const History: React.FC = () => {
   };
 
   return (
-    <H.Container>
+    <Container>
       <Header text="히스토리" />
-      <H.Result />
-      <H.InfoWrapper>
-        <H.DateText>{data.Title}</H.DateText>
-      </H.InfoWrapper>
-      <H.InfoLayout>
+      <Result />
+      <InfoWrapper>
+        <DateText>{data.Title}</DateText>
+      </InfoWrapper>
+      <InfoLayout>
         {renderCategories()}
-        <H.Line />
-      </H.InfoLayout>
-      <H.ReviewWrapper>
-        <H.InfoBoldText>리뷰</H.InfoBoldText>
-        <H.InfoNormalText>
+        <Line />
+      </InfoLayout>
+      <ReviewWrapper>
+        <InfoBoldText>리뷰</InfoBoldText>
+        <InfoNormalText>
           {data.Review || '아직 리뷰를 남기지 않았어요!'}
-        </H.InfoNormalText>
-      </H.ReviewWrapper>
-      <H.ButtonWrapper>
+        </InfoNormalText>
+      </ReviewWrapper>
+      <TimeText>{data.date}에 추천 받음</TimeText>
+      <ButtonWrapper>
         <ClickButton variant="historyButton" onClick={handleClick}>
-          완료
+          가상 피팅 하러 가기
         </ClickButton>
         <ClickButton variant="reviewButton" onClick={handleClick}>
           리뷰 기록하기
         </ClickButton>
-      </H.ButtonWrapper>
-    </H.Container>
+      </ButtonWrapper>
+    </Container>
   );
 };
 

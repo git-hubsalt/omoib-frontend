@@ -21,7 +21,7 @@ export const recommendationData = [
         itemName: '하얀색 가디건',
       },
     ],
-    Review: '그냥 그럼...',
+    Review: '',
   },
 ];
 
