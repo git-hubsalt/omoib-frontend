@@ -14,7 +14,7 @@ export const ContentsBox = styled.div`
     align-items: center;
 `;
 
-export const UploaderLayout = styled.div<UploaderLayoutProps>`
+export const BodyImageUploaderLayout = styled.div<UploaderLayoutProps>`
     width: ${({ width }) => width}px;
     height: ${({ height }) => height}px;
     display: flex;

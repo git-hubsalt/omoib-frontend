@@ -1,5 +1,10 @@
-import {ReactNode, useEffect, useState} from "react";
-import {ContentsBox, IconButtonContainer, UploadButton, UploaderLayout} from "./BodyImageUploaderStyle";
+import {useEffect, useState} from "react";
+import {
+  BodyImageUploaderLayout,
+  ContentsBox,
+  IconButtonContainer,
+  UploadButton,
+} from './BodyImageUploaderStyle';
 import CameraIcon from "../../assets/camera.svg";
 import {useIsReactNativeWebview} from "../../hooks/useIsReactNativeWebview";
 import {sendMessageToReactNative} from "../../utils/reactNativeMessage";
@@ -43,11 +48,11 @@ const BodyImageUploader = ({ width, height, buttonText, onImageChange }: BodyIma
   const handleImageUpload = () => {
     if (!isNative) return;
 
-    sendMessageToReactNative({ type: 'OPEN_UPLOAD_ALERT' });
+    sendMessageToReactNative({ type: 'UPLOAD_BODY_IMAGE' });
   }
 
   return (
-    <UploaderLayout
+    <BodyImageUploaderLayout
       width={width}
       height={height}
     >
@@ -63,7 +68,7 @@ const BodyImageUploader = ({ width, height, buttonText, onImageChange }: BodyIma
           <img src={imageBase64} alt={"uploaded"} />
         }
       </ContentsBox>
-    </UploaderLayout>
+    </BodyImageUploaderLayout>
   );
 }
 

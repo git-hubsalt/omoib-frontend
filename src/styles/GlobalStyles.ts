@@ -21,7 +21,10 @@ export const GlobalStyles = createGlobalStyle`
         border: 0;
         vertical-align: baseline;
     }
-    
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
     
   @font-face {
     font-family: "Pretendard";
