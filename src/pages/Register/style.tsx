@@ -16,9 +16,10 @@ export const ContentsContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 0 14px;
+  padding: 0 14px 20px;
   box-sizing: border-box;
   gap: 20px;
+  border-bottom: 1px solid #D9D9D9;
 `
 
 export const TagSelectionBox = styled.div`
