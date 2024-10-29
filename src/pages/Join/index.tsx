@@ -4,15 +4,18 @@ import {
   JoinLayout,
   NoticeText,
   InputTextBox,
-  WelcomeTitle, ContentsBox
+  WelcomeTitle, ContentsBox, FooterBox
 } from "./style";
 import Uploader from "../../components/Uploader/Uploader";
 import {ChangeEvent, useState} from "react";
 import Input from "../../components/Input/Input";
 import ClickButton from "../../components/Button/ClickButton";
+import {useNavigate} from 'react-router-dom'; // useNavigate 추가
 
 const JoinPage = () => {
   const [nickname, setNickname] = useState<string>("");
+
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   const handleBodyImageChange = (imageBase64: string) => {
 
@@ -21,8 +24,9 @@ const JoinPage = () => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNickname(event.target.value);
   };
-  const handleButtonClick = () => {
 
+  const handleButtonClick = () => {
+    navigate('/'); // 회원가입 완료 시 메인 페이지로 이동
   };
 
   return (
@@ -46,13 +50,15 @@ const JoinPage = () => {
             <Uploader.Image
               hasButton={true}
               buttonText='신체 사진 등록하기'
-              onImageChange={handleBodyImageChange} />
+              onImageChange={handleBodyImageChange}/>
           </Uploader>
         </ImageUploaderBox>
       </ContentsBox>
-      <ClickButton variant={'footerButton'} onClick={handleButtonClick}>
-        회원 가입 완료
-      </ClickButton>
+      <FooterBox>
+        <ClickButton variant={'footerButton'} onClick={handleButtonClick}>
+          회원 가입 완료
+        </ClickButton>
+      </FooterBox>
     </JoinLayout>
   )
 };

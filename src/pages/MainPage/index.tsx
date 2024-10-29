@@ -47,11 +47,11 @@ export default function MainPage() {
         lowTemp={22}
       />
       <MainListWrapper>
-        <MainList icon={<TshirtIcon />} text="코디 추천" route="/coordination" />
-        <MainList icon={<BubbleIcon />} text="가상 피팅" route="/virtual-fitting" />
-        <MainList icon={<ClosetIcon />} text="옷장" route="/closet" />
-        <MainList icon={<WishIcon />} text="위시" route="/wish" />
-        <MainList icon={<HistoryIcon />} text="히스토리" route="/history" />
+        <MainList icon={<TshirtIcon/>} text="코디 추천" route="/outfit-recommendations"/>
+        <MainList icon={<BubbleIcon/>} text="가상 피팅" route="/virtual-fitting"/>
+        <MainList icon={<ClosetIcon/>} text="옷장" route="/closet"/>
+        <MainList icon={<WishIcon/>} text="위시" route="/wish"/>
+        <MainList icon={<HistoryIcon/>} text="히스토리" route="/history"/>
       </MainListWrapper>
 
       <TextBox>

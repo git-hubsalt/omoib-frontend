@@ -7,7 +7,7 @@ const AddClothesButton: React.FC = () => {
   return (
     // 옷장에 옷 추가하는 페이지로 이동
     <ButtonLayout>
-      <Link to="/add-clothes">
+      <Link to="/register/add-clothes">
         <ButtonContainer>
           <Plus/>
         </ButtonContainer>
