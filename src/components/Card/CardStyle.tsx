@@ -3,16 +3,25 @@ import styled from 'styled-components';
 export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
-
   border-radius: 8px;
-  //width: 300px;
+  max-width: 122px;
+    width: 100%;
+    padding: 6px 4px;
 `;
 
 export const ImagePlaceholder = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   background-color: #f0f0f0;
-  border-radius: 8px;
+  border-radius: 10px;
+    align-items: center;
+`;
+
+export const Image = styled.img`
+  width: 110px;
+  height: 110px;
+  border-radius: 10px;
+  object-fit: cover;  // 이미지가 영역에 맞게 조정됨
 `;
 
 export const ContentWrapper = styled.div`
@@ -21,13 +30,13 @@ export const ContentWrapper = styled.div`
 `;
 
 export const Title = styled.h3`
-  font-size: 18px;
-  margin: 0;
+  font-size: 13px;
+  margin-top: 4px;
   color: #000;
 `;
 
 export const Date = styled.p`
-  font-size: 14px;
+  font-size: 10px;
   margin: 4px 0;
   color: #888;
 `;
@@ -35,6 +44,5 @@ export const Date = styled.p`
 export const TagsWrapper = styled.div`
   display: flex;
   gap: 8px;
-  margin-top: 8px;
 `;
 

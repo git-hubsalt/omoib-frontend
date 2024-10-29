@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 
 interface WeatherContainerProps {
-  backgroundColor: string;
+  $backgroundColor: string;
 }
 
 export const WeatherContainer = styled.div<WeatherContainerProps>`
@@ -12,7 +12,7 @@ export const WeatherContainer = styled.div<WeatherContainerProps>`
     flex-direction: column;;
     padding: 30px 20px;
     text-align: center;
-    background-color: ${(props) => props.backgroundColor};
+    background-color: ${(props) => props.$backgroundColor};
     max-height : 300px;
     height: 100%;
     
