@@ -16,11 +16,33 @@ export const MainListWrapper = styled.div`
 `;
 
 export const ProfileBox = styled.div`
+    gap: 10px;
+  display: flex;
+  align-items: center;
+`;
+
+
+export const HeaderBox = styled.div`
   padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const TextBox = styled.div`
-  text-align: center;
-  font-size: 12px;
-  color: #575757;
-  padding: 20px;;`
+    text-align: center;
+    font-size: 12px;
+    color: #575757;
+    padding: 20px;
+;`
+
+export const ProfileIconWrapper = styled.div`
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+`;
+
+export const NoticeWrapper = styled.div`
+  cursor: pointer;
+`;
+
