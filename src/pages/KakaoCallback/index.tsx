@@ -1,14 +1,15 @@
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import useAuthStore from '../../stores/authStore';
 
 const KakaoCallback = () => {
   const navigate = useNavigate();
   const token = new URLSearchParams(window.location.search).get('token');
+  const { login } = useAuthStore();
 
   useEffect(() => {
     if (token) {
-      //TODO: 쿠키에 저장하기
-      localStorage.setItem('token', token);
+      login(token);
       navigate('/');
     }
   }, []);

@@ -1,57 +1,69 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-
-interface UploaderLayoutProps {
-  width: number;
-  height: number;
+interface CountTextProps {
+  $color: string;
 }
 
-export const ContentsBox = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+export const UploaderLayout = styled.div`
+  width: 100%;
+  height: 73px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 4px;
+  overflow-x: auto;
+`
+
+export const UploaderBox = styled.div`
+  width: 64px;
+  height: 64px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  border: 1px solid #D1D3D8;
+`
+
+export const CountText = styled.p<CountTextProps>`
+  color: ${({ $color }) => $color};
+  font-family: 'Pretendard';
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+`
+
+export const CountTextBox = styled.div`
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+`
+
+export const UploaderContainer = styled.div`
+  width: 73px;
+  height: 73px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  flex-shrink: 0;
+`
+
+export const CancelIcon = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(+20%);
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  border-radius: 100%;
 `;
 
-export const UploaderLayout = styled.div<UploaderLayoutProps>`
-    width: ${({ width }) => width}px;
-    height: ${({ height }) => height}px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-position:  0 0, 0 0, 100% 0, 0 100%;
-    background-size: 2px 100%, 100% 2px, 2px 100% , 100% 2px;
-    background-repeat: no-repeat;
-    background-image:
-            repeating-linear-gradient(0deg, var(--gray--5), var(--gray--5) 10px, transparent 10px, transparent 25px), // left
-            repeating-linear-gradient(90deg, var(--gray--5), var(--gray--5) 10px, transparent 10px, transparent 25px), // top
-            repeating-linear-gradient(180deg, var(--gray--5), var(--gray--5) 10px, transparent 10px, transparent 25px), // right
-            repeating-linear-gradient(270deg, var(--gray--5), var(--gray--5) 10px, transparent 10px, transparent 25px); // bottom
-    border-image: repeating-linear-gradient(0deg, var(--gray--5), var(--gray--5) 10px, transparent 10px, transparent 25px);
-    border-radius: 10px;
-`;
-
-export const IconButtonContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 62px;
-`;
-
-export const UploadButton = styled.button`
-    background-color: var(--main);
-    width: 208px;
-    height: 56px;
-    text-align: center;
-    color: white;
-    font-family: 'Pretendard';
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 22px;
-    letter-spacing: -0.43px;
-    border-radius: 14px;
-    border: 1px solid var(--main);
-`;

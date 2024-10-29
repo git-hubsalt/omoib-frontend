@@ -1,70 +1,106 @@
-import {ReactNode, useEffect, useState} from "react";
-import {ContentsBox, IconButtonContainer, UploadButton, UploaderLayout} from "./UploaderStyle";
-import CameraIcon from "../../assets/camera.svg";
-import ClothesIcon from "../../assets/clothes.svg";
-import {useIsReactNativeWebview} from "../../hooks/useIsReactNativeWebview";
-import {sendMessageToReactNative} from "../../utils/reactNativeMessage";
-
+import { FC, ReactNode, useEffect } from 'react';
+import { UploaderLayout, UploaderBox, CountText, CountTextBox, CancelIcon, UploaderContainer } from './UploaderStyle';
+import CameraIcon from '../../assets/camera.svg';
+import ClothesIcon from '../../assets/clothes.svg';
+import XIcon from '../../assets/x.svg';
+import { useIsReactNativeWebview } from '../../hooks/useIsReactNativeWebview';
+import { sendMessageToReactNative } from '../../utils/reactNativeMessage';
 
 interface UploaderProps {
-  width: number;
-  height: number;
+  type: string;
+  maxCount: number;
+  currentCount: number;
+  onUpload: (data: string) => void;
   children: ReactNode;
 }
 
-interface ImageUploaderProps {
-  hasButton: boolean;
-  buttonText?: string;
-  onImageChange: (imageBase64: string) => void;
+interface AdderProps {
+  maxCount: number;
+  currentCount: number;
+  onUpload: (data: string) => void;
 }
 
-interface ClothesUploaderProps {
-  buttonText: string;
-  onClothesChange: (clothes: string) => void;
+interface TypeAdderProps extends AdderProps {
+  type: string;
 }
 
-const Uploader = ({ width, height, children }: UploaderProps) => {
+interface AdderItemProps {
+  type: string;
+  maxCount: number;
+  currentCount: number;
+  onClick: () => void;
+}
+
+interface ImageUploaderItemProps {
+  index: number;
+  image: string;
+  onClick: () => void;
+  onCancel: (index: number) => void;
+}
+
+interface ClothesUploaderItemProps {
+  index: number;
+  clothes: string;
+  onClick: () => void;
+  onCancel: (index: number) => void;
+}
+
+const Uploader = ({ type, maxCount, currentCount, onUpload, children }: UploaderProps) => {
   return (
-    <UploaderLayout
-      width={width}
-      height={height}
-    >
-        {children}
+    <UploaderLayout>
+      <Adder
+        type={type}
+        maxCount={maxCount}
+        currentCount={currentCount}
+        onUpload={onUpload}
+      />
+      {children}
     </UploaderLayout>
   );
 }
 
-const Clothes = ({ buttonText, onClothesChange }: ClothesUploaderProps) => {
-  const [clothes, setClothes] = useState<string | null>(null);
-
-  const handleBoxUpload = () => {
-    if (clothes === null) return;
-
-    handleClothesUpload();
-  }
-
-  const handleClothesUpload = () => {
-
-  }
-
+const ImageUploaderItem: FC<ImageUploaderItemProps> = ({ index, image, onClick, onCancel }) => {
   return (
-    <ContentsBox onClick={handleBoxUpload}>
-      {(clothes === null) ?
-        <IconButtonContainer>
-          <img src={ClothesIcon} alt={'clothes'} />
-            <UploadButton onClick={() => {}}>
-              {buttonText}
-            </UploadButton>
-        </IconButtonContainer>
-        :
-        <img src={'temp_clothes'} alt={"uploaded"} />
-      }
-    </ContentsBox>
+    <UploaderContainer>
+      <UploaderBox onClick={onClick}>
+        {(image !== null && image !== undefined) ?
+          null :
+          <img src={image} width={60} height={60} alt={'uploaded'} />
+        }
+      </UploaderBox>
+      <CancelIcon onClick={() => { onCancel(index) }}>
+        <img src={XIcon} alt={'cancel'} />
+      </CancelIcon>
+    </UploaderContainer>
   );
 }
 
-const Image = ({ hasButton, buttonText, onImageChange }: ImageUploaderProps) => {
-  const [imageBase64, setImageBase64] = useState<string | null>(null);
+const ClothesUploaderItem: FC<ClothesUploaderItemProps> = ({ index, clothes, onClick, onCancel }) => {
+  return (
+    <ImageUploaderItem
+      index={index}
+      image={clothes}
+      onClick={onClick}
+      onCancel={() => onCancel(index)}
+    />
+  );
+}
+
+const Adder: FC<TypeAdderProps> = ({ type, currentCount, maxCount, onUpload }) => {
+  return (type === 'clothes') ?
+    <ClothesAdder maxCount={maxCount} currentCount={currentCount} onUpload={onUpload} /> :
+    <ImageAdder maxCount={maxCount} currentCount={currentCount} onUpload={onUpload} />;
+}
+
+const ClothesAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
+  return (
+    <div>
+
+    </div>
+  );
+}
+
+const ImageAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
   const isNative = useIsReactNativeWebview();
 
   const messageHandler = (event: MessageEvent) => {
@@ -72,8 +108,7 @@ const Image = ({ hasButton, buttonText, onImageChange }: ImageUploaderProps) => 
 
     const { type, data } = JSON.parse(event.data);
     if (type === 'IMAGE') {
-      setImageBase64(data);
-      onImageChange(data);
+      onUpload(data);
     }
   }
 
@@ -87,38 +122,43 @@ const Image = ({ hasButton, buttonText, onImageChange }: ImageUploaderProps) => 
     }
   }, []);
 
-  const handleBoxUpload = () => {
-    if (hasButton && imageBase64 === null) return;
-
-    handleImageUpload();
-  }
-
   const handleImageUpload = () => {
     if (!isNative) return;
 
-    sendMessageToReactNative({ type: 'OPEN_UPLOAD_ALERT' });
+    sendMessageToReactNative({ type: 'UPLOAD_CLOTHES_IMAGE' });
   }
 
   return (
-    <ContentsBox onClick={handleBoxUpload}>
-      {(imageBase64 === null) ?
-          <IconButtonContainer>
-            <img src={CameraIcon} alt={'camera'} />
-            {(hasButton) ?
-                <UploadButton onClick={handleImageUpload}>
-                  {buttonText}
-                </UploadButton>
-                : null
-            }
-          </IconButtonContainer>
-        :
-        <img src={imageBase64} alt={"uploaded"} />
-      }
-    </ContentsBox>
+    <AdderItem
+      type={'image'}
+      maxCount={maxCount}
+      currentCount={currentCount}
+      onClick={handleImageUpload}
+    />
+  );
+}
+
+const AdderItem: FC<AdderItemProps> = ({ type, maxCount, currentCount, onClick }) => {
+  const displayIcon = (displayType: string) => {
+    return (displayType === 'clothes') ?
+      <img src={ClothesIcon} width={29.6} height={22.7} alt={'clothes'} /> :
+      <img src={CameraIcon} width={30.5} height={25} alt={'camera'} />;
+  }
+
+  return (
+    <UploaderContainer>
+      <UploaderBox onClick={onClick}>
+        {displayIcon(type)}
+        <CountTextBox>
+          <CountText $color={(currentCount < maxCount) ? 'var(--main)' : '#FA8989'}>{currentCount}</CountText>
+          <CountText $color={'#989898'}>/{maxCount}</CountText>
+        </CountTextBox>
+      </UploaderBox>
+    </UploaderContainer>
   );
 }
 
 export default Uploader;
 
-Uploader.Clothes = Clothes;
-Uploader.Image = Image;
+Uploader.Clothes = ClothesUploaderItem;
+Uploader.Image = ImageUploaderItem;

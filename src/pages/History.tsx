@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import * as H from "../styles/HistoryStyles";
 import TagButton from '../components/Button/TagButton';
 import Header from '../components/Header/Header';
 import ClickButton from '../components/Button/ClickButton';
-import { ReviewData } from '../data';
+import {ReviewData} from '../data';
 
 interface recommendationData {
   id: number;
   date: string;
   categories: {
-      category: string;
-      items: {
-          name: string;
-          tags: string[];
-      }[];
+    category: string;
+    items: {
+      name: string;
+      tags: string[];
+    }[];
   }[];
 
 }
@@ -25,14 +25,15 @@ interface Props {
   onClickDelete: (id: number) => void;
   currentId: number;
 }
-const History: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFitting, onClickDelete, currentId }) => {
+
+const History: React.FC<Props> = ({recommendationData, fittingData, isVirtualFitting, onClickDelete, currentId}) => {
   //data=현재 Id / currentId는 현재 선택된 아이디를 나타낸 것 / 가상피팅이랑 코디추천이랑 다르게 데이터 받아와야 함 히스토리도
   const data = isVirtualFitting ? fittingData.find(item => item.id === currentId) : recommendationData.find(item => item.id === currentId);
 
-    // 데이터가 없을 때의 처리(에러 처리 안할 시 오류 발생)
-    if (!data) {
-      return <div>No data found</div>;
-    }
+  // 데이터가 없을 때의 처리(에러 처리 안할 시 오류 발생)
+  if (!data) {
+    return <div>No data found</div>;
+  }
 
 
   //데이터 받아오는 공통 함수 (상의, 하의, 기타)
@@ -48,7 +49,7 @@ const History: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFi
           <H.InfoWrapper key={index}>
             <H.InfoNormalText>{item.name}</H.InfoNormalText>
             {item.tags.map((tag, tagIndex) => (
-              <TagButton key={tagIndex} name={tag} withHash={true} />
+              <TagButton key={tagIndex} name={tag} withHash={true}/>
             ))}
           </H.InfoWrapper>
         ))}
@@ -62,12 +63,12 @@ const History: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFi
 
   return (
     <div>
-      <Header text='히스토리' />
+      <Header text='히스토리'/>
       <H.Container>
-        <H.Result />
+        <H.Result/>
         <H.InfoWrapper>
           <H.DateText>
-          {isVirtualFitting ? `${data.date}에 가상피팅했어요` : `${data.date}에 추천 받았어요`}
+            {isVirtualFitting ? `${data.date}에 가상피팅했어요` : `${data.date}에 추천 받았어요`}
           </H.DateText>
           <H.Delete onClick={() => onClickDelete(data.id)}>삭제</H.Delete>
         </H.InfoWrapper>
@@ -78,19 +79,19 @@ const History: React.FC<Props> = ({ recommendationData, fittingData, isVirtualFi
         </H.InfoContainer>
         <H.ReviewWrapper>
           <H.InfoWrapper>
-            <img src={ReviewData.temperature[0].emojiSrc} alt="추웠어요" />
+            <img src={ReviewData.temperature[0].emojiSrc} alt="추웠어요"/>
             {ReviewData.temperature[0].label}
           </H.InfoWrapper>
           <H.InfoWrapper>
-            <img src={ReviewData.likeability[0].emojiSrc} alt="별로예요" />
+            <img src={ReviewData.likeability[0].emojiSrc} alt="별로예요"/>
             {ReviewData.likeability[0].label}
           </H.InfoWrapper>
         </H.ReviewWrapper>
         <ClickButton variant='historyButton' onClick={handleClick}>
-         완료
+          완료
         </ClickButton>
         <ClickButton variant='reviewButton' onClick={handleClick}>
-         리뷰 기록하기
+          리뷰 기록하기
         </ClickButton>
       </H.Container>
     </div>
