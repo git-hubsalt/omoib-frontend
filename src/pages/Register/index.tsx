@@ -2,7 +2,7 @@ import { ContentsContainer, NoticeText, RegisterLayout, TagBox, TagSelectionBox,
 import Header from "../../components/Header/Header";
 import Uploader from "../../components/Uploader/Uploader";
 import { useParams } from "react-router-dom";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import TagButton from "../../components/Button/TagButton";
 import ClickButton from "../../components/Button/ClickButton";
 
@@ -15,8 +15,6 @@ const RegisterPage = () => {
   const [name, setName] = useState<string>('');
   const [contents, setContents] = useState<number[]>([0]); // ContentsContainer 개수를 관리하는 상태
 
-  const handleClothesImageChange = () => {
-  };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -34,15 +32,47 @@ const RegisterPage = () => {
     console.log("Registering clothing item:", { name });
   };
 
+  const [items, setItems] = useState<string[]>([]);
+
+  useEffect(() => {
+    setItems([
+      "test",
+      "test1",
+      "test2",
+      "test3",
+      "test4",
+    ]);
+  }, []);
+
+  const onCancel = (index: number) => {
+    setItems((currentItems) => currentItems.filter((item, i) => index !== i));
+    console.log(`onCancel ${index}`);
+  }
+
   return (
     <RegisterLayout>
       <Header text={`${type}에 옷 등록하기`} />
 
-      <UploaderBox onClick={handleUploaderClick}>
-        <Uploader width={64} height={64}>
-          <Uploader.Image hasButton={false} onImageChange={handleClothesImageChange} />
+        <Uploader
+          type={'image'}
+          maxCount={10}
+          currentCount={items.length}
+          onUpload={handleUploaderClick}
+        >
+          {(items.length > 0) ?
+            items.map((item, index) => (
+              //각각의 항목들을 표시
+              <Uploader.Image
+                key={index}
+                index={index}
+                image={item}
+                onClick={() => { console.log('업로더아이템 클릭') }}
+                onCancel={onCancel}
+              />
+            )) :
+            null
+          }
         </Uploader>
-      </UploaderBox>
 
       {contents.map((_, index) => (
         <ContentsContainer key={index}>
