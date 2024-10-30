@@ -57,7 +57,7 @@ const Uploader = ({ type, maxCount, currentCount, onUpload, children }: Uploader
       {children}
     </UploaderLayout>
   );
-}
+};
 
 const ImageUploaderItem: FC<ImageUploaderItemProps> = ({ index, image, onClick, onCancel }) => {
   return (
@@ -68,12 +68,14 @@ const ImageUploaderItem: FC<ImageUploaderItemProps> = ({ index, image, onClick, 
           <img src={image} width={60} height={60} alt={'uploaded'} />
         }
       </UploaderBox>
-      <CancelIcon onClick={() => { onCancel(index) }}>
+      <CancelIcon onClick={() => {
+        onCancel(index);
+      }}>
         <img src={XIcon} alt={'cancel'} />
       </CancelIcon>
     </UploaderContainer>
   );
-}
+};
 
 const ClothesUploaderItem: FC<ClothesUploaderItemProps> = ({ index, clothes, onClick, onCancel }) => {
   return (
@@ -84,13 +86,13 @@ const ClothesUploaderItem: FC<ClothesUploaderItemProps> = ({ index, clothes, onC
       onCancel={() => onCancel(index)}
     />
   );
-}
+};
 
 const Adder: FC<TypeAdderProps> = ({ type, currentCount, maxCount, onUpload }) => {
   return (type === 'clothes') ?
     <ClothesAdder maxCount={maxCount} currentCount={currentCount} onUpload={onUpload} /> :
     <ImageAdder maxCount={maxCount} currentCount={currentCount} onUpload={onUpload} />;
-}
+};
 
 const ClothesAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
   return (
@@ -98,7 +100,7 @@ const ClothesAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
 
     </div>
   );
-}
+};
 
 const ImageAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
   const isNative = useIsReactNativeWebview();
@@ -110,7 +112,7 @@ const ImageAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
     if (type === 'IMAGE') {
       onUpload(data);
     }
-  }
+  };
 
   useEffect(() => {
     window.addEventListener('message', messageHandler);
@@ -119,14 +121,14 @@ const ImageAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
     return () => {
       window.removeEventListener('message', messageHandler);
       document.removeEventListener('message', messageHandler as EventListener);
-    }
+    };
   }, []);
 
   const handleImageUpload = () => {
     if (!isNative) return;
 
     sendMessageToReactNative({ type: 'UPLOAD_CLOTHES_IMAGE' });
-  }
+  };
 
   return (
     <AdderItem
@@ -136,14 +138,14 @@ const ImageAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
       onClick={handleImageUpload}
     />
   );
-}
+};
 
 const AdderItem: FC<AdderItemProps> = ({ type, maxCount, currentCount, onClick }) => {
   const displayIcon = (displayType: string) => {
     return (displayType === 'clothes') ?
       <img src={ClothesIcon} width={29.6} height={22.7} alt={'clothes'} /> :
       <img src={CameraIcon} width={30.5} height={25} alt={'camera'} />;
-  }
+  };
 
   return (
     <UploaderContainer>
@@ -156,7 +158,7 @@ const AdderItem: FC<AdderItemProps> = ({ type, maxCount, currentCount, onClick }
       </UploaderBox>
     </UploaderContainer>
   );
-}
+};
 
 export default Uploader;
 

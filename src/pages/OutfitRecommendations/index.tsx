@@ -8,20 +8,19 @@ import {OutfitRecommendationsLayout} from "./style"; // ClickButton import
 const OutfitRecommendations: React.FC = () => {
 
   return (
-    <OutfitRecommendationsLayout>
-      <Header text="코디추천"/> {/* 헤더에 텍스트 전달 */}
+    <><OutfitRecommendationsLayout>
+      <Header text="코디추천" /> {/* 헤더에 텍스트 전달 */}
       <style.Text>이 아이템은 꼭 넣고 싶어요!</style.Text>
-      <Uploader width={310} height={466}>
-        <Uploader.Clothes
-          buttonText={'아이템 등록하기'}
-          onClothesChange={(clothes: string) => {
-          }}
-        />
-      </Uploader>
+      <Uploader width={310} height={466} />
+      <Uploader.Clothes
+        buttonText='아이템 등록하기'
+        onClothesChange={(clothes: string) => {
+        }} />
+    </Uploader>
       <style.Text>오늘의 키워드를 말해주세요.</style.Text>
       <FooterButton variant="footerButton">
         완료
-      </FooterButton>
+      </FooterButton></>
     </OutfitRecommendationsLayout>
   );
 };

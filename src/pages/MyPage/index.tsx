@@ -8,7 +8,7 @@ export default function MyPage() {
   const data = {
     nickname: '조다운',
     email: 'awhekdns@kookmin.ac.kr',
-  }
+  };
   return (
     <div>
       <Header text="마이페이지" />
@@ -24,7 +24,6 @@ export default function MyPage() {
         <div>신체 사진</div>
         <div></div>
       </InfoWrapper>
-
       <LogoutWrapper>
         <p>로그아웃</p>
       </LogoutWrapper>
