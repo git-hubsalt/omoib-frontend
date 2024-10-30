@@ -64,6 +64,10 @@ const History: React.FC = () => {
     ));
   };
 
+  const handleVirtualFittingClick = () => {
+    navigate(`/virtual-fitting`);
+  };
+
   //푸터 버튼 이벤트
   const handleClick = () => {
     navigate(`/review?id=${id}&isVirtualFitting=${isVirtualFittingParam}`);
@@ -88,7 +92,7 @@ const History: React.FC = () => {
       </ReviewWrapper>
       <TimeText>{data.date}에 추천 받음</TimeText>
       <ButtonWrapper>
-        <ClickButton variant="historyButton" onClick={handleClick}>
+        <ClickButton variant="historyButton" onClick={handleVirtualFittingClick}>
           가상 피팅 하러 가기
         </ClickButton>
         <ClickButton variant="reviewButton" onClick={handleClick}>
