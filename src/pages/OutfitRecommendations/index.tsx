@@ -1,24 +1,34 @@
-import React, {useState} from 'react';
-import Header from '../../components/Header/Header'; // Header 컴포넌트의 경로를 맞게 설정하세요
-import Uploader from "../../components/Uploader/Uploader";
-import * as style from './style'; // 스타일 경로를 맞게 설정하세요
+import React, { useState } from 'react';
+import Header from '../../components/Header/Header';
+import BodyImageUploader from "../../components/Uploader/BodyImageUploader";
+import * as style from './style';
 import FooterButton from "../../components/Button/ClickButton";
-import {OutfitRecommendationsLayout} from "./style"; // ClickButton import
+import { OutfitRecommendationsLayout } from "./style";
 
 const OutfitRecommendations: React.FC = () => {
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+
+  const handleImageChange = (imageBase64: string) => {
+    setUploadedImage(imageBase64); // 업로드된 이미지를 상태에 저장
+    console.log("New image uploaded:", imageBase64); // 이미지 업로드 확인용 콘솔 출력
+  };
 
   return (
     <OutfitRecommendationsLayout>
-      <Header text="코디추천"/> {/* 헤더에 텍스트 전달 */}
+      <Header text="코디추천" /> {/* 헤더에 텍스트 전달 */}
+
       <style.Text>이 아이템은 꼭 넣고 싶어요!</style.Text>
-      <Uploader width={310} height={466}>
-        <Uploader.Clothes
-          buttonText={'아이템 등록하기'}
-          onClothesChange={(clothes: string) => {
-          }}
-        />
-      </Uploader>
+
+      {/* BodyImageUploader 컴포넌트 사용 */}
+      <BodyImageUploader
+        width={327} // 원하는 너비
+        height={482} // 원하는 높이
+        buttonText="이미지 업로드" // 버튼에 표시할 텍스트
+        onImageChange={handleImageChange} // 이미지 변경 핸들러
+      />
+
       <style.Text>오늘의 키워드를 말해주세요.</style.Text>
+
       <FooterButton variant="footerButton">
         완료
       </FooterButton>

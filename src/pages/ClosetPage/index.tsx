@@ -3,7 +3,6 @@ import Header from '../../components/Header/Header'; // Header 컴포넌트의 �
 import Card from '../../components/Card/Card';
 import {ClosetContainer} from './style';
 import AddClothesButton from '../../components/Button/AddClothesButton';
-import Header from '../../components/Header/Header';
 
 export default function ClosetPage() {
   // 여러 카드에 대한 데이터를 배열로 저장
