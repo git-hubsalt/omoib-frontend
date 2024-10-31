@@ -30,7 +30,7 @@ const OutfitRecommendations: React.FC = () => {
 
       <FooterButton variant="footerButton">
         완료
-      </FooterButton></>
+      </FooterButton>
     </OutfitRecommendationsLayout>
   );
 };
