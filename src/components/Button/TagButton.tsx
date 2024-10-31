@@ -50,7 +50,11 @@ const getTagStyles = (tagContent: string) => {
     const clothingColors: Record<string, { backgroundColor: string; color: string }> = {
         상의: { backgroundColor: '#FBE56B', color: 'white' },
         하의: { backgroundColor: '#FBE56B', color: 'white' },
-        '드레스/원피스': { backgroundColor: '#FBE56B', color: 'white' },
+        한벌옷: { backgroundColor: '#FBE56B', color: 'white' },
+        신발: { backgroundColor: '#FBE56B', color: 'white' },
+        가방: { backgroundColor: '#FBE56B', color: 'white' },
+        모자: { backgroundColor: '#FBE56B', color: 'white' },
+        기타: { backgroundColor: '#FBE56B', color: 'white' },
     };
 
     if (seasonColors[tagContent]) {
