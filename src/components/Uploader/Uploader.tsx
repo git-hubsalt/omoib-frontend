@@ -5,6 +5,8 @@ import ClothesIcon from '../../assets/clothes.svg';
 import XIcon from '../../assets/x.svg';
 import { useIsReactNativeWebview } from '../../hooks/useIsReactNativeWebview';
 import { sendMessageToReactNative } from '../../utils/reactNativeMessage';
+import { useNavigate } from 'react-router-dom';
+import { ClothesInfo } from '../../types/type';
 
 interface UploaderProps {
   type: string;
@@ -40,7 +42,7 @@ interface ImageUploaderItemProps {
 
 interface ClothesUploaderItemProps {
   index: number;
-  clothes: string;
+  clothes: ClothesInfo;
   onClick: () => void;
   onCancel: (index: number) => void;
 }
@@ -79,7 +81,7 @@ const ClothesUploaderItem: FC<ClothesUploaderItemProps> = ({ index, clothes, onC
   return (
     <ImageUploaderItem
       index={index}
-      image={clothes}
+      image={clothes.imageUrl}
       onClick={onClick}
       onCancel={() => onCancel(index)}
     />
@@ -93,10 +95,20 @@ const Adder: FC<TypeAdderProps> = ({ type, currentCount, maxCount, onUpload }) =
 }
 
 const ClothesAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
-  return (
-    <div>
+  const navigate = useNavigate();
 
-    </div>
+  const handleAdderClick = () => {
+    //TODO: 옷장이나 위시에서 옷 선택 페이지로 이동하기
+    navigate('/closet')
+  };
+
+  return (
+    <AdderItem
+      type={'clothes'}
+      maxCount={maxCount}
+      currentCount={currentCount}
+      onClick={handleAdderClick}
+    />
   );
 }
 
@@ -107,7 +119,10 @@ const ImageAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
     if (!isNative) return;
 
     const { type, data } = JSON.parse(event.data);
+    //sendMessageToReactNative({ type: 'LOG', payload: `${data}` })
     if (type === 'IMAGE') {
+      //sendMessageToReactNative({type: 'LOG', payload: `received: ${data}`});
+      //handleUpload(JSON.parse(data)).then(r => sendMessageToReactNative({ type: 'LOG', payload: 'success' }));
       onUpload(data);
     }
   }
