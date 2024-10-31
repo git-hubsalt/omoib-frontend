@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, {useState} from 'react';
 import {GlobalStyles} from './styles/GlobalStyles';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {recommendationData, fittingData} from './data';
 import MainPage from './pages/MainPage/index';
-import KakaoCallback from './pages/KakaoCallback';
-import RegisterPage from './pages/Register';
-import JoinPage from './pages/Join';
+import KakaoCallback from "./pages/KakaoCallback";
+import RegisterPage from "./pages/Register";
+import JoinPage from "./pages/Join";
 import History from './pages/History';
-import Notice from './pages/Notice';
-import MyPage from './pages/MyPage';
 import ClosetPage from './pages/ClosetPage/index';
 import WishPage from './pages/WishPage/index'
 import Onboarding from "./pages/Onboarding/index"
 import OutfitRecommendations from "./pages/OutfitRecommendations/index";
 import VirtualFitting from "./pages/VirtualFitting/index";
+import Review from './pages/Review';
+
 
 const App: React.FC = () => {
   const [isVirtualFitting, setIsVirtualFitting] = useState(false);
@@ -36,26 +35,22 @@ const App: React.FC = () => {
   const currentIdForPage = isVirtualFitting
     ? fittingData[0]?.id || 1
     : recommendationData[0]?.id || 1;
-
   return (
     <div className="App">
       <BrowserRouter>
-        <GlobalStyles />
+        <GlobalStyles/>
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/callback" element={<KakaoCallback />} />
-          <Route path="/join" element={<JoinPage />} />
-          <Route path="/register/:type" element={<RegisterPage />} />
-          <Route path="/coordination" element={<MainPage />} /> // 코디 추천
-          <Route path="/virtual-fitting" element={<MainPage />} /> // 가상 피팅
-          <Route path="/closet" element={<MainPage />} /> // 옷장
-          <Route path="/wish" element={<MainPage />} /> // 위시
-          <Route path="/history" element={<History recommendationData={recommendationData} fittingData={fittingData}
-                                                   isVirtualFitting={false} onClickDelete={onClickDelete}
-                                                   currentId={currentIdForPage} />} /> // 히스토리
-          <Route path="/notice" element={<Notice />} /> // 알림
-          <Route path="/my-page" element={<MyPage />} /> // 마이페이지
-
+          <Route path="/" element={<MainPage/>}/>
+          <Route path="/callback" element={<KakaoCallback/>}/>
+          <Route path="/join" element={<JoinPage/>}/>
+          <Route path="/onboarding" element={<Onboarding/>}/>
+          <Route path="/register/:type" element={<RegisterPage/>}/>
+          <Route path="/virtual-fitting" element={<VirtualFitting/>}/> // 가상 피팅
+          <Route path='/outfit-recommendations' element={<OutfitRecommendations/>}/>//코디추천
+          <Route path="/closet" element={<ClosetPage/>}/> // 옷장
+          <Route path="/wish" element={<WishPage/>}/> // 위시
+          <Route path="/history" element={<History/>}/> // 히스토리
+          <Route path="/review" element={<Review />} />
         </Routes>
       </BrowserRouter>
 
