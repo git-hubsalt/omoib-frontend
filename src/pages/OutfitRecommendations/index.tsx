@@ -26,12 +26,11 @@ const OutfitRecommendations: React.FC = () => {
         buttonText="이미지 업로드" // 버튼에 표시할 텍스트
         onImageChange={handleImageChange} // 이미지 변경 핸들러
       />
-
       <style.Text>오늘의 키워드를 말해주세요.</style.Text>
 
       <FooterButton variant="footerButton">
         완료
-      </FooterButton>
+      </FooterButton></>
     </OutfitRecommendationsLayout>
   );
 };
