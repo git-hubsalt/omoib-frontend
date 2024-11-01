@@ -13,6 +13,9 @@ import Onboarding from "./pages/Onboarding/index"
 import OutfitRecommendations from "./pages/OutfitRecommendations/index";
 import VirtualFitting from "./pages/VirtualFitting/index";
 import Review from './pages/Review';
+import MyPage from './pages/MyPage';
+import LoadingPage from './pages/LoadingPage';
+import NoticePage from './pages/NoticePage';
 
 
 const App: React.FC = () => {
@@ -32,9 +35,6 @@ const App: React.FC = () => {
       });
     }
   };
-  const currentIdForPage = isVirtualFitting
-    ? fittingData[0]?.id || 1
-    : recommendationData[0]?.id || 1;
   return (
     <div className="App">
       <BrowserRouter>
@@ -51,6 +51,9 @@ const App: React.FC = () => {
           <Route path="/wish" element={<WishPage/>}/> // 위시
           <Route path="/history" element={<History/>}/> // 히스토리
           <Route path="/review" element={<Review />} />
+          <Route path="/my-page" element={<MyPage/>}/>
+          <Route path="/loading" element={<LoadingPage/>}/>
+          <Route path="/notice" element={<NoticePage/>}/>
         </Routes>
       </BrowserRouter>
 
