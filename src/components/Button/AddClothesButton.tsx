@@ -13,7 +13,6 @@ const AddClothesButton: React.FC = () => {
         </ButtonContainer>
       </Link>
     </ButtonLayout>
-
   );
 };
 

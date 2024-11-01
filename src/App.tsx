@@ -16,6 +16,9 @@ import Review from './pages/Review';
 import MyPage from './pages/MyPage';
 import LoadingPage from './pages/LoadingPage';
 import NoticePage from './pages/NoticePage';
+import HistoryDetailPage from './pages/HistoryDetailPage';
+import SelectClothesPage from './pages/SelectClothesPage';
+import SelectVirtualFittingPage from './pages/SelectVirtualFittingPage';
 
 
 const App: React.FC = () => {
@@ -45,15 +48,18 @@ const App: React.FC = () => {
           <Route path="/join" element={<JoinPage/>}/>
           <Route path="/onboarding" element={<Onboarding/>}/>
           <Route path="/register/:type" element={<RegisterPage/>}/>
-          <Route path="/virtual-fitting" element={<VirtualFitting/>}/> // 가상 피팅
-          <Route path='/outfit-recommendations' element={<OutfitRecommendations/>}/>//코디추천
-          <Route path="/closet" element={<ClosetPage/>}/>//옷장
+          <Route path="/virtual-fitting" element={<VirtualFitting/>}/>
+          <Route path='/outfit-recommendations' element={<OutfitRecommendations/>}/>
+          <Route path="/closet" element={<ClosetPage/>}/>
           <Route path="/wish" element={<WishPage/>}/>
-          <Route path="/history" element={<History/>}/>
+          <Route path="/history-detail" element={<History/>}/>
           <Route path="/review" element={<Review />} />
           <Route path="/my-page" element={<MyPage/>}/>
           <Route path="/loading" element={<LoadingPage/>}/>
           <Route path="/notice" element={<NoticePage/>}/>
+          <Route path="/history" element={<HistoryDetailPage/>}/>
+          <Route path="/select-virtual-fitting" element={<SelectVirtualFittingPage/>}/>
+          <Route path="/select-outfit-recommendations" element={<SelectClothesPage/>}/>
         </Routes>
       </BrowserRouter>
 
