@@ -1,9 +1,9 @@
-import SelectButton from '../../components/Button/SelectButton';
 import React from 'react';
+import styled from 'styled-components';
 import Header from '../../components/Header/Header';
 import Card from '../../components/Card/Card';
-import styled from 'styled-components';
-
+import SelectButton from '../../components/Button/SelectButton';
+import ClickButton from '../../components/Button/ClickButton';
 
 export default function SelectVirtualFittingPage() {
   const cardData = [
@@ -34,16 +34,16 @@ export default function SelectVirtualFittingPage() {
   ];
 
   return (
-    <div>
+    <PageContainer>
       <Header text="가상 피팅" />
       <HeaderWrapper>
-      <div>
         <p>가상 피팅 방식을 골라주세요.</p>
-      </div>
-      <SelectButton />
-      <div>
-        <p>가상 피팅을 원하는 코디 한 가지를 선택해 주세요. (0/1)</p>
-      </div>
+        <ButtonGroup>
+          <SelectButton />
+        </ButtonGroup>
+        <InstructionText>
+          가상 피팅을 원하는 코디 한 가지를 선택해 주세요. (0/1)
+        </InstructionText>
       </HeaderWrapper>
       <CardContainer>
         {cardData.map((item, index) => (
@@ -53,12 +53,39 @@ export default function SelectVirtualFittingPage() {
             date={item.date}
             tags={item.tags}
             imageSrc={item.imageSrc}
-          />))}
+          />
+        ))}
       </CardContainer>
-
-    </div>
+      <FooterButtonContainer>
+        <ClickButton variant="footerButton">다 정했어요</ClickButton>
+      </FooterButtonContainer>
+    </PageContainer>
   );
 }
+
+const PageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+`;
+
+const HeaderWrapper = styled.div`
+    width: 100%;
+    padding: 0 20px;
+`;
+
+const ButtonGroup = styled.div`
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+`;
+
+const InstructionText = styled.p`
+    margin-top: 16px;
+    font-size: 0.875rem;
+    color: #555;
+`;
 
 const CardContainer = styled.div`
     display: grid;
@@ -66,6 +93,10 @@ const CardContainer = styled.div`
     padding: 20px;
 `;
 
-const HeaderWrapper = styled.div`
-    padding: 0 20px;
+const FooterButtonContainer = styled.div`
+    position: fixed;
+    bottom: 0;
+    max-width: 393px;
+    width: 100%;
+    padding: 20px;
 `;
