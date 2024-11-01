@@ -1,10 +1,10 @@
 import React from 'react';
-import {WeatherContainer, TemperatureBox, InfoBox} from './WeatherCardStyle';
-import {ReactComponent as Cloud} from '../../../assets/weathers/cloud.svg';
-import {ReactComponent as Sun} from '../../../assets/weathers/sun.svg';
-import {ReactComponent as CloudRain} from '../../../assets/weathers/cloud-with-rain.svg';
-import {ReactComponent as Wind} from '../../../assets/weathers/leaf-in-wind.svg';
-import {ReactComponent as Snow} from '../../../assets/weathers/snowman.svg';
+import { WeatherContainer, TemperatureBox, InfoBox } from './WeatherCardStyle';
+import { ReactComponent as Cloud } from '../../../assets/weathers/cloud.svg';
+import { ReactComponent as Sun } from '../../../assets/weathers/sun.svg';
+import { ReactComponent as CloudRain } from '../../../assets/weathers/cloud-with-rain.svg';
+import { ReactComponent as Wind } from '../../../assets/weathers/leaf-in-wind.svg';
+import { ReactComponent as Snow } from '../../../assets/weathers/snowman.svg';
 
 interface WeatherCardProps {
   temperature: number;
@@ -20,7 +20,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
                                                    icon: IconComponent, // 아이콘을 컴포넌트로 받음
                                                    description,
                                                    highTemp,
-                                                   lowTemp
+                                                   lowTemp,
                                                  }) => {
 
   const getBackgroundColor = () => {
@@ -35,8 +35,8 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   return (
     <WeatherContainer $backgroundColor={getBackgroundColor()}>
       <InfoBox>
-        <div style={{fontSize: '40px'}}>
-          <IconComponent/> {/* 전달된 컴포넌트를 렌더링 */}
+        <div style={{ fontSize: '40px' }}>
+          <IconComponent />
         </div>
         <TemperatureBox>
           {temperature} ℃

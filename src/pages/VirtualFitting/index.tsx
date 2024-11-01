@@ -4,6 +4,7 @@ import BodyImageUploader from "../../components/Uploader/BodyImageUploader";
 import Tab from "../../components/Tab/Tab";
 import FooterButton from "../../components/Button/ClickButton";
 import { VirtualFittingLayout } from "./style";
+import SelectButton from '../../components/Button/SelectButton';
 
 const VirtualFitting: React.FC = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
@@ -18,8 +19,7 @@ const VirtualFitting: React.FC = () => {
       <Header text="가상피팅" /> {/* 헤더에 텍스트 전달 */}
 
       {/* Tab 컴포넌트에서 tabs prop을 배열로 전달 */}
-      <Tab tabs={['추천코디', '직접선택']} />
-
+      {/*<Tab tabs={['추천코디', '직접선택']} />*/}
       {/* BodyImageUploader 컴포넌트에 필요한 props 전달 */}
       <BodyImageUploader
         width={327} // 원하는 너비 설정
