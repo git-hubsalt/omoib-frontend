@@ -7,7 +7,7 @@ import {
   Date,
   TagsWrapper,
   Image,
-} from './CardStyle';
+} from './style';
 import TagButton from '../Button/TagButton';
 
 interface CardProps {

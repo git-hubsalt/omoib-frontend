@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header';
 import BodyImageUploader from "../../components/Uploader/BodyImageUploader";
-import Tab from "../../components/Tab/Tab";
+import Tab from "../../components/Tab";
 import FooterButton from "../../components/Button/ClickButton";
 import { VirtualFittingLayout } from "./style";
 import SelectButton from '../../components/Button/SelectButton';

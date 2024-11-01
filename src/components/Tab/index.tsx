@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as style from "./TabStyle";
+import * as style from "./style";
 
 interface TabProps {
   tabs: string[];

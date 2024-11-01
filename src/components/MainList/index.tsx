@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom';
-import {MainParagraph, IconBox, ListLayout} from './MainListStyle';
+import {MainParagraph, IconBox, ListLayout} from './style';
 
 interface MainListProps {
   icon: React.ReactNode;

@@ -1,5 +1,5 @@
 import { ContentsContainer, NoticeText, RegisterLayout, TagBox, TagSelectionBox, Input, UploaderBox } from "./style";
-import Header from "../../components/Header/Header";
+import Header from "../../components/Header";
 import Uploader from "../../components/Uploader/Uploader";
 import { useParams } from "react-router-dom";
 import { ChangeEvent, useState, useEffect } from "react";

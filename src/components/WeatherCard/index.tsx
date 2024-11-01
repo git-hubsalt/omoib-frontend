@@ -1,5 +1,5 @@
 import React from 'react';
-import { WeatherContainer, TemperatureBox, InfoBox } from './WeatherCardStyle';
+import { WeatherContainer, TemperatureBox, InfoBox } from './style';
 import { ReactComponent as Cloud } from '../../../assets/weathers/cloud.svg';
 import { ReactComponent as Sun } from '../../../assets/weathers/sun.svg';
 import { ReactComponent as CloudRain } from '../../../assets/weathers/cloud-with-rain.svg';

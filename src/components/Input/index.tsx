@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {InputBox, StyledInput} from "./InputStyle";
+import {InputBox, StyledInput} from "./style";
 
 interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

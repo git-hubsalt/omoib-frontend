@@ -5,7 +5,7 @@ import {
   NoticeTextContainer,
   MainText,
   SubText,
-} from './NoticeStyle';
+} from './style';
 
 export default function Notice() {
   return (

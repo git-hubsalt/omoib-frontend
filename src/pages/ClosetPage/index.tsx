@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../../components/Header/Header'; // Header 컴포넌트의 경로를 맞게 설정하세요
-import Card from '../../components/Card/Card';
+import Header from '../../components/Header'; // Header 컴포넌트의 경로를 맞게 설정하세요
+import Card from '../../components/Card';
 import { ClosetContainer } from './style';
 import AddClothesButton from '../../components/Button/AddClothesButton';
 

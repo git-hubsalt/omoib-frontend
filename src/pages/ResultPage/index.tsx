@@ -2,7 +2,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {ShowResultBox, Result, DateText, InfoBoldText, InfoNormalText, InfoContainer, InfoWrapper, Line, ReviewWrapper, WriteReviewBox, ReviewButton} from './style';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header';
 import ClickButton from '../../components/Button/ClickButton';
 import { recommendationData, fittingData } from '../../data'
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {Container, Result, DateText, InfoBoldText, InfoNormalText, InfoLayout, InfoContainer, InfoWrapper, ButtonWrapper, Line, ReviewWrapper, TimeText} from './style';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header';
 import ClickButton from '../../components/Button/ClickButton';
 import { recommendationData, fittingData } from '../../data';
 

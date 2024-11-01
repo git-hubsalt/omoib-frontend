@@ -4,7 +4,7 @@ import {
   ContentsBox,
   IconButtonContainer,
   UploadButton,
-} from './BodyImageUploaderStyle';
+} from './style';
 import CameraIcon from "../../assets/camera.svg";
 import {useIsReactNativeWebview} from "../../hooks/useIsReactNativeWebview";
 import {sendMessageToReactNative} from "../../utils/reactNativeMessage";

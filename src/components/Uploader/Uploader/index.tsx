@@ -1,5 +1,5 @@
 import { FC, ReactNode, useEffect } from 'react';
-import { UploaderLayout, UploaderBox, CountText, CountTextBox, CancelIcon, UploaderContainer } from './UploaderStyle';
+import { UploaderLayout, UploaderBox, CountText, CountTextBox, CancelIcon, UploaderContainer } from './style';
 import CameraIcon from '../../assets/camera.svg';
 import ClothesIcon from '../../assets/clothes.svg';
 import XIcon from '../../assets/x.svg';

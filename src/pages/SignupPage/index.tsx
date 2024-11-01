@@ -7,7 +7,7 @@ import {
   WelcomeTitle, ContentsBox, FooterBox,
 } from './style';
 import { ChangeEvent, useState } from 'react';
-import Input from '../../components/Input/Input';
+import Input from '../../components/Input';
 import ClickButton from '../../components/Button/ClickButton';
 import { useNavigate } from 'react-router-dom';
 import BodyImageUploader from '../../components/Uploader/BodyImageUploader'; // useNavigate 추가
