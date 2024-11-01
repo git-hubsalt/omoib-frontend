@@ -4,16 +4,17 @@ import {
   JoinLayout,
   NoticeText,
   InputTextBox,
-  WelcomeTitle, ContentsBox, FooterBox
-} from "./style";
-import {ChangeEvent, useState} from "react";
-import Input from "../../components/Input/Input";
-import ClickButton from "../../components/Button/ClickButton";
-import {useNavigate} from 'react-router-dom';
+  WelcomeTitle, ContentsBox, FooterBox,
+} from './style';
+import { ChangeEvent, useState } from 'react';
+import Input from '../../components/Input/Input';
+import ClickButton from '../../components/Button/ClickButton';
+import { useNavigate } from 'react-router-dom';
 import BodyImageUploader from '../../components/Uploader/BodyImageUploader'; // useNavigate 추가
+import React from 'react';
 
-const JoinPage = () => {
-  const [nickname, setNickname] = useState<string>("");
+const SignupPage = () => {
+  const [nickname, setNickname] = useState<string>('');
 
   const navigate = useNavigate(); // useNavigate 훅 사용
 
@@ -36,7 +37,7 @@ const JoinPage = () => {
           <NoticeText>이름을 입력해 주세요</NoticeText>
           <Input
             value={nickname}
-            placeholder='예) 홍길동'
+            placeholder="예) 홍길동"
             onChange={handleInputChange}
           />
         </InputTextBox>
@@ -59,7 +60,7 @@ const JoinPage = () => {
         </ClickButton>
       </FooterBox>
     </JoinLayout>
-  )
+  );
 };
 
-export default JoinPage;
+export default SignupPage;
