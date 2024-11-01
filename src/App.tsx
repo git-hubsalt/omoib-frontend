@@ -7,8 +7,8 @@ import KakaoCallback from "./pages/KakaoCallback";
 import RegisterPage from "./pages/Register";
 import JoinPage from "./pages/Join";
 import History from './pages/History';
-import ClosetPage from './pages/ClosetPage/index';
-import WishPage from './pages/WishPage/index'
+import ClosetPage from './pages/ClosetDetailPage/index';
+import WishPage from './pages/WishDetailPage/index'
 import Onboarding from "./pages/Onboarding/index"
 import OutfitRecommendations from "./pages/OutfitRecommendations/index";
 import VirtualFitting from "./pages/VirtualFitting/index";
@@ -47,9 +47,9 @@ const App: React.FC = () => {
           <Route path="/register/:type" element={<RegisterPage/>}/>
           <Route path="/virtual-fitting" element={<VirtualFitting/>}/> // 가상 피팅
           <Route path='/outfit-recommendations' element={<OutfitRecommendations/>}/>//코디추천
-          <Route path="/closet" element={<ClosetPage/>}/> // 옷장
-          <Route path="/wish" element={<WishPage/>}/> // 위시
-          <Route path="/history" element={<History/>}/> // 히스토리
+          <Route path="/closet" element={<ClosetPage/>}/>//옷장
+          <Route path="/wish" element={<WishPage/>}/>
+          <Route path="/history" element={<History/>}/>
           <Route path="/review" element={<Review />} />
           <Route path="/my-page" element={<MyPage/>}/>
           <Route path="/loading" element={<LoadingPage/>}/>
