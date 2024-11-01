@@ -2,13 +2,11 @@ import React from 'react';
 import logo from '../../assets/logo/logo.svg';
 import kakao from '../../assets/logo/kakao.svg';
 import * as style from './style';
-import {useNavigate} from 'react-router-dom';
 
 const Onboarding: React.FC = () => {
-  const navigate = useNavigate();
 
   const handleKakaoClick = () => {
-    navigate('/join'); // "/join" 경로로 이동
+    window.location.href = `${process.env.REACT_APP_API_BASE_URI}/oauth2/authorization/kakao`;
   };
 
   return (
