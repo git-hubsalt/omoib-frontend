@@ -10,14 +10,29 @@ import {ChangeEvent, useState} from "react";
 import Input from "../../components/Input/Input";
 import ClickButton from "../../components/Button/ClickButton";
 import {useNavigate} from 'react-router-dom';
-import BodyImageUploader from '../../components/Uploader/BodyImageUploader'; // useNavigate 추가
+import BodyImageUploader from '../../components/Uploader/BodyImageUploader';
+import { useMutation } from '@tanstack/react-query';
+import { postSignup } from '../../apis/signup'; // useNavigate 추가
 
 const JoinPage = () => {
   const [nickname, setNickname] = useState<string>("");
+  const [bodyImage, setBodyImage] = useState<File | null>(null);
+  const signup = useMutation({
+    mutationFn: ({ username, image }: { username: string; image: File }) => postSignup(username, image),
+    onSuccess: () => {
+      navigate('/');
+      //임시 알림 메시지
+      alert('오모입에 오신 걸 환영해요!')
+    },
+    onError: () => {
+      alert('회원가입 중 오류가 발생했어요...');
+    }
+  });
 
   const navigate = useNavigate(); // useNavigate 훅 사용
 
-  const handleBodyImageChange = (imageBase64: string) => {
+  const handleBodyImageChange = (image: File) => {
+    setBodyImage(image);
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +40,9 @@ const JoinPage = () => {
   };
 
   const handleButtonClick = () => {
-    navigate('/'); // 회원가입 완료 시 메인 페이지로 이동
+    if (bodyImage) {
+      signup.mutate({ username: nickname, image: bodyImage });
+    }
   };
 
   return (
