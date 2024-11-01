@@ -1,4 +1,4 @@
-export const ClickButtonStyles = {
+export const Style = {
     footerButton: `
         width: 100%;
         bottom: 0;
