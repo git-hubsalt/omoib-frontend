@@ -6,8 +6,8 @@ import {
   UploadButton,
 } from './style';
 import CameraIcon from "../../assets/camera.svg";
-import { BodyImage, InvisibleInput } from './UploaderStyle';
-import { ALLOWED_IMAGE_FORMATS } from '../../utils/constants';
+import { BodyImage, InvisibleInput } from '../Uploader/style';
+import { ALLOWED_IMAGE_FORMATS } from '../../../utils/constants';
 
 
 interface BodyImageUploaderProps {

@@ -29,7 +29,6 @@ export const UploaderBox = styled.div`
 
 export const CountText = styled.p<CountTextProps>`
   color: ${({ $color }) => $color};
-  font-family: 'Pretendard';
   font-size: 12px;
   font-style: normal;
   font-weight: 500;

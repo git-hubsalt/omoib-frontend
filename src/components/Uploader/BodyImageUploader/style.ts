@@ -46,7 +46,6 @@ export const UploadButton = styled.button`
     height: 56px;
     text-align: center;
     color: white;
-    font-family: 'Pretendard';
     font-size: 17px;
     font-style: normal;
     font-weight: 600;
