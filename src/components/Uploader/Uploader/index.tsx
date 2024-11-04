@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, FC, ReactNode, useEffect, useRef, useState } from 'react';
 import {
   UploaderLayout,
   UploaderBox,
@@ -7,13 +7,13 @@ import {
   CancelIcon,
   UploaderContainer,
   InvisibleInput,
-} from './UploaderStyle';
+} from './style';
 import CameraIcon from '../../assets/camera.svg';
 import ClothesIcon from '../../assets/clothes.svg';
 import XIcon from '../../assets/x.svg';
 import { useNavigate } from 'react-router-dom';
-import { ClothesInfo } from '../../types/type';
-import { ALLOWED_IMAGE_FORMATS } from '../../utils/constants';
+import { ClothesInfo } from '../../../types/type';
+import { ALLOWED_IMAGE_FORMATS } from '../../../utils/constants';
 
 interface UploaderProps {
   type: string;
