@@ -1,36 +1,111 @@
-import React, { useState } from 'react';
-import Header from '../../components/Header';
-import BodyImageUploader from "../../components/Uploader/BodyImageUploader";
-import * as style from './style';
+import React, { FC, useRef, useState } from 'react';
+import Header from '../../components/Header/Header';
 import FooterButton from "../../components/Button/ClickButton";
-import { OutfitRecommendationsLayout } from "./style";
+import {
+  ClothesBox,
+  ContentsBox,
+  KeywordBox,
+  KeywordTextArea,
+  OutfitRecommendationsLayout,
+  TextAreaBox,
+  TextBox,
+} from './style';
+import Uploader from '../../components/Uploader/Uploader';
+import useClothesSelectorStore from '../../stores/clothesSelectorStore';
+import { useMutation } from '@tanstack/react-query';
+import { postOutfitRecommendation, PostOutfitRecommendationProps } from '../../apis/outfit-recommendation';
+import { useNavigate } from 'react-router-dom';
 
-const OutfitRecommendations: React.FC = () => {
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+const OutfitRecommendations: FC = () => {
+  const [currentIndex, setCurrentIndex] = useState<number>(-1);
+  const { clothesInfos, removeClothesInfo } = useClothesSelectorStore();
+  const keywordRef = useRef<HTMLTextAreaElement>(null);
+  const navigate = useNavigate();
+  const recommend = useMutation({
+    mutationFn: ({ requiredClothes, filterTagList }: PostOutfitRecommendationProps) =>
+      postOutfitRecommendation({ requiredClothes, filterTagList }),
+    onSuccess: (res) => {
+      //TODO: 알려줄게요! 창 띄우기
+      navigate('/fallback?')
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  });
 
-  const handleImageChange = (imageBase64: string) => {
-    setUploadedImage(imageBase64); // 업로드된 이미지를 상태에 저장
-    console.log("New image uploaded:", imageBase64); // 이미지 업로드 확인용 콘솔 출력
-  };
+  const handleCancel = (index: number) => {
+    if (index == currentIndex) {
+      setCurrentIndex(-1);
+    }
+
+    removeClothesInfo(clothesInfos[index]);
+  }
+
+  const handleButtonClick = () => {
+    const keywords = findKeywords();
+
+    //TODO: API 연동
+    recommend.mutate({ requiredClothes: clothesInfos, filterTagList: keywords });
+  }
+
+  const findKeywords: () => string[] = () => {
+    if (!keywordRef.current) return [];
+
+    const keywordText = keywordRef.current.value;
+
+    if (keywordText.length <= 0) {
+      console.log('키워드가 비어있어요!');
+      return [];
+    }
+
+    return keywordText.split(',').map((sliced) => sliced.trim());
+  }
 
   return (
     <OutfitRecommendationsLayout>
-      <Header text="코디추천" /> {/* 헤더에 텍스트 전달 */}
-
-      <style.Text>이 아이템은 꼭 넣고 싶어요!</style.Text>
-
-      {/* BodyImageUploader 컴포넌트 사용 */}
-      <BodyImageUploader
-        width={327} // 원하는 너비
-        height={482} // 원하는 높이
-        buttonText="이미지 업로드" // 버튼에 표시할 텍스트
-        onImageChange={handleImageChange} // 이미지 변경 핸들러
-      />
-      <style.Text>오늘의 키워드를 말해주세요.</style.Text>
-
-      <FooterButton variant="footerButton">
-        완료
-      </FooterButton>
+      <Header text="코디 추천" /> {/* 헤더에 텍스트 전달 */}
+      <ContentsBox>
+        <ClothesBox>
+          <TextBox>이 아이템은 꼭 넣고 싶어요!</TextBox>
+          <Uploader
+            type={'clothes'}
+            maxCount={10}
+            currentCount={clothesInfos.length}
+            onUpload={() => {}}
+          >
+            {(clothesInfos.length > 0) ?
+              clothesInfos.map((clothes, index) =>
+                <Uploader.Clothes
+                  key={index}
+                  index={index}
+                  clothes={clothes}
+                  onClick={() => {}}
+                  onCancel={handleCancel}
+                />
+              ) :
+              null
+            }
+          </Uploader>
+        </ClothesBox>
+        <KeywordBox>
+          <TextBox>오늘의 키워드를 입력해주세요.</TextBox>
+          <TextAreaBox>
+            <KeywordTextArea
+              placeholder={'입고 싶은 코디의 분위기, 오늘의 기분, 상황 등을\n' +
+                '키워드 형식으로, 쉼표로 구분하여 작성해주세요.\n' +
+                '(여러 개일 경우 반영되지 않을 수도 있어요.)\n\n' +
+                'ex. 데이트, 단정, 기쁨'}
+              ref={keywordRef}
+            />
+          </TextAreaBox>
+        </KeywordBox>
+        <FooterButton
+          variant="footerButton"
+          onClick={handleButtonClick}
+        >
+          완료
+        </FooterButton>
+      </ContentsBox>
     </OutfitRecommendationsLayout>
   );
 };
