@@ -6,8 +6,8 @@ import {
   InputTextBox,
   WelcomeTitle, ContentsBox, FooterBox
 } from "./style";
-import {ChangeEvent, useState} from "react";
-import Input from "../../components/Input/Input";
+import React, {ChangeEvent, useState} from "react";
+import Input from "../../components/Input/index";
 import ClickButton from "../../components/Button/ClickButton";
 import {useNavigate} from 'react-router-dom';
 import BodyImageUploader from '../../components/Uploader/BodyImageUploader';
