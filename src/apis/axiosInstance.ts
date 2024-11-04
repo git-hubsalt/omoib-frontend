@@ -11,6 +11,11 @@ const privateAxiosInstance = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
+const privateFormDataAxiosInstance = axios.create({
+  baseURL: process.env.REACT_APP_API_BASE_URI,
+  headers: { 'Content-Type': 'multipart/form-data' },
+});
+
 privateAxiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const { accessToken } = useAuthStore.getState();
@@ -28,4 +33,5 @@ privateAxiosInstance.interceptors.request.use(
 export {
   publicAxiosInstance,
   privateAxiosInstance,
+  privateFormDataAxiosInstance,
 };
