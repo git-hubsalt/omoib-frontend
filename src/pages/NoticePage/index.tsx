@@ -1,14 +1,14 @@
 import React from 'react';
-import Header from '../../components/Header/Header';
-import Notice from '../../components/Notice/Notice'
+import Header from '../../components/Header';
+import Index from '../../components/NoticeItem'
 
 export default function NoticePage() {
 
   return (
     <div>
       <Header text="알림"/>
-      <Notice/>
-      <Notice/>
+      <Index/>
+      <Index/>
     </div>
   );
 }

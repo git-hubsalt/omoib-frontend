@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../../components/Header/Header';
-import Card from '../../components/Card/Card';
+import Header from '../../components/Header';
+import Card from '../../components/Card';
 import SelectButton from '../../components/Button/SelectButton';
 import ClickButton from '../../components/Button/ClickButton';
 
