@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import {
   BodyImageUploaderLayout,
   ContentsBox,
@@ -6,49 +6,85 @@ import {
   UploadButton,
 } from './BodyImageUploaderStyle';
 import CameraIcon from "../../assets/camera.svg";
-import {useIsReactNativeWebview} from "../../hooks/useIsReactNativeWebview";
-import {sendMessageToReactNative} from "../../utils/reactNativeMessage";
+import { BodyImage, InvisibleInput } from './UploaderStyle';
+import { ALLOWED_IMAGE_FORMATS } from '../../utils/constants';
 
 
 interface BodyImageUploaderProps {
   width: number;
   height: number;
   buttonText: string;
-  onImageChange: (imageBase64: string) => void;
+  onImageChange: (image: File) => void;
 }
 
 const BodyImageUploader = ({ width, height, buttonText, onImageChange }: BodyImageUploaderProps) => {
-  const [imageBase64, setImageBase64] = useState<string | null>(null);
-  const isNative = useIsReactNativeWebview();
-
-  const messageHandler = (event: MessageEvent) => {
-    if (!isNative) return;
-
-    const { type, data } = JSON.parse(event.data);
-    if (type === 'IMAGE') {
-      setImageBase64(data);
-      onImageChange(data);
-    }
-  }
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageBase64, setImageBase64] = useState<string | ArrayBuffer | null>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    window.addEventListener('message', messageHandler);
-    document.addEventListener('message', messageHandler as EventListener);
+    if (!imageFile) {
+      setImageBase64(null);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(imageFile);
+
+    reader.onload = () => {
+      if (reader.result !== undefined) {
+        setImageBase64(reader.result);
+      }
+    };
 
     return () => {
-      window.removeEventListener('message', messageHandler);
-      document.removeEventListener('message', messageHandler as EventListener);
+      reader.onload = null;
+    };
+  }, [imageFile]);
+
+  //네이티브 사용 X로 코드 제거
+  // const isNative = useIsReactNativeWebview();
+
+  // const messageHandler = (event: MessageEvent) => {
+  //   if (!isNative) return;å
+  //å
+  //   const { type, data } = JSON.parse(event.data);
+  //   if (type === 'IMAGE') {
+  //     setImage(data);
+  //     onImageChange(data);
+  //   }
+  // }
+  //
+  // useEffect(() => {
+  //   window.addEventListener('message', messageHandler);
+  //   document.addEventListener('message', messageHandler as EventListener);
+  //
+  //   return () => {
+  //     window.removeEventListener('message', messageHandler);
+  //     document.removeEventListener('message', messageHandler as EventListener);
+  //   }
+  // }, []);
+  const handleBoxClick = () => {
+    if (imageBase64) {
+      handleButtonClick();
     }
-  }, []);
+  };
 
-  const handleBoxUpload = () => {
-    handleImageUpload();
-  }
+  const handleButtonClick = () => {
+    if (!imageInputRef.current) return;
+    imageInputRef.current.click();
+  };
 
-  const handleImageUpload = () => {
-    if (!isNative) return;
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
 
-    sendMessageToReactNative({ type: 'UPLOAD_BODY_IMAGE' });
+    if (!file) {
+      setImageFile(null);
+      return;
+    }
+
+    setImageFile(file);
+    onImageChange(file);
   }
 
   return (
@@ -56,16 +92,29 @@ const BodyImageUploader = ({ width, height, buttonText, onImageChange }: BodyIma
       width={width}
       height={height}
     >
-      <ContentsBox onClick={handleBoxUpload}>
-        {(imageBase64 === null) ?
+      <ContentsBox onClick={handleBoxClick}>
+        {(imageBase64) ?
+          <ContentsBox>
+            <InvisibleInput
+              ref={imageInputRef}
+              type={'file'}
+              accept={ALLOWED_IMAGE_FORMATS}
+              onChange={handleImageChange}
+            />
+            <BodyImage src={imageBase64 as string} alt={'uploaded'} />
+          </ContentsBox> :
           <IconButtonContainer>
-            <img src={CameraIcon} alt={'camera'} />
-            <UploadButton onClick={handleImageUpload}>
+          <img src={CameraIcon} alt={'camera'} />
+            <UploadButton onClick={handleButtonClick}>
+              <InvisibleInput
+                ref={imageInputRef}
+                type={'file'}
+                accept={ALLOWED_IMAGE_FORMATS}
+                onChange={handleImageChange}
+              />
               {buttonText}
             </UploadButton>
           </IconButtonContainer>
-          :
-          <img src={imageBase64} alt={"uploaded"} />
         }
       </ContentsBox>
     </BodyImageUploaderLayout>

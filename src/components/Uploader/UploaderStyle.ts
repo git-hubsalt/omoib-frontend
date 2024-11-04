@@ -67,3 +67,12 @@ export const CancelIcon = styled.div`
   border-radius: 100%;
 `;
 
+export const BodyImage = styled.img`
+  width: 90%;
+  height: 90%;
+`
+
+export const InvisibleInput = styled.input`
+  display: none;
+`
+
