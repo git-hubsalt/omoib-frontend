@@ -1,8 +1,6 @@
 import React from 'react';
 import WeatherCard from '../MainPage/WeatherCard/WeatherCard';
 import MainList from './MainList/MainList';
-import { ReactComponent as Cloud } from '../../assets/weathers/cloud.svg';
-import { ReactComponent as Sun } from '../../assets/weathers/sun.svg';
 import { PageLayout, MainListWrapper, ProfileBox, TextBox, HeaderBox, NoticeWrapper, ProfileIconWrapper } from './style';
 import { ReactComponent as TshirtIcon } from '../../assets/main/t-shirt.svg';
 import { ReactComponent as BubbleIcon } from '../../assets/main/bubble.svg';

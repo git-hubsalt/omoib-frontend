@@ -1,10 +1,20 @@
-import { FC, ReactNode, useEffect } from 'react';
-import { UploaderLayout, UploaderBox, CountText, CountTextBox, CancelIcon, UploaderContainer } from './UploaderStyle';
+import { ChangeEvent, FC, ReactNode, useEffect, useRef, useState } from 'react';
+import {
+  UploaderLayout,
+  UploaderBox,
+  CountText,
+  CountTextBox,
+  CancelIcon,
+  UploaderContainer,
+  InvisibleInput,
+} from './UploaderStyle';
 import CameraIcon from '../../assets/camera.svg';
 import ClothesIcon from '../../assets/clothes.svg';
 import XIcon from '../../assets/x.svg';
 import { useIsReactNativeWebview } from '../../hooks/useIsReactNativeWebview';
 import { sendMessageToReactNative } from '../../utils/reactNativeMessage';
+import { useNavigate } from 'react-router-dom';
+import { ClothesInfo } from '../../types/type';
 
 interface UploaderProps {
   type: string;
@@ -40,7 +50,7 @@ interface ImageUploaderItemProps {
 
 interface ClothesUploaderItemProps {
   index: number;
-  clothes: string;
+  clothes: ClothesInfo;
   onClick: () => void;
   onCancel: (index: number) => void;
 }
@@ -64,8 +74,8 @@ const ImageUploaderItem: FC<ImageUploaderItemProps> = ({ index, image, onClick, 
     <UploaderContainer>
       <UploaderBox onClick={onClick}>
         {(image !== null && image !== undefined) ?
-          null :
-          <img src={image} width={60} height={60} alt={'uploaded'} />
+          <img src={image} width={60} height={60} alt={'uploaded'} /> :
+          null
         }
       </UploaderBox>
       <CancelIcon onClick={() => {
@@ -81,7 +91,7 @@ const ClothesUploaderItem: FC<ClothesUploaderItemProps> = ({ index, clothes, onC
   return (
     <ImageUploaderItem
       index={index}
-      image={clothes}
+      image={clothes.imageUrl}
       onClick={onClick}
       onCancel={() => onCancel(index)}
     />
@@ -95,48 +105,100 @@ const Adder: FC<TypeAdderProps> = ({ type, currentCount, maxCount, onUpload }) =
 };
 
 const ClothesAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
-  return (
-    <div>
+  const navigate = useNavigate();
 
-    </div>
-  );
-};
-
-const ImageAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
-  const isNative = useIsReactNativeWebview();
-
-  const messageHandler = (event: MessageEvent) => {
-    if (!isNative) return;
-
-    const { type, data } = JSON.parse(event.data);
-    if (type === 'IMAGE') {
-      onUpload(data);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('message', messageHandler);
-    document.addEventListener('message', messageHandler as EventListener);
-
-    return () => {
-      window.removeEventListener('message', messageHandler);
-      document.removeEventListener('message', messageHandler as EventListener);
-    };
-  }, []);
-
-  const handleImageUpload = () => {
-    if (!isNative) return;
-
-    sendMessageToReactNative({ type: 'UPLOAD_CLOTHES_IMAGE' });
+  const handleAdderClick = () => {
+    //TODO: 옷장이나 위시에서 옷 선택 페이지로 이동하기
+    navigate('/closet')
   };
 
   return (
     <AdderItem
-      type={'image'}
+      type={'clothes'}
       maxCount={maxCount}
       currentCount={currentCount}
-      onClick={handleImageUpload}
+      onClick={handleAdderClick}
     />
+  );
+};
+
+const ImageAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
+  const [imageBase64, setImageBase64] = useState<string | ArrayBuffer | null>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  //네이티브 사용 X로 인한 코드 제거
+  //const isNative = useIsReactNativeWebview();
+
+  // const messageHandler = (event: MessageEvent) => {
+  //   if (!isNative) return;
+  //
+  //   const { type, data } = JSON.parse(event.data);
+  //   //sendMessageToReactNative({ type: 'LOG', payload: `${data}` })
+  //   if (type === 'IMAGE') {
+  //     //sendMessageToReactNative({type: 'LOG', payload: `received: ${data}`});
+  //     //handleUpload(JSON.parse(data)).then(r => sendMessageToReactNative({ type: 'LOG', payload: 'success' }));
+  //     onUpload(data);
+  //   }
+  // };
+  //
+  // useEffect(() => {
+  //   window.addEventListener('message', messageHandler);
+  //   document.addEventListener('message', messageHandler as EventListener);
+  //
+  //   return () => {
+  //     window.removeEventListener('message', messageHandler);
+  //     document.removeEventListener('message', messageHandler as EventListener);
+  //   };
+  // }, []);
+
+  const handleBoxClick = () => {
+    console.log('if 통과 전');
+    console.log(`currentCount: ${currentCount}`);
+    console.log(`maxCount: ${maxCount}`);
+    if (currentCount < maxCount) {
+      console.log('if 통과 후');
+      handleButtonClick();
+    }
+  };
+
+  const handleButtonClick = () => {
+    if (!imageInputRef.current) return;
+    imageInputRef.current.click();
+  };
+
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      setImageBase64(null);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      if (reader.result !== undefined) {
+        setImageBase64(reader.result);
+        onUpload(reader.result as string);
+      }
+    };
+  }
+
+  return (
+    <>
+      <InvisibleInput
+        ref={imageInputRef}
+        type={'file'}
+        accept={'.jpg, .png, .jpeg, .heic'}
+        onChange={handleImageChange}
+      />
+      <AdderItem
+        type={'image'}
+        maxCount={maxCount}
+        currentCount={currentCount}
+        onClick={handleBoxClick}
+      />
+    </>
   );
 };
 

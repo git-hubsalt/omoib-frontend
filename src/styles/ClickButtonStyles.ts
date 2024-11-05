@@ -7,7 +7,7 @@ export const ClickButtonStyles = {
         padding: 30px 120px;
         background-color: #89CEFA;
         border: none;
-        color: white;
+        color: white; 
     `,
     registerButton: `
         width: 208px;

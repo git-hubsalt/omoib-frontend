@@ -13,6 +13,7 @@ import Onboarding from "./pages/Onboarding/index"
 import OutfitRecommendations from "./pages/OutfitRecommendations/index";
 import VirtualFitting from "./pages/VirtualFitting/index";
 import Review from './pages/Review';
+import Notice from './pages/Notice';
 
 
 const App: React.FC = () => {
@@ -51,6 +52,7 @@ const App: React.FC = () => {
           <Route path="/wish" element={<WishPage/>}/> // 위시
           <Route path="/history" element={<History/>}/> // 히스토리
           <Route path="/review" element={<Review />} />
+          <Route path="/notice" element={<Notice/>}/>
         </Routes>
       </BrowserRouter>
 
