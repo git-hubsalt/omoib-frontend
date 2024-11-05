@@ -21,12 +21,12 @@ const VirtualFitting: React.FC = () => {
       {/* Tab 컴포넌트에서 tabs prop을 배열로 전달 */}
       {/*<Tab tabs={['추천코디', '직접선택']} />*/}
       {/* BodyImageUploader 컴포넌트에 필요한 props 전달 */}
-      <BodyImageUploader
-        width={327} // 원하는 너비 설정
-        height={482} // 원하는 높이 설정
-        buttonText="이미지 업로드" // 버튼에 표시할 텍스트
-        onImageChange={handleImageChange} // 이미지 변경 핸들러
-      />
+      {/*<BodyImageUploader*/}
+      {/*  width={327} // 원하는 너비 설정*/}
+      {/*  height={482} // 원하는 높이 설정*/}
+      {/*  buttonText="이미지 업로드" // 버튼에 표시할 텍스트*/}
+      {/*  onImageChange={handleImageChange} // 이미지 변경 핸들러*/}
+      {/*/>*/}
 
       <FooterButton variant="footerButton">
         완료

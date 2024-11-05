@@ -8,9 +8,9 @@ import {
   UploaderContainer,
   InvisibleInput,
 } from './style';
-import CameraIcon from '../../assets/camera.svg';
-import ClothesIcon from '../../assets/clothes.svg';
-import XIcon from '../../assets/x.svg';
+import CameraIcon from '../../../assets/camera.svg';
+import ClothesIcon from '../../../assets/clothes.svg';
+import XIcon from '../../../assets/x.svg';
 import { useNavigate } from 'react-router-dom';
 import { ClothesInfo } from '../../../types/type';
 import { ALLOWED_IMAGE_FORMATS } from '../../../utils/constants';

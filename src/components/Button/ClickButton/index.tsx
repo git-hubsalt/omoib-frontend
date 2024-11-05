@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import * as C from "../../styles/ClickButtonStyles";
+import * as C from "./style";
 
 // 버튼 스타일에 따른 속성 정의
 type ButtonVariant = "footerButton" | "registerButton" | "historyButton" | "reviewButton";
@@ -10,10 +10,10 @@ interface ButtonStyleProps {
 }
 
 const buttonVariants = {
-    footerButton: C.ClickButtonStyles.footerButton,
-    registerButton: C.ClickButtonStyles.registerButton,
-    historyButton: C.ClickButtonStyles.historyButton,
-    reviewButton: C.ClickButtonStyles.reviewButton,
+    footerButton: C.Style.footerButton,
+    registerButton: C.Style.registerButton,
+    historyButton: C.Style.historyButton,
+    reviewButton: C.Style.reviewButton,
 };
 
 

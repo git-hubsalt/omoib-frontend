@@ -1,5 +1,5 @@
 import React, { FC, useRef, useState } from 'react';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header/index';
 import FooterButton from "../../components/Button/ClickButton";
 import {
   ClothesBox,

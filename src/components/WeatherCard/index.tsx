@@ -1,10 +1,10 @@
 import React from 'react';
 import { WeatherContainer, TemperatureBox, InfoBox } from './style';
-import { ReactComponent as Cloud } from '../../../assets/weathers/cloud.svg';
-import { ReactComponent as Sun } from '../../../assets/weathers/sun.svg';
-import { ReactComponent as CloudRain } from '../../../assets/weathers/cloud-with-rain.svg';
-import { ReactComponent as Wind } from '../../../assets/weathers/leaf-in-wind.svg';
-import { ReactComponent as Snow } from '../../../assets/weathers/snowman.svg';
+import { ReactComponent as Cloud } from '../../assets/weathers/cloud.svg';
+import { ReactComponent as Sun } from '../../assets/weathers/sun.svg';
+import { ReactComponent as CloudRain } from '../../assets/weathers/cloud-with-rain.svg';
+import { ReactComponent as Wind } from '../../assets/weathers/leaf-in-wind.svg';
+import { ReactComponent as Snow } from '../../assets/weathers/snowman.svg';
 
 interface WeatherCardProps {
   temperature: number;

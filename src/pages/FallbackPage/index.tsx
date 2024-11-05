@@ -1,7 +1,7 @@
 import { FallbackLayout, ContentsBox, Title, CenterBox, ButtonBox } from './style';
 import FallbackIcon from '../../assets/fallback.svg';
 import BellIcon from '../../assets/bell.svg';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header/index';
 import ClickButton from '../../components/Button/ClickButton';
 import { useNavigate } from 'react-router-dom';
 
