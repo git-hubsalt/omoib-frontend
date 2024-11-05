@@ -5,7 +5,7 @@ import {
   IconButtonContainer,
   UploadButton,
 } from './style';
-import CameraIcon from "../../assets/camera.svg";
+import CameraIcon from "../../../assets/camera.svg";
 import { BodyImage, InvisibleInput } from '../Uploader/style';
 import { ALLOWED_IMAGE_FORMATS } from '../../../utils/constants';
 
