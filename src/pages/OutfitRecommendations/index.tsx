@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
+import { OutfitRecommendationsLayout, Text } from "./style";
 import Header from '../../components/Header/Header';
 import BodyImageUploader from "../../components/Uploader/BodyImageUploader";
-import * as style from './style';
 import FooterButton from "../../components/Button/ClickButton";
-import { OutfitRecommendationsLayout } from "./style";
 
 const OutfitRecommendations: React.FC = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
@@ -17,7 +16,7 @@ const OutfitRecommendations: React.FC = () => {
     <OutfitRecommendationsLayout>
       <Header text="코디추천" /> {/* 헤더에 텍스트 전달 */}
 
-      <style.Text>이 아이템은 꼭 넣고 싶어요!</style.Text>
+      <Text>이 아이템은 꼭 넣고 싶어요!</Text>
 
       {/* BodyImageUploader 컴포넌트 사용 */}
       <BodyImageUploader
@@ -26,11 +25,11 @@ const OutfitRecommendations: React.FC = () => {
         buttonText="이미지 업로드" // 버튼에 표시할 텍스트
         onImageChange={handleImageChange} // 이미지 변경 핸들러
       />
-      <style.Text>오늘의 키워드를 말해주세요.</style.Text>
+      <Text>오늘의 키워드를 말해주세요.</Text>
 
       <FooterButton variant="footerButton">
         완료
-      </FooterButton></>
+      </FooterButton>
     </OutfitRecommendationsLayout>
   );
 };
