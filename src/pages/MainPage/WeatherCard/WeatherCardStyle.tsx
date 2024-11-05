@@ -18,10 +18,11 @@ export const WeatherContainer = styled.div<WeatherContainerProps>`
     
 `;
 
-export const TemperatureBox = styled.div`
-  font-size: 24px;
-  font-weight: bold;
-  margin: 10px 0;
+export const Description = styled.div`
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 export const InfoBox : any = styled.div`
