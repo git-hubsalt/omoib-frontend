@@ -5,7 +5,7 @@ import {
 import Header from "../../components/Header/index";
 import Uploader from "../../components/Uploader/Uploader";
 import { useParams } from "react-router-dom";
-import { ChangeEvent, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ClickButton from "../../components/Button/ClickButton";
 import Content from "../../components/Content";
 import { ClothesImage } from "../../types/type";
