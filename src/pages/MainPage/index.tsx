@@ -1,8 +1,6 @@
 import React from 'react';
 import WeatherCard from '../../components/WeatherCard/index';
 import MainList from '../../components/MainList/index';
-import { ReactComponent as Cloud } from '../../assets/weathers/cloud.svg';
-import { ReactComponent as Sun } from '../../assets/weathers/sun.svg';
 import { PageLayout, MainListWrapper, ProfileBox, TextBox, HeaderBox, NoticeWrapper, ProfileIconWrapper } from './style';
 import { ReactComponent as TshirtIcon } from '../../assets/main/t-shirt.svg';
 import { ReactComponent as BubbleIcon } from '../../assets/main/bubble.svg';
@@ -28,29 +26,23 @@ export default function MainPage() {
   return (
     <PageLayout>
       <HeaderBox>
-      <ProfileBox>
-        <ProfileIconWrapper>
-          <ProfileIcon onClick={handleMyPageClick}/>
-        </ProfileIconWrapper>
-        <p>조다운 님 안녕하세요.</p>
-      </ProfileBox>
+        <ProfileBox>
+          <ProfileIconWrapper>
+            <ProfileIcon onClick={handleMyPageClick}/>
+          </ProfileIconWrapper>
+          <p>조다운 님 안녕하세요.</p>
+        </ProfileBox>
         <NoticeWrapper>
           <Notice onClick={handleNoticeClick} /> {/* Notice 클릭 이벤트 추가 */}
         </NoticeWrapper>
 
       </HeaderBox>
-      <WeatherCard
-        temperature={28}
-        icon={Sun}
-        description="맑음"
-        highTemp={31}
-        lowTemp={22}
-      />
+      <WeatherCard/>
       <MainListWrapper>
-        <MainList icon={<TshirtIcon/>} text="코디 추천" route="/recommendations/outfits"/>
+        <MainList icon={<TshirtIcon/>} text="코디 추천" route="/outfit-recommendations"/>
         <MainList icon={<BubbleIcon/>} text="가상 피팅" route="/virtual-fitting"/>
         <MainList icon={<ClosetIcon/>} text="옷장" route="/closet"/>
-        <MainList icon={<WishIcon/>} text="위시" route="/wishlist"/>
+        <MainList icon={<WishIcon/>} text="위시" route="/wish"/>
         <MainList icon={<HistoryIcon/>} text="히스토리" route="/history"/>
       </MainListWrapper>
 
