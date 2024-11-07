@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import * as R from './style';
+import {
+  KeywordTextArea,
+  Title,
+  ReviewWrapper,
+  InnerContainer,
+  TopContainer,
+  Container,
+} from './style';
 import Header from '../../components/Header';
 import ClickButton from '../../components/Button/ClickButton';
 import { recommendationData, fittingData } from '../../data';
@@ -30,24 +37,27 @@ const Review: React.FC = () => {
     }
   };
   return (
-    <R.Container>
-      <R.TopContainer>
+    <Container>
+      <TopContainer>
         <Header text="리뷰 작성" />
-        <R.InnerContainer>
-          <R.ReviewWrapper>
-            <R.Title>리뷰를 남겨주세요!</R.Title>
-            <R.ReviewBox
-              placeholder={`오늘 온도는 어땠나요?\n전체적인 코디는 어땠나요?\n마음에 들었나요?\n\n나중에 볼 수 있게 리뷰를 작성해주세요.`}
-              value={review}
-              onChange={handleChange}
+        <InnerContainer>
+          <ReviewWrapper>
+            <Title>리뷰를 남겨주세요!</Title>
+            <KeywordTextArea
+              placeholder={
+                '오늘 온도는 어땠나요?\n' +
+                '전체적인 코디는 어땠나요?\n' +
+                '마음에 들었나요?\n\n' +
+                '나중에 볼 수 있게 한 줄 평을 자세히 작성해주세요.'
+              }
             />
-          </R.ReviewWrapper>
+          </ReviewWrapper>
           <ClickButton variant="historyButton" onClick={handleSubmit}>
             작성 완료하기
           </ClickButton>
-        </R.InnerContainer>
-      </R.TopContainer>
-    </R.Container>
+        </InnerContainer>
+      </TopContainer>
+    </Container>
   );
 };
 

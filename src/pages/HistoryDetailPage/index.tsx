@@ -113,7 +113,7 @@ const HistoryDetailPage: React.FC = () => {
           가상 피팅 하러 가기
         </ClickButton>
         <ClickButton variant="reviewButton" onClick={handleClick}>
-          리뷰 기록하기
+          {data.Review ? '리뷰 수정하기' : '리뷰 기록하기'}
         </ClickButton>
       </ButtonWrapper>
     </Container>
