@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import {Container, Result, DateText, InfoBoldText, InfoNormalText, InfoLayout, InfoContainer, InfoWrapper, ButtonWrapper, Line, ReviewWrapper, TimeText} from './style';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  Container,
+  Result,
+  DateText,
+  InfoBoldText,
+  InfoNormalText,
+  InfoLayout,
+  InfoContainer,
+  InfoWrapper,
+  ButtonWrapper,
+  Line,
+  ReviewWrapper,
+  TimeText,
+} from './style';
 import Header from '../../components/Header';
 import ClickButton from '../../components/Button/ClickButton';
 import { recommendationData, fittingData } from '../../data';
@@ -19,9 +32,10 @@ const HistoryDetailPage: React.FC = () => {
   const navigate = useNavigate();
   // 쿼리 파라미터(스트링 키:값 ) 를 가져옴
   const searchParams = new URLSearchParams(window.location.search);
+  const params = useParams();
 
   // 쿼리 파라미터에서 get 통해 특정 키인 id 값을 가져옴
-  const id = parseInt(searchParams.get('id') || '1', 10); // 기본값 1
+  const id = parseInt(params.id || '1', 10); // 기본값 1
   // 쿼리 파라미터에서 get 통해 특정 키인 isVirtualFitting 값을 가져옴
   const isVirtualFittingParam = searchParams.get('isVirtualFitting');
   //데이터 선택
@@ -92,7 +106,10 @@ const HistoryDetailPage: React.FC = () => {
       </ReviewWrapper>
       <TimeText>{data.date}에 추천 받음</TimeText>
       <ButtonWrapper>
-        <ClickButton variant="historyButton" onClick={handleVirtualFittingClick}>
+        <ClickButton
+          variant="historyButton"
+          onClick={handleVirtualFittingClick}
+        >
           가상 피팅 하러 가기
         </ClickButton>
         <ClickButton variant="reviewButton" onClick={handleClick}>
