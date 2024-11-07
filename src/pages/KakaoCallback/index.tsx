@@ -4,14 +4,19 @@ import useAuthStore from '../../stores/authStore';
 
 const KakaoCallback = () => {
   const navigate = useNavigate();
-  const token = new URLSearchParams(window.location.search).get('token');
+  const searchParams = new URLSearchParams(window.location.search);
+  const isNewUser = searchParams.get("isNewUser");
+  const token = searchParams.get('token');
   const { login } = useAuthStore();
 
   useEffect(() => {
     if (token) {
+      console.log(`token: ${token}`);
       login(token);
-      navigate('/');
     }
+
+    const redirectUrl = (isNewUser) ? '/signup' : '/';
+    navigate(redirectUrl);
   }, []);
 
   return (
