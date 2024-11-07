@@ -4,7 +4,7 @@ import { WishContainer } from './style';
 import AddClothesButton from '../../components/Button/AddClothesButton';
 import Header from '../../components/Header';
 import { deleteWish } from '../../apis/wish';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function WishPage() {
   // 여러 카드에 대한 데이터를 배열로 저장
@@ -50,9 +50,17 @@ export default function WishPage() {
     },
   });
 
+  const onclick = () => {
+    alert('삭제 버튼 클릭');
+  };
+
   return (
     <div>
-      <Header text="위시리스트" />
+      <Header
+        text="위시리스트"
+        showDeleteButton={true}
+        onClickDelete={onclick}
+      />
       <WishContainer>
         {cardData.map((item, index) => (
           <Card
