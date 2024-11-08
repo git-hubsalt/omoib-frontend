@@ -17,12 +17,13 @@ import HistoryPage from './pages/HistoryPage';
 import SignupPage from './pages/SignupPage';
 import VirtualFittingPage from './pages/VirtualFittingPage';
 import ReviewPage from './pages/ReviewPage';
+import FallbackPage from "./pages/FallbackPage";
 
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
-      <Route path="/auth/callback" element={<KakaoCallback />} />
+      <Route path="/callback" element={<KakaoCallback />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/onboarding" element={<Onboarding />} />
       <Route path="/profile/register/:type" element={<RegisterPage />} />
@@ -44,6 +45,7 @@ const AppRoutes: React.FC = () => {
         element={<SelectVirtualFittingPage />}
       />
       <Route path="/outfit/select" element={<SelectClothesPage />} />
+      <Route path="/fallback" element={<FallbackPage />} />
     </Routes>
   );
 };
