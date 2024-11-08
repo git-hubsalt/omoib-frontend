@@ -47,13 +47,7 @@ export default function MainPage() {
         </NoticeWrapper>
 
       </HeaderBox>
-      <WeatherCard
-        temperature={28}
-        icon={Sun}
-        description="맑음"
-        highTemp={31}
-        lowTemp={22}
-      />
+      <WeatherCard />
       <MainListWrapper>
         <MainList icon={<TshirtIcon/>} text="코디 추천" route="/recommendations/outfits"/>
         <MainList icon={<BubbleIcon/>} text="가상 피팅" route="/virtual-fitting"/>
