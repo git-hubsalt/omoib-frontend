@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import {
   KeywordTextArea,
   Title,
@@ -10,32 +9,35 @@ import {
 } from './style';
 import Header from '../../components/Header';
 import ClickButton from '../../components/Button/ClickButton';
-import { recommendationData, fittingData } from '../../data';
+import {useMutation} from "@tanstack/react-query";
+import {putReview, PutReviewProps} from "../../apis/review";
+import {useNavigate} from "react-router-dom";
 
 const Review: React.FC = () => {
   const [review, setReview] = useState('');
   const searchParams = new URLSearchParams(window.location.search);
+  const navigate = useNavigate();
   const id = parseInt(searchParams.get('id') || '1', 10);
-  const isVirtualFittingParam = searchParams.get('isVirtualFitting');
+  // const isVirtualFittingParam = searchParams.get('isVirtualFitting');
+  const writeReview = useMutation({
+    mutationFn: ({ historyId, text }: PutReviewProps) =>
+      putReview({ historyId , text }),
+    onSuccess: (res) => {
+      navigate(-1);
+    },
+    onError: (error) => {
+      console.error(error);
+    }
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setReview(e.target.value);
   };
 
   const handleSubmit = async () => {
-    try {
-      // 엔드포인트 변경할 것
-      const response = await axios.post('/api/review', {
-        id: id,
-        isVirtualFittingParam: isVirtualFittingParam,
-        review: review,
-      });
-
-      console.log('리뷰가 성공적으로 저장되었습니다!', response.data);
-    } catch (error) {
-      console.error('리뷰 저장에 실패했어요 :(', error);
-    }
+    writeReview.mutate({ historyId: id, text: review });
   };
+
   return (
     <Container>
       <TopContainer>
