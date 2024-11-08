@@ -1,4 +1,5 @@
 import {create} from "zustand/index";
+import {persist} from "zustand/middleware";
 
 interface UserInfo {
   username: string;
@@ -11,10 +12,15 @@ interface UserState {
 }
 
 const useUserInfoStore = create<UserState>()(
-  set => ({
-    userInfo: null,
-    setUserInfo: (userInfo: UserInfo) => set({ userInfo: userInfo}),
-  })
+  persist<UserState>(
+    set => ({
+      userInfo: null,
+      setUserInfo: (userInfo: UserInfo) => set({ userInfo: userInfo}),
+    }),
+    {
+      name: 'userStore',
+    }
+  )
 )
 
 export default useUserInfoStore;

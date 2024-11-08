@@ -13,20 +13,23 @@ const KakaoCallback = () => {
 
   useEffect(() => {
     if (token) {
-      console.log(`token: ${token}`);
+      // console.log(`token: ${token}`);
+      // console.log('isNewUser: ', isNewUser);
       login(token);
     }
 
-    if (!isNewUser) {
+    if (isNewUser && isNewUser === 'false') {
       const username = searchParams.get('username');
       const profileUrl = searchParams.get('profileUrl');
+      // console.log(`username: ${username}`);
+      // console.log(`profileUrl: ${profileUrl}`);
 
       if (username) {
         setUserInfo({ username, profileUrl });
       }
     }
 
-    const redirectUrl = (isNewUser) ? '/signup' : '/';
+    const redirectUrl = (isNewUser && isNewUser === 'true') ? '/signup' : '/';
     navigate(redirectUrl);
   }, []);
 

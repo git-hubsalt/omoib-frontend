@@ -13,12 +13,14 @@ import {useNavigate} from 'react-router-dom';
 import BodyImageUploader from '../../components/Uploader/BodyImageUploader';
 import { useMutation } from '@tanstack/react-query';
 import { postSignup } from '../../apis/user';
-import useAuthStore from "../../stores/authStore"; // useNavigate 추가
+import useAuthStore from "../../stores/authStore";
+import useUserInfoStore from "../../stores/userStore"; // useNavigate 추가
 
 const SignupPage = () => {
   const [nickname, setNickname] = useState<string>('');
   const [bodyImage, setBodyImage] = useState<File | null>(null);
   const authStore = useAuthStore();
+  const { setUserInfo } = useUserInfoStore();
   const signup = useMutation({
     mutationFn: ({ username, image }: { username: string; image: File }) => postSignup(username, image),
     onSuccess: () => {
@@ -44,6 +46,7 @@ const SignupPage = () => {
   const handleButtonClick = () => {
     if (bodyImage) {
       console.log(`signup token: ${authStore.accessToken}`);
+      setUserInfo({ username: nickname, profileUrl: null });
       signup.mutate({ username: nickname, image: bodyImage });
     }
   };
