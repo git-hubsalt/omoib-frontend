@@ -12,6 +12,7 @@ import {ClothesBase, ClothesImage, ClothesInfo} from "../../types/type";
 import {useMutation} from "@tanstack/react-query";
 import {postWish} from "../../apis/wish";
 import base64toFile from "../../utils/base64";
+import {postCloset} from "../../apis/closet";
 
 const seasons: string[] = ['봄', '여름', '가을', '겨울'];
 const categories: string[] = ['상의', '하의', '아우터', '신발', '가방', '모자', '기타'];
@@ -24,7 +25,8 @@ const RegisterPage = () => {
   const navigate = useNavigate();
 
   const register = useMutation({
-    mutationFn: ({ clothes, images }: { clothes: ClothesBase[]; images: File[] }) => postWish(clothes, images),
+    mutationFn: ({ clothes, images }: { clothes: ClothesBase[]; images: File[] }) =>
+      (type === '위시') ? postWish(clothes, images) : postCloset(clothes, images),
     onSuccess: ()=>{
       alert('등록 성공')
       navigate('/wishlist')
