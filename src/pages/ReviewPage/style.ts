@@ -22,7 +22,7 @@ export const ReviewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  margin-bottom: 158px;
+  margin-bottom: 80%;
 `;
 
 export const Title = styled.div`
@@ -30,19 +30,27 @@ export const Title = styled.div`
   font-weight: 500;
 `;
 
-export const ReviewBox = styled.textarea`
-  display: flex;
-  max-height: 343px;
-  min-height: 300px;
+export const KeywordTextArea = styled.textarea`
+  height: 153px;
   padding: 24px 17px;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 10px;
+  font-size: 15px;
+  font-family: 'Pretendard';
+  font-weight: 500;
+  color: black;
+  border-radius: 10px;
+  border: 1px solid #bcbec0;
+  resize: none;
+
+  &:focus {
+    outline: none;
+  }
 
   &::placeholder {
-    font-size: 14px;
-    line-height: 1.5; /* placeholder의 줄 간격 */
-    color: #888;
-    white-space: pre-line; /* 줄바꿈 문자를 인식하게 설정 */
+    font-family: 'Pretendard';
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gray--5);
+    white-space: pre-line;
+    line-height: normal;
   }
 `;

@@ -39,6 +39,7 @@ export const ProfileIconWrapper = styled.div`
     cursor: pointer;
     display: flex;
     align-items: center;
+    border-radius: 100%;
 `;
 
 export const NoticeWrapper = styled.div`

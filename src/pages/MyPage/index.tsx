@@ -1,20 +1,35 @@
 import React from 'react';
 import Header from '../../components/Header';
-import { LogoutWrapper } from './style';
-import { InfoWrapper } from './style';
+import { LogoutWrapper, InfoWrapper } from './style';
+import { useQuery } from 'react-query';
+import { privateAxiosInstance } from '../../apis/axiosInstance';
+import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../../stores/authStore'; // 인증 상태 관리를 위한 store
 
+const fetchUserData = async () => {
+  const { data } = await privateAxiosInstance.get('/mypage');
+  return data;
+};
 
 export default function MyPage() {
-  const data = {
-    nickname: '조다운',
-    email: 'awhekdns@kookmin.ac.kr',
+  const { data, isLoading, error } = useQuery('userData', fetchUserData);
+  const { logout } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/onboarding');
   };
+
+  if (isLoading) return <p>로딩 중...</p>;
+  if (error) return <p>오류가 발생했습니다.</p>;
+
   return (
     <div>
       <Header text="마이페이지" />
       <InfoWrapper>
         <div>닉네임</div>
-        <div>{data.nickname}</div>
+        <div>{data.name}</div>
       </InfoWrapper>
       <InfoWrapper>
         <div>이메일</div>
@@ -22,9 +37,25 @@ export default function MyPage() {
       </InfoWrapper>
       <InfoWrapper>
         <div>신체 사진</div>
-        <div></div>
+        <div>
+          {data.rowImagePath ? (
+            <img src={data.rowImagePath} alt="신체 사진" style={{ width: '100px' }} />
+          ) : (
+            <p>사진이 없습니다.</p>
+          )}
+        </div>
       </InfoWrapper>
-      <LogoutWrapper>
+      <InfoWrapper>
+        <div>프로필 사진</div>
+        <div>
+          {data.profileImagePath ? (
+            <img src={data.profileImagePath} alt="프로필 사진" style={{ width: '100px' }} />
+          ) : (
+            <p>사진이 없습니다.</p>
+          )}
+        </div>
+      </InfoWrapper>
+      <LogoutWrapper onClick={handleLogout}>
         <p>로그아웃</p>
       </LogoutWrapper>
     </div>
