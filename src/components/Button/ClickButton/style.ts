@@ -1,9 +1,7 @@
 export const Style = {
     footerButton: `
         width: 100%;
-        bottom: 0;
         height: 82px;
-        position: fixed;
         padding: 30px 120px;
         background-color: #89CEFA;
         border: none;
