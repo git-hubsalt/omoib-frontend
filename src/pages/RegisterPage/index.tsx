@@ -8,7 +8,7 @@ import Uploader from "../../components/Uploader/Uploader";
 import {useNavigate, useParams} from "react-router-dom";
 import ClickButton from "../../components/Button/ClickButton";
 import Content from "../../components/Content";
-import {ClothesBase, ClothesImage} from "../../types/type";
+import {ClothesBase, ClothesImage, ClothesInfo} from "../../types/type";
 import {useMutation} from "@tanstack/react-query";
 import {postWish} from "../../apis/wish";
 import base64toFile from "../../utils/base64";
@@ -71,13 +71,17 @@ const RegisterPage = () => {
   const handleButtonClick = async () => {
     if (contents.every((content) => content.name)) {
       const images = contents.map((item, index) => base64toFile(item.imageBase64, `clothimage_${index}`))
-      const clothes = contents.map((item) => {
+      const clothes: ClothesBase[] = contents.map((item) => {
         return {
           name: item.name,
           clothesType: item.clothesType,
           seasonTypes: item.seasonTypes,
         } as ClothesBase
       });
+
+      console.log(`name: ${clothes[0].name}`);
+      console.log(`clothesType: ${clothes[0].clothesType}`);
+      console.log(`seasonTypes: ${clothes[0].seasonTypes}`);
 
       register.mutate({ clothes: clothes, images: images });
     } else {
