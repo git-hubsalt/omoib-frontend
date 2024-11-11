@@ -47,7 +47,7 @@ export default function ClosetPage() {
     queryKey: ['closet'],
   });
 
-  const cardData = (data) ? data.data as ClosetCardInfo[] : [];
+  const cardData = (data && data.data) ? data.data as ClosetCardInfo[] : [];
 
   return (
     <div>
