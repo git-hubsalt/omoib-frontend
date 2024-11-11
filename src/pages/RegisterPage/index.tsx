@@ -5,7 +5,7 @@ import {
 } from "./style";
 import Header from "../../components/Header/index";
 import Uploader from "../../components/Uploader/Uploader";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ClickButton from "../../components/Button/ClickButton";
 import Content from "../../components/Content";
 import {ClothesBase, ClothesImage} from "../../types/type";
@@ -21,11 +21,13 @@ const RegisterPage = () => {
   const type = params.type === 'wish' ? '위시' : '옷장';
   const [contents, setContents] = useState<ClothesImage[]>([]);
   const [items, setItems] = useState<string[]>([]);
+  const navigate = useNavigate();
 
   const register = useMutation({
     mutationFn: ({ clothes, images }: { clothes: ClothesBase[]; images: File[] }) => postWish(clothes, images),
     onSuccess: ()=>{
       alert('등록 성공')
+      navigate('/wishlist')
     },
     onError: ()=>{
       alert('등록 실패')
@@ -43,19 +45,20 @@ const RegisterPage = () => {
           if (field === 'seasonTypes') {
             const updatedSeasons = content.seasonTypes.includes(value)
               ? content.seasonTypes.filter((season) => season !== value)
-              : [...content.seasonTypes, value];
-            return { ...content, seasonTypes: updatedSeasons };
+              : Array.from(new Set([...content.seasonTypes, value])); // 중복 제거 후 단일 배열 유지
+            return { ...content, seasonTypes: updatedSeasons.flat() }; // .flat()으로 중첩 방지
           } else if (field === 'clothesType') {
             return { ...content, clothesType: value };
           }
           return { ...content, [field]: value };
-        } else if (field === 'clothesType') {
-          return { ...content, clothesType: '' };
         }
         return content;
       })
     );
   };
+
+
+
 
   const handleUploaderClick = (imageBase64: string) => {
     setItems((prevItems) => [...prevItems, imageBase64]);
@@ -66,7 +69,7 @@ const RegisterPage = () => {
   };
 
   const handleButtonClick = async () => {
-    if (contents.some((content) => !content.name)) {
+    if (contents.every((content) => content.name)) {
       const images = contents.map((item, index) => base64toFile(item.imageBase64, `clothimage_${index}`))
       const clothes = contents.map((item) => {
         return {
