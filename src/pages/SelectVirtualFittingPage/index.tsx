@@ -67,12 +67,15 @@ const PageContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
 `;
 
 const HeaderWrapper = styled.div`
+    max-width: 393px;
     width: 100%;
-    padding: 0 20px;
+
+    & > * {
+        padding: 0 10px;
+    }
 `;
 
 const ButtonGroup = styled.div`
@@ -82,7 +85,7 @@ const ButtonGroup = styled.div`
 `;
 
 const InstructionText = styled.p`
-    margin-top: 16px;
+    margin-top: 12px;
     font-size: 0.875rem;
     color: #555;
 `;
@@ -90,7 +93,15 @@ const InstructionText = styled.p`
 const CardContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: 20px;
+    padding: 10px;
+    align-items: center;
+    
+    
+    & > * {
+        padding: 0 10px;
+        width: 100%;
+        max-width: 393px;
+    }
 `;
 
 const FooterButtonContainer = styled.div`
@@ -98,5 +109,5 @@ const FooterButtonContainer = styled.div`
     bottom: 0;
     max-width: 393px;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
 `;
