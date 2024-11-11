@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { PageContainer, HeaderWrapper, ButtonGroup, InstructionText, CardContainer, FooterButtonContainer } from './style';
 import Header from '../../components/Header';
 import Card from '../../components/Card';
 import SelectButton from '../../components/Button/SelectButton';
@@ -62,52 +62,3 @@ export default function SelectVirtualFittingPage() {
     </PageContainer>
   );
 }
-
-const PageContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
-
-const HeaderWrapper = styled.div`
-    max-width: 393px;
-    width: 100%;
-
-    & > * {
-        padding: 0 10px;
-    }
-`;
-
-const ButtonGroup = styled.div`
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-`;
-
-const InstructionText = styled.p`
-    margin-top: 12px;
-    font-size: 0.875rem;
-    color: #555;
-`;
-
-const CardContainer = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    padding: 10px;
-    align-items: center;
-    
-    
-    & > * {
-        padding: 0 10px;
-        width: 100%;
-        max-width: 393px;
-    }
-`;
-
-const FooterButtonContainer = styled.div`
-    position: fixed;
-    bottom: 0;
-    max-width: 393px;
-    width: 100%;
-    padding: 10px;
-`;

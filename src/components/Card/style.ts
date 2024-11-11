@@ -7,6 +7,7 @@ export const CardWrapper = styled.div`
     max-width: 122px;
     width: 100%;
     padding: 6px 4px;
+    
 `;
 
 export const ImagePlaceholder = styled.div`
