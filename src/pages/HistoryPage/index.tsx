@@ -48,7 +48,6 @@ export default function HistoryPage() {
             imageSrc={item.imageSrc}
           />))}
       </ClosetContainer>
-
     </div>
   );
 }

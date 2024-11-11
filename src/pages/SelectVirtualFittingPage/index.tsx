@@ -1,37 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PageContainer, HeaderWrapper, ButtonGroup, InstructionText, CardContainer, FooterButtonContainer } from './style';
 import Header from '../../components/Header';
 import Card from '../../components/Card';
 import SelectButton from '../../components/Button/SelectButton';
 import ClickButton from '../../components/Button/ClickButton';
 
+interface CardData {
+  id: number;
+  name: string;
+  createDate: string;
+  tagList: string[];
+  imageUrl: string;
+}
+
 export default function SelectVirtualFittingPage() {
-  const cardData = [
+  const cardData: CardData[] = [
     {
-      title: '체크셔츠',
-      date: '2024.09.22',
-      tags: ['가을', '상의'],
-      imageSrc: 'https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1430195_lifestyle?$rl_4x5_pdp$',
+      id: 1,
+      name: "하의",
+      createDate: "2024.11.11",
+      tagList: ["봄", "가을"],
+      imageUrl: "https://githubsalt-bucket.s3.ap-northeast-2.amazonaws.com/users/a/items/closet/lower.jpg",
     },
     {
-      title: '패딩 재킷',
-      date: '2024.01.12',
-      tags: ['겨울'],
-      imageSrc: 'https://image.msscdn.net/thumbnails/images/goods_img/20240108/3780896/3780896_17065042559824_big.jpg?w=1200',
-    },
-    {
-      title: '반팔 티셔츠',
-      date: '2024.06.15',
-      tags: ['여름', '상의'],
-      imageSrc: 'https://image.msscdn.net/thumbnails/images/goods_img/20240430/4096643/4096643_17188607420995_big.jpg?w=1200',
-    },
-    {
-      title: '청바지',
-      date: '2024.08.05',
-      tags: ['여름', '하의'],
-      imageSrc: 'https://image.msscdn.net/thumbnails/images/goods_img/20240508/4114622/4114622_17168553676980_big.jpg?w=1200',
+      id: 2,
+      name: "상의",
+      createDate: "2024.11.11",
+      tagList: ["여름", "가을"],
+      imageUrl: "https://githubsalt-bucket.s3.ap-northeast-2.amazonaws.com/users/a/items/closet/upper.jpg",
     },
   ];
+
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const handleCardClick = (index: number) => {
+    // 현재 선택된 카드와 클릭된 카드가 같으면 선택 해제, 다르면 선택
+    setSelectedIndex(prevIndex => (prevIndex === index ? null : index));
+  };
 
   return (
     <PageContainer>
@@ -48,11 +53,14 @@ export default function SelectVirtualFittingPage() {
       <CardContainer>
         {cardData.map((item, index) => (
           <Card
-            key={index}
-            title={item.title}
-            date={item.date}
-            tags={item.tags}
-            imageSrc={item.imageSrc}
+            key={item.id}
+            id={item.id}
+            title={item.name} // name을 title로 매핑
+            date={item.createDate} // createDate를 date로 매핑
+            tags={item.tagList} // tagList를 tags로 매핑
+            imageSrc={item.imageUrl} // imageUrl을 imageSrc로 매핑
+            isSelected={selectedIndex === index} // 선택된 카드인지 여부
+            onClick={() => handleCardClick(index)} // 카드 클릭 시 처리
           />
         ))}
       </CardContainer>
