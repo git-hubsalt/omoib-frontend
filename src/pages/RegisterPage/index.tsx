@@ -8,9 +8,12 @@ import Uploader from "../../components/Uploader/Uploader";
 import { useParams } from "react-router-dom";
 import ClickButton from "../../components/Button/ClickButton";
 import Content from "../../components/Content";
-import { ClothesImage } from "../../types/type";
+import {ClothesBase, ClothesImage} from "../../types/type";
 import axios from 'axios';
 import useAuthStore from "../../stores/authStore";
+import {useMutation} from "@tanstack/react-query";
+import {postWish} from "../../apis/wish";
+import base64toFile from "../../utils/base64";
 
 const seasons: string[] = ['봄', '여름', '가을', '겨울'];
 const categories: string[] = ['상의', '하의', '아우터', '신발', '가방', '모자', '기타'];
@@ -59,48 +62,21 @@ const RegisterPage = () => {
 
   const handleButtonClick = async () => {
     if (contents.some((content) => !content.name)) {
+      const images = contents.map((item, index) => base64toFile(item.imageBase64, `clothimage_${index}`))
+      const clothes = contents.map((item) => {
+        return {
+          name: item.name,
+          clothesType: item.clothesType,
+          seasonTypes: item.seasonTypes,
+        } as ClothesBase
+      });
+
+      register.mutate({ clothes: clothes, images: images });
+    } else {
       alert("모든 제목을 입력해주세요.");
-      return;
     }
+  }
 
-    const formData = new FormData();
-    contents.forEach((content) => {
-      formData.append(
-        'requestDTO',
-        new Blob(
-          [JSON.stringify({
-            clothes: [
-              {
-                name: content.name,
-                seasonType: content.seasonTypes,
-                clothesType: content.clothesType
-              }
-            ]
-          })],
-          { type: 'application/json' }
-        )
-      );
-      formData.append('image', content.imageBase64);
-    });
-
-    try {
-      await axios.post(`${process.env.REACT_APP_API_BASE_URI}/wish`, formData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": 'multipart/form-data',
-        }
-      });
-      alert("옷 등록이 완료되었습니다.");
-    } catch (error: any) {
-      console.error("옷 등록 중 오류 발생:", {
-        message: error.message,
-        response: error.response ? error.response.data : 'No response from server',
-        status: error.response ? error.response.status : 'No status',
-        stack: error.stack,
-      });
-      alert(`옷 등록에 실패했습니다: ${error.message}`);
-    }
-  };
 
   const onCancel = (index: number) => {
     setItems((currentItems) => currentItems.filter((_, i) => i !== index));
