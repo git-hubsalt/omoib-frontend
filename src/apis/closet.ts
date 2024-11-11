@@ -9,7 +9,7 @@ export const getCloset = () => {
     return privateAxiosInstance.get('/closet');
 }
 
-export const postCloset = (clothes: ClothesBase, images: File[]) => {
+export const postCloset = (clothes: ClothesBase[], images: File[]) => {
     const formData = new FormData();
     const requestBody = { clothes: clothes };
 

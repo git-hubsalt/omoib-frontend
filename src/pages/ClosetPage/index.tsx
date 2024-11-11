@@ -9,7 +9,7 @@ import {getCloset} from "../../apis/closet";
 interface ClosetCardInfo {
   id: number;
   name: string;
-  createdDate: string;
+  createDate: string;
   tagList: string[];
   imageUrl: string;
 }
@@ -47,7 +47,7 @@ export default function ClosetPage() {
     queryKey: ['closet'],
   });
 
-  const cardData = (data) ? data.data as ClosetCardInfo[] : [];
+  const cardData = (data && data.data && data.data.clothes) ? data.data.clothes as ClosetCardInfo[] : [];
 
   return (
     <div>
@@ -57,7 +57,7 @@ export default function ClosetPage() {
           <Card
             key={index}
             title={item.name}
-            date={item.createdDate}
+            date={item.createDate}
             tags={item.tagList}
             imageSrc={item.imageUrl}
           />))}
