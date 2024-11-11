@@ -1,7 +1,7 @@
 export interface ClothesBase {
   name: string;
   seasonTypes: ('봄' | '여름' | '가을' | '겨울')[];
-  clothesType: 'upper' | 'lower' | 'shoes' | 'bag' | 'cap' | 'outer' | 'overall';
+  clothesType: '상의' | '하의' | '신발' | '가방' | '모자' | '아우터' | '기타';
 }
 
 export interface ClothesInfo extends ClothesBase {
