@@ -2,8 +2,8 @@ import { privateFormDataAxiosInstance } from './axiosInstance';
 import {ClothesBase} from "../types/type";
 
 export const deleteWish = async (Id: number) => {
-  const apiUri = process.env.REACT_APP_API_KEY;
-  return await privateFormDataAxiosInstance.delete(`{apiUri}/wish/${Id}`);
+  const apiUri = process.env.REACT_APP_API_BASE_URI;
+  return await privateFormDataAxiosInstance.delete(`${apiUri}/wish/${Id}`);
 };
 
 
