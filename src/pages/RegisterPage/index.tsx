@@ -9,8 +9,6 @@ import { useParams } from "react-router-dom";
 import ClickButton from "../../components/Button/ClickButton";
 import Content from "../../components/Content";
 import {ClothesBase, ClothesImage} from "../../types/type";
-import axios from 'axios';
-import useAuthStore from "../../stores/authStore";
 import {useMutation} from "@tanstack/react-query";
 import {postWish} from "../../apis/wish";
 import base64toFile from "../../utils/base64";
@@ -33,9 +31,6 @@ const RegisterPage = () => {
       alert('등록 실패')
     }
   })
-
-  // 테스트용으로 받은 토큰을 하드코딩
-  //const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczMDk1OTkzMywiZXhwIjoxNzMyNzU5OTMzfQ.563h32qveX9duf9vJseX49SuWFNMs35RRtBeqswdhhg';
 
   useEffect(() => {
     setItems([]);
