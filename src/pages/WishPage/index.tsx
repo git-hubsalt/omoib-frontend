@@ -1,3 +1,4 @@
+import React from 'react';
 import Card from '../../components/Card';
 import { WishContainer, DeleteButton, CardContainer } from './style';
 import AddClothesButton from '../../components/Button/AddClothesButton';

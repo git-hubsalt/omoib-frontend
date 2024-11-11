@@ -9,9 +9,9 @@ import {
 } from './style';
 import Header from '../../components/Header';
 import ClickButton from '../../components/Button/ClickButton';
-import {useMutation} from "@tanstack/react-query";
-import {putReview, PutReviewProps} from "../../apis/review";
-import {useNavigate} from "react-router-dom";
+import { useMutation } from '@tanstack/react-query';
+import { putReview, PutReviewProps } from '../../apis/review';
+import { useNavigate } from 'react-router-dom';
 
 const Review: React.FC = () => {
   const [review, setReview] = useState('');
@@ -21,14 +21,14 @@ const Review: React.FC = () => {
   // const isVirtualFittingParam = searchParams.get('isVirtualFitting');
   const writeReview = useMutation({
     mutationFn: ({ historyId, text }: PutReviewProps) =>
-      putReview({ historyId , text }),
-    onSuccess: (res) => {
+      putReview({ historyId, text }),
+    onSuccess: () => {
       navigate(-1);
     },
-    onError: (error) => {
+    onError: error => {
       console.error(error);
       navigate(`/fallback?message=${error.message}&isNotification=false`);
-    }
+    },
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -54,6 +54,7 @@ const Review: React.FC = () => {
                 '마음에 들었나요?\n\n' +
                 '나중에 볼 수 있게 한 줄 평을 자세히 작성해주세요.'
               }
+              onChange={handleChange}
             />
           </ReviewWrapper>
           <ClickButton variant="historyButton" onClick={handleSubmit}>
