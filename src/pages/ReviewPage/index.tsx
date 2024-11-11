@@ -27,6 +27,7 @@ const Review: React.FC = () => {
     },
     onError: (error) => {
       console.error(error);
+      navigate(`/fallback?message=${error.message}&isNotification=false`);
     }
   });
 
@@ -35,6 +36,7 @@ const Review: React.FC = () => {
   };
 
   const handleSubmit = async () => {
+    console.log(`id: ${id}`);
     writeReview.mutate({ historyId: id, text: review });
   };
 

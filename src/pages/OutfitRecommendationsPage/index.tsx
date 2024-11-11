@@ -25,8 +25,8 @@ const OutfitRecommendations: FC = () => {
     mutationFn: ({ requiredClothes, filterTagList }: PostOutfitRecommendationProps) =>
       postOutfitRecommendation({ requiredClothes, filterTagList }),
     onSuccess: (res) => {
-      //TODO: 알려줄게요! 창 띄우기
-      navigate('/fallback?')
+      const message = '추천이 끝나면 \n알림창에서 알려드려요!';
+      navigate(`/fallback?message=${message}&isNotification=true`);
     },
     onError: (error) => {
       console.error(error);
@@ -43,8 +43,6 @@ const OutfitRecommendations: FC = () => {
 
   const handleButtonClick = () => {
     const keywords = findKeywords();
-
-    //TODO: API 연동
     recommend.mutate({ requiredClothes: clothesInfos, filterTagList: keywords });
   }
 
