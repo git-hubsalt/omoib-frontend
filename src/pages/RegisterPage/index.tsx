@@ -24,8 +24,18 @@ const RegisterPage = () => {
   const [contents, setContents] = useState<ClothesImage[]>([]);
   const [items, setItems] = useState<string[]>([]);
 
+  const register = useMutation({
+    mutationFn: ({ clothes, images }: { clothes: ClothesBase[]; images: File[] }) => postWish(clothes, images),
+    onSuccess: ()=>{
+      alert('등록 성공')
+    },
+    onError: ()=>{
+      alert('등록 실패')
+    }
+  })
+
   // 테스트용으로 받은 토큰을 하드코딩
-  const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczMDk1OTkzMywiZXhwIjoxNzMyNzU5OTMzfQ.563h32qveX9duf9vJseX49SuWFNMs35RRtBeqswdhhg';
+  //const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczMDk1OTkzMywiZXhwIjoxNzMyNzU5OTMzfQ.563h32qveX9duf9vJseX49SuWFNMs35RRtBeqswdhhg';
 
   useEffect(() => {
     setItems([]);

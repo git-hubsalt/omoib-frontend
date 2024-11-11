@@ -6,7 +6,7 @@ export const deleteWish = async (Id: number) => {
 };
 
 
-export const postWish = (clothes: ClothesBase, images: File[]) => {
+export const postWish = (clothes: ClothesBase[], images: File[]) => {
   const formData = new FormData();
   const requestBody = { clothes: clothes };
 
