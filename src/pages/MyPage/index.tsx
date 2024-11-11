@@ -3,15 +3,23 @@ import Header from '../../components/Header';
 import { LogoutWrapper, InfoWrapper } from './style';
 import { useQuery } from 'react-query';
 import { privateAxiosInstance } from '../../apis/axiosInstance';
+import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../../stores/authStore'; // 인증 상태 관리를 위한 store
 
-// 사용자 정보 가져오기 API 함수
 const fetchUserData = async () => {
-  const { data } = await privateAxiosInstance.get('/mypage'); // 실제 API 경로로 수정
+  const { data } = await privateAxiosInstance.get('/mypage');
   return data;
 };
 
 export default function MyPage() {
   const { data, isLoading, error } = useQuery('userData', fetchUserData);
+  const { logout } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/onboarding');
+  };
 
   if (isLoading) return <p>로딩 중...</p>;
   if (error) return <p>오류가 발생했습니다.</p>;
@@ -47,7 +55,7 @@ export default function MyPage() {
           )}
         </div>
       </InfoWrapper>
-      <LogoutWrapper>
+      <LogoutWrapper onClick={handleLogout}>
         <p>로그아웃</p>
       </LogoutWrapper>
     </div>
