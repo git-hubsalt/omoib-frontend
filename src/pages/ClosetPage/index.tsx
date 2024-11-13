@@ -1,10 +1,11 @@
-import React from 'react';
-import Header from '../../components/Header'; // Header 컴포넌트의 경로를 맞게 설정하세요
+import React, { useState } from 'react';
+import Header from '../../components/Header';
 import Card from '../../components/Card';
-import { ClosetContainer } from './style';
+import { ClosetContainer, DeleteButton, CardContainer } from './style';
 import AddClothesButton from '../../components/Button/AddClothesButton';
-import { useQuery } from '@tanstack/react-query';
-import { getCloset } from '../../apis/closet';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getCloset, deleteCloset } from '../../apis/closet';
+import x from '../../assets/x.svg';
 
 interface ClosetCardInfo {
   id: number;
@@ -14,63 +15,69 @@ interface ClosetCardInfo {
   imageUrl: string;
 }
 
-const cardDataDemo = [
-  {
-    title: '체크셔츠',
-    date: '2024.09.22',
-    tags: ['가을', '상의'],
-    imageSrc:
-      'https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1430195_lifestyle?$rl_4x5_pdp$',
-  },
-  {
-    title: '패딩 재킷',
-    date: '2024.01.12',
-    tags: ['겨울'],
-    imageSrc:
-      'https://image.msscdn.net/thumbnails/images/goods_img/20240108/3780896/3780896_17065042559824_big.jpg?w=1200',
-  },
-  {
-    title: '반팔 티셔츠',
-    date: '2024.06.15',
-    tags: ['여름', '상의'],
-    imageSrc:
-      'https://image.msscdn.net/thumbnails/images/goods_img/20240430/4096643/4096643_17188607420995_big.jpg?w=1200',
-  },
-  {
-    title: '청바지',
-    date: '2024.08.05',
-    tags: ['여름', '하의'],
-    imageSrc:
-      'https://image.msscdn.net/thumbnails/images/goods_img/20240508/4114622/4114622_17168553676980_big.jpg?w=1200',
-  },
-];
-
 export default function ClosetPage() {
-  const { isLoading, data } = useQuery({
+  const [showDeleteButton, setShowDeleteButton] = useState(false);
+  const queryClient = useQueryClient();
+
+  const { isLoading, isError, data, error } = useQuery<{
+    clothes: ClosetCardInfo[];
+  }>({
     queryFn: getCloset,
     queryKey: ['closet'],
   });
 
-  const cardData =
-    data && data.data && data.data.clothes
-      ? (data.data.clothes as ClosetCardInfo[])
-      : [];
+  const closet = useMutation({
+    mutationFn: (id: number) => deleteCloset(id),
+    onSuccess: (_, id) => {
+      queryClient.setQueryData(
+        ['closet'],
+        (oldData: { clothes: ClosetCardInfo[] } | undefined) =>
+          oldData
+            ? { clothes: oldData.clothes.filter(item => item.id !== id) }
+            : undefined,
+      );
+      alert('옷장에서 삭제되었습니다.');
+      console.log(data);
+      setShowDeleteButton(false);
+    },
+    onError: error => {
+      alert('옷장 삭제 중 오류가 발생했습니다.');
+      console.log(data);
+      console.log(error.message);
+    },
+  });
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div>
-      <Header text="옷장" />
+      <Header
+        text="옷장"
+        showDeleteButton={true}
+        onClickDelete={() => setShowDeleteButton(true)}
+      />
       <ClosetContainer>
-        {!isLoading &&
-          cardData.map((item, index) => (
+        {data?.clothes?.map((item: ClosetCardInfo) => (
+          <CardContainer key={item.id}>
+            {showDeleteButton && (
+              <DeleteButton onClick={() => closet.mutate(item.id)}>
+                <img src={x} alt="x" width="8px" />
+              </DeleteButton>
+            )}
             <Card
-              key={index}
               title={item.name}
               date={item.createDate}
               tags={item.tagList}
               imageSrc={item.imageUrl}
             />
-          ))}
-        <AddClothesButton linkTo="add-clothes" />
+          </CardContainer>
+        ))}
+        <AddClothesButton linkTo="closet" />
       </ClosetContainer>
     </div>
   );

@@ -1,3 +1,4 @@
+import React from 'react';
 import { ReactComponent as Back } from '../../assets/back.svg';
 import { useNavigate } from 'react-router-dom';
 import {

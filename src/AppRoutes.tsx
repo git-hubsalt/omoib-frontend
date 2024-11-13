@@ -17,7 +17,7 @@ import HistoryPage from './pages/HistoryPage';
 import SignupPage from './pages/SignupPage';
 import VirtualFittingPage from './pages/VirtualFittingPage';
 import ReviewPage from './pages/ReviewPage';
-import FallbackPage from "./pages/FallbackPage";
+import FallbackPage from './pages/FallbackPage';
 
 const AppRoutes: React.FC = () => {
   return (
