@@ -38,6 +38,7 @@ export default function WishPage() {
       );
       alert('위시리스트에서 삭제되었습니다.');
       console.log(data);
+      setShowDeleteButton(false);
     },
     onError: () => {
       alert('위시리스트 삭제 중 오류가 발생했습니다.');
