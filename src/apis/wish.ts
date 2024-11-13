@@ -24,5 +24,6 @@ export const postWish = (clothes: ClothesBase[], images: File[]) => {
 };
 
 export const getWish = async () => {
-  return await privateFormDataAxiosInstance.get('/wish');
+  const response = await privateFormDataAxiosInstance.get('/wish');
+  return response.data;
 };

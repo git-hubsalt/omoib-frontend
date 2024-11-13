@@ -9,6 +9,7 @@ import { deleteWish, getWish } from '../../apis/wish';
 
 export default function WishPage() {
   const [showDeleteButton, setShowDeleteButton] = useState(false);
+  const queryClient = useQueryClient();
 
   interface WishItem {
     id: number;
@@ -18,33 +19,31 @@ export default function WishPage() {
     imageUrl: string;
   }
 
-  const { isLoading, isError, data, error } = useQuery<{
-    data: { clothes: WishItem[] };
-  }>({
-    queryKey: ['wish'],
-    queryFn: getWish,
-  });
-  console.log(data);
-
-  const queryClient = useQueryClient();
+  const { isLoading, isError, data, error } = useQuery<{ clothes: WishItem[] }>(
+    {
+      queryKey: ['wish'],
+      queryFn: getWish,
+    },
+  );
 
   const wish = useMutation({
     mutationFn: (id: number) => deleteWish(id),
     onSuccess: (_, id) => {
       queryClient.setQueryData(
-        ['getWish'],
+        ['wish'],
         (oldData: { clothes: WishItem[] } | undefined) =>
           oldData
             ? { clothes: oldData.clothes.filter(item => item.id !== id) }
             : undefined,
       );
       alert('위시리스트에서 삭제되었습니다.');
+      console.log(data);
     },
     onError: () => {
       alert('위시리스트 삭제 중 오류가 발생했습니다.');
+      console.log(data);
     },
   });
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -61,7 +60,7 @@ export default function WishPage() {
         onClickDelete={() => setShowDeleteButton(true)}
       />
       <WishContainer>
-        {data?.data?.clothes?.map((item: WishItem) => (
+        {data?.clothes?.map((item: WishItem) => (
           <CardContainer key={item.id}>
             {showDeleteButton && (
               <DeleteButton onClick={() => wish.mutate(item.id)}>
