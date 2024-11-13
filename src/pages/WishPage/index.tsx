@@ -58,7 +58,7 @@ export default function WishPage() {
       <Header
         text="위시리스트"
         showDeleteButton={true}
-        onClickDelete={() => setShowDeleteButton(true)}
+        onClickDelete={() => setShowDeleteButton(!showDeleteButton)}
       />
       <WishContainer>
         {data?.clothes?.map((item: WishItem) => (
