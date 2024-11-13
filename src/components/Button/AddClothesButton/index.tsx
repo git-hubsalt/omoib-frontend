@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Plus } from '../../../assets/plus.svg';
 
-const AddClothesButton: React.FC = () => {
+interface AddClothesButtonProps {
+  linkTo: string; // 동적으로 전달받는 경로
+}
+
+const AddClothesButton: React.FC<AddClothesButtonProps> = ({ linkTo }) => {
   return (
     <ButtonLayout>
-      <Link to="/profile/register/add-clothes">
+      <Link to={`/profile/register/${linkTo}`}>
         <ButtonContainer>
-          <Plus/>
+          <Plus />
         </ButtonContainer>
       </Link>
     </ButtonLayout>
@@ -18,12 +22,12 @@ const AddClothesButton: React.FC = () => {
 export default AddClothesButton;
 
 const ButtonLayout = styled.div`
-    display: flex;
-    flex-direction: column;
-    max-width: 122px;
-    width: 100%;
-    padding: 6px 4px;`
-
+  display: flex;
+  flex-direction: column;
+  max-width: 122px;
+  width: 100%;
+  padding: 6px 4px;
+`;
 
 const ButtonContainer = styled.div`
   width: 110px;

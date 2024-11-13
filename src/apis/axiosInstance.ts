@@ -25,9 +25,9 @@ privateAxiosInstance.interceptors.request.use(
 
     return config;
   },
-  (error) => {
+  error => {
     return Promise.reject(error);
-  }
+  },
 );
 
 privateFormDataAxiosInstance.interceptors.request.use(
@@ -39,9 +39,9 @@ privateFormDataAxiosInstance.interceptors.request.use(
 
     return config;
   },
-  (error) => {
+  error => {
     return Promise.reject(error);
-  }
+  },
 );
 
 export {
