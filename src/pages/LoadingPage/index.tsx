@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import SpinnerImage from '../../assets/spin.svg';
-import {SpinnerWrapper, SpinnerContainer, PhraseContainer, HighlightText} from './style';
+import {
+  SpinnerWrapper,
+  SpinnerContainer,
+  PhraseContainer,
+  HighlightText,
+} from './style';
 
 const phrases = [
   '인공지능이 일하고 있어요!',

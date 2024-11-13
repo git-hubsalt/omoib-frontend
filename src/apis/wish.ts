@@ -1,11 +1,9 @@
 import { privateFormDataAxiosInstance } from './axiosInstance';
-import {ClothesBase} from "../types/type";
+import { ClothesBase } from '../types/type';
 
 export const deleteWish = async (Id: number) => {
-  const apiUri = process.env.REACT_APP_API_BASE_URI;
-  return await privateFormDataAxiosInstance.delete(`${apiUri}/wish/${Id}`);
+  return await privateFormDataAxiosInstance.delete(`/wish/${Id}`);
 };
-
 
 export const postWish = (clothes: ClothesBase[], images: File[]) => {
   const formData = new FormData();
@@ -14,7 +12,7 @@ export const postWish = (clothes: ClothesBase[], images: File[]) => {
   formData.append(
     'requestDTO',
     new Blob([JSON.stringify(requestBody)], { type: 'application/json' }),
-  )
+  );
 
   images.forEach(image => {
     if (image.size > 0) {
@@ -23,4 +21,9 @@ export const postWish = (clothes: ClothesBase[], images: File[]) => {
   });
 
   return privateFormDataAxiosInstance.post('/wish', formData);
-}
+};
+
+export const getWish = async () => {
+  const response = await privateFormDataAxiosInstance.get('/wish');
+  return response.data;
+};
