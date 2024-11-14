@@ -11,7 +11,9 @@ export const Result = styled.div`
   margin: 20px 25px 25px 25px;
   border-radius: 10px;
   height: 432px;
-  background-color: var(--gray--2);
+  //background-color: var(--gray--2);
+    display: flex;
+    justify-content: center;
 `;
 
 export const DateText = styled.div`

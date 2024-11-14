@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import x from '../../assets/x.svg';
 import { deleteWish, getWish } from '../../apis/wish';
 import { ReactComponent as Spinner } from '../../assets/spin.svg';
+import { SpinnerWrapper } from '../SelectClothesPage/style';
 
 export default function WishPage() {
   const [showDeleteButton, setShowDeleteButton] = useState(false);
@@ -47,7 +48,7 @@ export default function WishPage() {
     },
   });
   if (isLoading) {
-    return <div><Spinner/></div>;
+    return <SpinnerWrapper><Spinner/></SpinnerWrapper>;
   }
 
   if (isError) {
