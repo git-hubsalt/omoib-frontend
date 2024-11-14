@@ -6,6 +6,7 @@ import AddClothesButton from '../../components/Button/AddClothesButton';
 import Header from '../../components/Header';
 import x from '../../assets/x.svg';
 import { deleteWish, getWish } from '../../apis/wish';
+import { ReactComponent as Spinner } from '../../assets/spin.svg';
 
 export default function WishPage() {
   const [showDeleteButton, setShowDeleteButton] = useState(false);
@@ -46,7 +47,7 @@ export default function WishPage() {
     },
   });
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div><Spinner/></div>;
   }
 
   if (isError) {

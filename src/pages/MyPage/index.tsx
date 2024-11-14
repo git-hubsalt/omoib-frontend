@@ -4,7 +4,8 @@ import { LogoutWrapper, InfoWrapper } from './style';
 import { useQuery } from 'react-query';
 import { privateAxiosInstance } from '../../apis/axiosInstance';
 import { useNavigate } from 'react-router-dom';
-import useAuthStore from '../../stores/authStore'; // 인증 상태 관리를 위한 store
+import useAuthStore from '../../stores/authStore';
+import { ReactComponent as Spinner } from '../../assets/spin.svg';
 
 const fetchUserData = async () => {
   const { data } = await privateAxiosInstance.get('/mypage');
@@ -21,7 +22,7 @@ export default function MyPage() {
     navigate('/onboarding');
   };
 
-  if (isLoading) return <p>로딩 중...</p>;
+  if (isLoading) return <Spinner/>;
   if (error) return <p>오류가 발생했습니다.</p>;
 
   return (

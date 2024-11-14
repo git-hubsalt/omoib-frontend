@@ -6,7 +6,7 @@ import SelectButton from '../../components/Button/SelectButton';
 import ClickButton from '../../components/Button/ClickButton';
 import { useQuery } from '@tanstack/react-query';
 import { getCloset } from '../../apis/closet';
-import Spinner from '../../assets/spin.svg'
+import { ReactComponent as Spinner } from '../../assets/spin.svg'
 
 interface CardData {
   id: number;
@@ -76,7 +76,7 @@ export default function SelectVirtualFittingPage() {
           />
         </ButtonGroup>
         <InstructionText>
-          코디 추천을 원하는 아이템을 2가지 선택해 주세요. (0/2)
+          코디 추천을 원하는 아이템을 2가지 선택해 주세요.
         </InstructionText>
       </HeaderWrapper>
       <CardContainer>

@@ -6,6 +6,7 @@ import AddClothesButton from '../../components/Button/AddClothesButton';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getCloset, deleteCloset } from '../../apis/closet';
 import x from '../../assets/x.svg';
+import { ReactComponent as Spinner } from '../../assets/spin.svg';
 
 interface ClosetCardInfo {
   id: number;
@@ -47,7 +48,7 @@ export default function ClosetPage() {
     },
   });
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div><Spinner/></div>;
   }
 
   if (isError) {
