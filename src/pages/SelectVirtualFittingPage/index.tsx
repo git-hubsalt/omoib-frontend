@@ -128,8 +128,8 @@ export default function SelectVirtualFittingPage() {
       <HeaderWrapper>
         <p>아이템을 어디서 가져오시겠어요?</p>
         <ButtonGroup>
-          <SelectButton label="옷장" isSelected={mode === '옷장'} onClick={() => handleModeChange('옷장')} />
-          <SelectButton label="히스토리" isSelected={mode === '히스토리'} onClick={() => handleModeChange('히스토리')} />
+          <SelectButton label="추천코디" isSelected={mode === '히스토리'} onClick={() => handleModeChange('히스토리')} />
+          <SelectButton label="직접선택" isSelected={mode === '옷장'} onClick={() => handleModeChange('옷장')} />
         </ButtonGroup>
         <InstructionText>코디 추천을 원하는 아이템을 2가지 선택해 주세요.</InstructionText>
       </HeaderWrapper>
