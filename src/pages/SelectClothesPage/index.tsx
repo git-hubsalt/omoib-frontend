@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PageContainer, HeaderWrapper, ButtonGroup, InstructionText, CardContainer, FooterButtonContainer, SpinnerWrapper } from './style';
+import {
+  PageContainer,
+  HeaderWrapper,
+  ButtonGroup,
+  InstructionText,
+  CardContainer,
+  FooterButtonContainer,
+  SpinnerWrapper,
+} from './style';
 import Header from '../../components/Header';
 import Card from '../../components/Card';
 import SelectButton from '../../components/Button/SelectButton';
@@ -9,6 +17,7 @@ import useClothesSelectorStore from '../../stores/clothesSelectorStore';
 import { useQuery } from '@tanstack/react-query';
 import { getCloset } from '../../apis/closet';
 import { ReactComponent as Spinner } from '../../assets/spin.svg';
+import { getWish } from '../../apis/wish';
 
 interface CardData {
   id: number;
@@ -22,36 +31,46 @@ interface CardData {
 
 export default function SelectClothesPage() {
   const navigate = useNavigate();
-  const { data, isLoading } = useQuery({
-    queryFn: getCloset,
+  const { addClothesInfo } = useClothesSelectorStore();
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [mode, setMode] = useState<'옷장' | '위시리스트'>('옷장');
+
+  const { isLoading: isClosetLoading, data: closetData } = useQuery({
     queryKey: ['closet'],
+    queryFn: getCloset,
   });
 
-  const wardrobeData: CardData[] = (data && data.clothes) ? data.clothes : [];
-  const wishlistData: CardData[] = [
+  const { isLoading: isWishLoading, data: wishData } = useQuery({
+    queryKey: ['wish'],
+    queryFn: getWish,
+  });
+
+  // Use closetData or default empty array for wardrobe data
+  const wardrobeData: CardData[] = closetData?.clothes || [];
+
+  // Use wishData or default items for wishlist data
+  const wishlistData: CardData[] = wishData?.clothes || [
     {
       id: 3,
-      name: "자켓",
-      createDate: "2024.11.11",
-      tagList: ["겨울", "가을"],
-      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230803/3505201/3505201_18243790561663_big.jpg?w=1200",
+      name: '자켓',
+      createDate: '2024.11.11',
+      tagList: ['겨울', '가을'],
+      imageUrl: 'https://image.msscdn.net/thumbnails/images/goods_img/20230803/3505201/3505201_18243790561663_big.jpg?w=1200',
       seasonTypes: ['겨울', '가을'],
       clothesType: '아우터',
     },
     {
       id: 4,
-      name: "원피스",
-      createDate: "2024.11.11",
-      tagList: ["여름", "봄"],
-      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230921/3585220/3585220_17295567374199_big.jpg?w=1200",
+      name: '원피스',
+      createDate: '2024.11.11',
+      tagList: ['여름', '봄'],
+      imageUrl: 'https://image.msscdn.net/thumbnails/images/goods_img/20230921/3585220/3585220_17295567374199_big.jpg?w=1200',
       seasonTypes: ['여름', '봄'],
       clothesType: '기타',
     },
   ];
 
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [mode, setMode] = useState<'옷장' | '위시리스트'>('옷장');
-  const { addClothesInfo } = useClothesSelectorStore();
+  const isLoading = isClosetLoading || isWishLoading;
 
   const handleCardClick = (index: number) => {
     setSelectedIndex(prevIndex => (prevIndex === index ? null : index));
