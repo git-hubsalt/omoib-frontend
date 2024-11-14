@@ -22,7 +22,8 @@ export default function SelectVirtualFittingPage() {
     queryKey: ['closet'],
   });
 
-  const wardrobeData: CardData[] = data && data.data.clothes ? data.data.clothes : [];
+  // data와 data.data.clothes가 정의되지 않은 경우 빈 배열로 초기화
+  const wardrobeData: CardData[] = data?.data?.clothes ?? [];
 
   // 위시리스트 데이터 (임시로 넣은 예시 데이터)
   const wishlistData: CardData[] = [
@@ -43,7 +44,7 @@ export default function SelectVirtualFittingPage() {
   ];
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [mode, setMode] = useState<'옷장' | '위시리스트'>('옷장'); // '옷장' 모드로 초기화
+  const [mode, setMode] = useState<'옷장' | '위시리스트'>('옷장');
 
   const handleCardClick = (index: number) => {
     setSelectedIndex(prevIndex => (prevIndex === index ? null : index));
@@ -51,7 +52,7 @@ export default function SelectVirtualFittingPage() {
 
   const handleModeChange = (newMode: '옷장' | '위시리스트') => {
     setMode(newMode);
-    setSelectedIndex(null); // 모드 변경 시 선택된 카드 초기화
+    setSelectedIndex(null);
   };
 
   // 현재 모드에 맞는 데이터 선택
@@ -63,7 +64,6 @@ export default function SelectVirtualFittingPage() {
       <HeaderWrapper>
         <p>아이템을 어디서 가져오시겠어요?</p>
         <ButtonGroup>
-          {/* SelectButton에 mode와 onChange를 전달하여 모드 변경 */}
           <SelectButton
             label="코디 추천"
             isSelected={mode === '옷장'}
