@@ -9,7 +9,7 @@ interface SelectButtonProps {
 
 const SelectButton: React.FC<SelectButtonProps> = ({ label, isSelected, onClick }) => {
   return (
-    <StyledButton isSelected={isSelected} onClick={onClick}>
+    <StyledButton $isSelected={isSelected} onClick={onClick}>
       {label}
     </StyledButton>
   );
@@ -17,19 +17,19 @@ const SelectButton: React.FC<SelectButtonProps> = ({ label, isSelected, onClick 
 
 export default SelectButton;
 
-const StyledButton = styled.button<{ isSelected: boolean }>`
+const StyledButton = styled.button<{ $isSelected: boolean }>`
   padding: 10px 12px;
   border-radius: 20px;
   font-size: 13px;
   font-weight: 600;
-  color: ${({ isSelected }) => (isSelected ? '#fff' : '#89CEFA')};
-  background-color: ${({ isSelected }) => (isSelected ? '#89CEFA' : '#fff')};
+  color: ${({ $isSelected }) => ($isSelected ? '#fff' : '#89CEFA')};
+  background-color: ${({ $isSelected }) => ($isSelected ? '#89CEFA' : '#fff')};
   border: solid 1px #89CEFA;
   cursor: pointer;
   outline: none;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: ${({ isSelected }) => (isSelected ? '#75C4E6' : '#e6f7ff')};
+    background-color: ${({ $isSelected }) => ($isSelected ? '#75C4E6' : '#e6f7ff')};
   }
 `;

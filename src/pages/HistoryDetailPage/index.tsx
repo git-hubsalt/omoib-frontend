@@ -17,6 +17,8 @@ import {
 import Header from '../../components/Header';
 import ClickButton from '../../components/Button/ClickButton';
 import { privateAxiosInstance } from '../../apis/axiosInstance';
+import { ReactComponent as Spinner } from '../../assets/spin.svg'
+
 
 interface Category {
   category: string;
@@ -64,7 +66,7 @@ const HistoryDetailPage: React.FC = () => {
   }, [id]); // id가 변경되었을 때만 실행
 
   if (loading) {
-    return <div>로딩 중...</div>;
+    return <div><Spinner/></div>;
   }
 
   if (error) {
