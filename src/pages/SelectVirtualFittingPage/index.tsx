@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { PageContainer, HeaderWrapper, ButtonGroup, InstructionText, CardContainer, FooterButtonContainer } from './style';
+import { PageContainer, HeaderWrapper, ButtonGroup, InstructionText, CardContainer, FooterButtonContainer, SpinnerWrapper } from './style';
 import Header from '../../components/Header';
 import Card from '../../components/Card';
 import SelectButton from '../../components/Button/SelectButton';
 import ClickButton from '../../components/Button/ClickButton';
 import { useQuery } from '@tanstack/react-query';
 import { getCloset } from '../../apis/closet';
-import { ReactComponent as Spinner } from '../../assets/spin.svg'
+import { getHistory } from '../../apis/history';
+import { ReactComponent as Spinner } from '../../assets/spin.svg';
 
 interface CardData {
   id: number;
@@ -16,47 +17,54 @@ interface CardData {
   imageUrl: string;
 }
 
+interface HistoryCardData {
+  historyId: number;
+  type: string;
+  clothesList: {
+    id: number;
+    name: string;
+    clothesType: string;
+    seasonType: string[];
+    imagePath: string;
+  }[];
+  fittingImageURL: string | null;
+  filterTagsString: string;
+}
+
 export default function SelectVirtualFittingPage() {
-  const { isLoading, data } = useQuery({
+  const [mode, setMode] = useState<'옷장' | '히스토리'>('옷장');
+
+  const { isLoading: isClosetLoading, data: closetData } = useQuery({
     queryFn: getCloset,
     queryKey: ['closet'],
   });
 
-  // data와 data.data.clothes가 정의되지 않은 경우 빈 배열로 초기화
-  const wardrobeData: CardData[] = data?.data?.clothes ?? [];
+  const { isLoading: isHistoryLoading, data: historyData } = useQuery({
+    queryFn: () => getHistory(mode === '히스토리' ? 'RECOMMENDATION' : 'FITTING'),
+    queryKey: ['history', mode],
+    enabled: mode === '히스토리',
+  });
 
-  // 위시리스트 데이터 (임시로 넣은 예시 데이터)
-  const wishlistData: CardData[] = [
-    {
-      id: 3,
-      name: "자켓",
-      createDate: "2024.11.11",
-      tagList: ["겨울", "가을"],
-      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230803/3505201/3505201_18243790561663_big.jpg?w=1200",
-    },
-    {
-      id: 4,
-      name: "원피스",
-      createDate: "2024.11.11",
-      tagList: ["여름", "봄"],
-      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230921/3585220/3585220_17295567374199_big.jpg?w=1200",
-    },
-  ];
+
+  const wardrobeData: CardData[] = (closetData && closetData.clothes) ? closetData.clothes : [];
+  const fetchedHistoryData: HistoryCardData[] = historyData?.data ?? [];
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [mode, setMode] = useState<'옷장' | '위시리스트'>('옷장');
 
   const handleCardClick = (index: number) => {
     setSelectedIndex(prevIndex => (prevIndex === index ? null : index));
   };
 
-  const handleModeChange = (newMode: '옷장' | '위시리스트') => {
+  const handleModeChange = (newMode: '옷장' | '히스토리') => {
     setMode(newMode);
     setSelectedIndex(null);
   };
 
-  // 현재 모드에 맞는 데이터 선택
-  const cardData = mode === '옷장' ? wardrobeData : wishlistData;
+  const cardData = mode === '옷장'
+    ? wardrobeData
+    : fetchedHistoryData.flatMap(history => history.clothesList);
+
+  const isLoading = mode === '옷장' ? isClosetLoading : isHistoryLoading;
 
   return (
     <PageContainer>
@@ -65,38 +73,50 @@ export default function SelectVirtualFittingPage() {
         <p>아이템을 어디서 가져오시겠어요?</p>
         <ButtonGroup>
           <SelectButton
-            label="코디 추천"
+            label="옷장"
             isSelected={mode === '옷장'}
             onClick={() => handleModeChange('옷장')}
           />
           <SelectButton
-            label="직접 선택"
-            isSelected={mode === '위시리스트'}
-            onClick={() => handleModeChange('위시리스트')}
+            label="히스토리"
+            isSelected={mode === '히스토리'}
+            onClick={() => handleModeChange('히스토리')}
           />
         </ButtonGroup>
         <InstructionText>
           코디 추천을 원하는 아이템을 2가지 선택해 주세요.
         </InstructionText>
       </HeaderWrapper>
-      <CardContainer>
-        {isLoading ? (
-          <Spinner/>
-        ) : (
-          cardData.map((item, index) => (
-            <Card
-              key={item.id}
-              id={item.id}
-              title={item.name}
-              date={item.createDate}
-              tags={item.tagList}
-              imageSrc={item.imageUrl}
-              isSelected={selectedIndex === index}
-              onClick={() => handleCardClick(index)}
-            />
-          ))
-        )}
-      </CardContainer>
+      {isLoading ? (
+        <SpinnerWrapper>
+          <Spinner />
+        </SpinnerWrapper>
+      ) : (
+        <CardContainer>
+          {cardData.length === 0 ? (
+            <p>데이터가 없습니다.</p>
+          ) : (
+            cardData.map((item, index) => {
+              const date = 'createDate' in item ? item.createDate : '정보 없음';
+              const tags = 'seasonType' in item ? item.seasonType : [];
+              const imageSrc = 'imagePath' in item ? item.imagePath : item.imageUrl;
+
+              return (
+                <Card
+                  key={item.id}
+                  id={item.id}
+                  title={item.name}
+                  date={date}
+                  tags={tags}
+                  imageSrc={imageSrc}
+                  isSelected={selectedIndex === index}
+                  onClick={() => handleCardClick(index)}
+                />
+              );
+            })
+          )}
+        </CardContainer>
+      )}
       <FooterButtonContainer>
         <ClickButton variant="footerButton">다 정했어요</ClickButton>
       </FooterButtonContainer>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const SpinnerWrapper = styled.div`
   padding-top: 50%;
   display: flex;
-  flex-direction: column;
+  //flex-direction: column;
   justify-content: center;
   width: 100%;
 `;

@@ -48,3 +48,11 @@ export const FooterButtonContainer = styled.div`
     width: 100%;
     padding: 10px;
 `;
+
+export const SpinnerWrapper = styled.div`
+    padding-top: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  `;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PageContainer, HeaderWrapper, ButtonGroup, InstructionText, CardContainer, FooterButtonContainer } from './style';
+import { PageContainer, HeaderWrapper, ButtonGroup, InstructionText, CardContainer, FooterButtonContainer, SpinnerWrapper } from './style';
 import Header from '../../components/Header';
 import Card from '../../components/Card';
 import SelectButton from '../../components/Button/SelectButton';
@@ -8,6 +8,7 @@ import ClickButton from '../../components/Button/ClickButton';
 import useClothesSelectorStore from '../../stores/clothesSelectorStore';
 import { useQuery } from '@tanstack/react-query';
 import { getCloset } from '../../apis/closet';
+import { ReactComponent as Spinner } from '../../assets/spin.svg';
 
 interface CardData {
   id: number;
@@ -21,15 +22,12 @@ interface CardData {
 
 export default function SelectClothesPage() {
   const navigate = useNavigate();
-
   const { data, isLoading } = useQuery({
     queryFn: getCloset,
     queryKey: ['closet'],
   });
 
-  // data와 data.data.clothes가 정의되지 않았을 때 빈 배열로 초기화
   const wardrobeData: CardData[] = data?.data?.clothes || [];
-
   const wishlistData: CardData[] = [
     {
       id: 3,
@@ -53,7 +51,6 @@ export default function SelectClothesPage() {
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [mode, setMode] = useState<'옷장' | '위시리스트'>('옷장');
-
   const { addClothesInfo } = useClothesSelectorStore();
 
   const handleCardClick = (index: number) => {
@@ -88,8 +85,6 @@ export default function SelectClothesPage() {
 
   const cardData = mode === '옷장' ? wardrobeData : wishlistData;
 
-  if (isLoading) return <p>Loading...</p>;
-
   return (
     <PageContainer>
       <Header text="아이템 선택" />
@@ -111,20 +106,26 @@ export default function SelectClothesPage() {
           코디 추천을 원하는 아이템을 선택해 주세요.
         </InstructionText>
       </HeaderWrapper>
-      <CardContainer>
-        {cardData.map((item, index) => (
-          <Card
-            key={item.id}
-            id={item.id}
-            title={item.name}
-            date={item.createDate}
-            tags={item.tagList}
-            imageSrc={item.imageUrl}
-            isSelected={selectedIndex === index}
-            onClick={() => handleCardClick(index)}
-          />
-        ))}
-      </CardContainer>
+      {isLoading ? (
+        <SpinnerWrapper>
+          <Spinner />
+        </SpinnerWrapper>
+      ) : (
+        <CardContainer>
+          {cardData.map((item, index) => (
+            <Card
+              key={item.id}
+              id={item.id}
+              title={item.name}
+              date={item.createDate}
+              tags={item.tagList}
+              imageSrc={item.imageUrl}
+              isSelected={selectedIndex === index}
+              onClick={() => handleCardClick(index)}
+            />
+          ))}
+        </CardContainer>
+      )}
       <FooterButtonContainer>
         <ClickButton variant="footerButton" onClick={handleFinishSelection}>다 정했어요</ClickButton>
       </FooterButtonContainer>

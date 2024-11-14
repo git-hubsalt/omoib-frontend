@@ -6,6 +6,7 @@ import { ReactComponent as CloudRain } from '../../assets/weathers/cloud-with-ra
 import { ReactComponent as Wind } from '../../assets/weathers/leaf-in-wind.svg';
 import { ReactComponent as Snow } from '../../assets/weathers/snowman.svg';
 import { fetchWeatherData } from '../../apis/weather';
+import { ReactComponent as Spinner} from '../../assets/spin.svg';
 
 interface WeatherData {
   category: string;
@@ -16,6 +17,7 @@ interface WeatherData {
 const WeatherCard: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
   const [icon, setIcon] = useState<React.ReactElement | null>(null);
+  const [loading, setLoading] = useState<boolean>(true); // 로딩 상태 추가
 
   const getBackgroundColor = (category: string) => {
     if (category === 'SKY' && weatherData[0]?.fcstValue === '1') return '#ECE4C5'; // 맑음
@@ -38,7 +40,7 @@ const WeatherCard: React.FC = () => {
         case '4':
           return <Cloud />;
         default:
-          return <Wind/>;
+          return <Wind />;
       }
     }
   };
@@ -79,7 +81,6 @@ const WeatherCard: React.FC = () => {
         setWeatherData(filteredData);
 
         // `SKY` 카테고리의 아이콘을 선택
-        // `SKY`와 `PTY` 카테고리의 아이콘을 선택
         const skyData = filteredData.find((item: WeatherData) => item.category === 'SKY');
         const ptyData = filteredData.find((item: WeatherData) => item.category === 'PTY');
         if (skyData && ptyData) {
@@ -90,6 +91,8 @@ const WeatherCard: React.FC = () => {
         }
       } catch (error) {
         console.error('Failed to fetch weather data:', error);
+      } finally {
+        setLoading(false); // 데이터 로딩 후 로딩 상태 변경
       }
     };
 
@@ -105,8 +108,8 @@ const WeatherCard: React.FC = () => {
       <InfoBox>
         {icon && <div style={{ fontSize: '40px' }}>{icon}</div>}
         <Description>
-          <p>온도: {temperature}°C</p>
-          <p>강수량: {precipitation}</p>
+          <p>온도: {temperature === 'N/A' ? '데이터 없음' : `${temperature}°C`}</p>
+          <p>강수량: {precipitation === 'N/A' ? '데이터 없음' : precipitation}</p>
         </Description>
       </InfoBox>
     </WeatherContainer>
