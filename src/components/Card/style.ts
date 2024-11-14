@@ -7,6 +7,7 @@ export const CardWrapper = styled.div`
     max-width: 122px;
     width: 100%;
     padding: 6px 4px;
+    position: relative; /* 상대 위치 설정 */
 `;
 
 export const ImagePlaceholder = styled.div`
@@ -48,3 +49,27 @@ export const TagsWrapper = styled.div`
     gap: 8px;
 `;
 
+
+export const CheckIcon = styled.div`
+    position: absolute;
+    top: 4px;
+    right: 25px;
+    background-color: #1e1e1e;
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+`;
+
+export const IconBox = styled.div`
+    position: absolute;
+    z-index: 1;
+    padding: 4px;
+    width: 100%;
+    max-width: 122px;
+    display: flex;
+`;

@@ -107,7 +107,7 @@ const ClothesAdder: FC<AdderProps> = ({ maxCount, currentCount, onUpload }) => {
   const navigate = useNavigate();
 
   const handleAdderClick = () => {
-    navigate('/closet/select')
+    navigate('/outfit/select')
   };
 
   return (

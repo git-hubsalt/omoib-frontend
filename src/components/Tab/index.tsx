@@ -3,10 +3,16 @@ import * as style from './style';
 
 interface TabProps {
   tabs: string[];
+  onTabChange: (tab: string) => void;
 }
 
-const TabComponent: React.FC<TabProps> = ({ tabs }) => {
+const TabComponent: React.FC<TabProps> = ({ tabs, onTabChange }) => {
   const [activeTab, setActiveTab] = useState<number>(0);
+
+  const handleTabClick = (tab: string, index: number) => {
+    setActiveTab(index);
+    onTabChange(tab); // 부모 컴포넌트에 선택된 탭을 전달
+  };
 
   return (
     <style.TabLayout>
@@ -14,7 +20,7 @@ const TabComponent: React.FC<TabProps> = ({ tabs }) => {
         <style.TabButton
           key={tab}
           active={activeTab === index}
-          onClick={() => setActiveTab(index)}
+          onClick={() => handleTabClick(tab, index)}
         >
           {tab}
         </style.TabButton>

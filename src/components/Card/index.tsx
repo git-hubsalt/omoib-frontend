@@ -7,20 +7,27 @@ import {
   Date,
   TagsWrapper,
   Image,
+  CheckIcon, // 새로운 스타일 컴포넌트 추가
+  IconBox,
 } from './style';
 import TagButton from '../Button/TagButton';
 
 interface CardProps {
-  title: string;
-  date: string;
-  tags: string[];
-  imageSrc?: string; // 이미지 소스를 받는 props 추가
+  id?: number;
+  title: string; // name을 title로 변경
+  date: string; // createDate를 date로 변경
+  tags: string[]; // tagList를 tags로 변경
+  imageSrc?: string; // imageUrl을 imageSrc로 변경
+  isSelected?: boolean;
+  onClick?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ title, date, tags, imageSrc }) => {
+const Card: React.FC<CardProps> = ({ title, date, tags, imageSrc, isSelected, onClick }) => {
   return (
-    <CardWrapper>
-      {/* 이미지 소스가 있으면 이미지를 보여주고, 없으면 기본 Placeholder를 보여줌 */}
+    <CardWrapper onClick={onClick}>
+      <IconBox>
+        {isSelected && <CheckIcon>✔</CheckIcon>} {/* 선택된 상태에서만 체크 아이콘을 표시 */}
+      </IconBox>
 
       {imageSrc ? (
         <Image src={imageSrc} alt={title} />

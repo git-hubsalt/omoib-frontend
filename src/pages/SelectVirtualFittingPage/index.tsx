@@ -1,58 +1,102 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import { PageContainer, HeaderWrapper, ButtonGroup, InstructionText, CardContainer, FooterButtonContainer } from './style';
 import Header from '../../components/Header';
 import Card from '../../components/Card';
 import SelectButton from '../../components/Button/SelectButton';
 import ClickButton from '../../components/Button/ClickButton';
 
-export default function SelectVirtualFittingPage() {
-  const cardData = [
+interface CardData {
+  id: number;
+  name: string;
+  createDate: string;
+  tagList: string[];
+  imageUrl: string;
+}
+
+export default function SelectClothesPage() {
+  // 데이터가 옷장/위시리스트에 따라 다르게 변하도록 변경
+  const wardrobeData: CardData[] = [
     {
-      title: '체크셔츠',
-      date: '2024.09.22',
-      tags: ['가을', '상의'],
-      imageSrc: 'https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1430195_lifestyle?$rl_4x5_pdp$',
+      id: 1,
+      name: "하의",
+      createDate: "2024.11.11",
+      tagList: ["봄", "가을"],
+      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230712/3404705/3404705_17134029927665_big.jpg?w=1200",
     },
     {
-      title: '패딩 재킷',
-      date: '2024.01.12',
-      tags: ['겨울'],
-      imageSrc: 'https://image.msscdn.net/thumbnails/images/goods_img/20240108/3780896/3780896_17065042559824_big.jpg?w=1200',
-    },
-    {
-      title: '반팔 티셔츠',
-      date: '2024.06.15',
-      tags: ['여름', '상의'],
-      imageSrc: 'https://image.msscdn.net/thumbnails/images/goods_img/20240430/4096643/4096643_17188607420995_big.jpg?w=1200',
-    },
-    {
-      title: '청바지',
-      date: '2024.08.05',
-      tags: ['여름', '하의'],
-      imageSrc: 'https://image.msscdn.net/thumbnails/images/goods_img/20240508/4114622/4114622_17168553676980_big.jpg?w=1200',
+      id: 2,
+      name: "상의",
+      createDate: "2024.11.11",
+      tagList: ["여름", "가을"],
+      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230921/3585220/3585220_17295567374199_big.jpg?w=1200",
     },
   ];
 
+  const wishlistData: CardData[] = [
+    {
+      id: 3,
+      name: "자켓",
+      createDate: "2024.11.11",
+      tagList: ["겨울", "가을"],
+      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230803/3505201/3505201_18243790561663_big.jpg?w=1200",
+    },
+    {
+      id: 4,
+      name: "원피스",
+      createDate: "2024.11.11",
+      tagList: ["여름", "봄"],
+      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230921/3585220/3585220_17295567374199_big.jpg?w=1200",
+    },
+  ];
+
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [mode, setMode] = useState<'옷장' | '위시리스트'>('옷장'); // '옷장' 모드로 초기화
+
+  const handleCardClick = (index: number) => {
+    setSelectedIndex(prevIndex => (prevIndex === index ? null : index));
+  };
+
+  const handleModeChange = (newMode: '옷장' | '위시리스트') => {
+    setMode(newMode);
+    setSelectedIndex(null); // 모드 변경 시 선택된 카드 초기화
+  };
+
+  // 현재 모드에 맞는 데이터 선택
+  const cardData = mode === '옷장' ? wardrobeData : wishlistData;
+
   return (
     <PageContainer>
-      <Header text="가상 피팅" />
+      <Header text="아이템 선택" />
       <HeaderWrapper>
-        <p>가상 피팅 방식을 골라주세요.</p>
+        <p>아이템을 어디서 가져오시겠어요?</p>
         <ButtonGroup>
-          <SelectButton />
+          {/* SelectButton에 mode와 onChange를 전달하여 모드 변경 */}
+          <SelectButton
+            label="옷장"
+            isSelected={mode === '옷장'}
+            onClick={() => handleModeChange('옷장')}
+          />
+          <SelectButton
+            label="위시리스트"
+            isSelected={mode === '위시리스트'}
+            onClick={() => handleModeChange('위시리스트')}
+          />
         </ButtonGroup>
         <InstructionText>
-          가상 피팅을 원하는 코디 한 가지를 선택해 주세요. (0/1)
+          코디 추천을 원하는 아이템을 2가지 선택해 주세요. (0/2)
         </InstructionText>
       </HeaderWrapper>
       <CardContainer>
         {cardData.map((item, index) => (
           <Card
-            key={index}
-            title={item.title}
-            date={item.date}
-            tags={item.tags}
-            imageSrc={item.imageSrc}
+            key={item.id}
+            id={item.id}
+            title={item.name}
+            date={item.createDate}
+            tags={item.tagList}
+            imageSrc={item.imageUrl}
+            isSelected={selectedIndex === index}
+            onClick={() => handleCardClick(index)}
           />
         ))}
       </CardContainer>
@@ -62,41 +106,3 @@ export default function SelectVirtualFittingPage() {
     </PageContainer>
   );
 }
-
-const PageContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-`;
-
-const HeaderWrapper = styled.div`
-    width: 100%;
-    padding: 0 20px;
-`;
-
-const ButtonGroup = styled.div`
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-`;
-
-const InstructionText = styled.p`
-    margin-top: 16px;
-    font-size: 0.875rem;
-    color: #555;
-`;
-
-const CardContainer = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    padding: 20px;
-`;
-
-const FooterButtonContainer = styled.div`
-    position: fixed;
-    bottom: 0;
-    max-width: 393px;
-    width: 100%;
-    padding: 20px;
-`;
