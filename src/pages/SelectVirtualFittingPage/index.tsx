@@ -13,8 +13,9 @@ interface CardData {
   imageUrl: string;
 }
 
-export default function SelectVirtualFittingPage() {
-  const cardData: CardData[] = [
+export default function SelectClothesPage() {
+  // 데이터가 옷장/위시리스트에 따라 다르게 변하도록 변경
+  const wardrobeData: CardData[] = [
     {
       id: 1,
       name: "하의",
@@ -31,23 +32,58 @@ export default function SelectVirtualFittingPage() {
     },
   ];
 
+  const wishlistData: CardData[] = [
+    {
+      id: 3,
+      name: "자켓",
+      createDate: "2024.11.11",
+      tagList: ["겨울", "가을"],
+      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230803/3505201/3505201_18243790561663_big.jpg?w=1200",
+    },
+    {
+      id: 4,
+      name: "원피스",
+      createDate: "2024.11.11",
+      tagList: ["여름", "봄"],
+      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230921/3585220/3585220_17295567374199_big.jpg?w=1200",
+    },
+  ];
+
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [mode, setMode] = useState<'옷장' | '위시리스트'>('옷장'); // '옷장' 모드로 초기화
 
   const handleCardClick = (index: number) => {
-    // 현재 선택된 카드와 클릭된 카드가 같으면 선택 해제, 다르면 선택
     setSelectedIndex(prevIndex => (prevIndex === index ? null : index));
   };
 
+  const handleModeChange = (newMode: '옷장' | '위시리스트') => {
+    setMode(newMode);
+    setSelectedIndex(null); // 모드 변경 시 선택된 카드 초기화
+  };
+
+  // 현재 모드에 맞는 데이터 선택
+  const cardData = mode === '옷장' ? wardrobeData : wishlistData;
+
   return (
     <PageContainer>
-      <Header text="가상 피팅" />
+      <Header text="아이템 선택" />
       <HeaderWrapper>
-        <p>가상 피팅 방식을 골라주세요.</p>
+        <p>아이템을 어디서 가져오시겠어요?</p>
         <ButtonGroup>
-          <SelectButton />
+          {/* SelectButton에 mode와 onChange를 전달하여 모드 변경 */}
+          <SelectButton
+            label="옷장"
+            isSelected={mode === '옷장'}
+            onClick={() => handleModeChange('옷장')}
+          />
+          <SelectButton
+            label="위시리스트"
+            isSelected={mode === '위시리스트'}
+            onClick={() => handleModeChange('위시리스트')}
+          />
         </ButtonGroup>
         <InstructionText>
-          가상 피팅을 원하는 코디 한 가지를 선택해 주세요. (0/1)
+          코디 추천을 원하는 아이템을 2가지 선택해 주세요. (0/2)
         </InstructionText>
       </HeaderWrapper>
       <CardContainer>
@@ -55,12 +91,12 @@ export default function SelectVirtualFittingPage() {
           <Card
             key={item.id}
             id={item.id}
-            title={item.name} // name을 title로 매핑
-            date={item.createDate} // createDate를 date로 매핑
-            tags={item.tagList} // tagList를 tags로 매핑
-            imageSrc={item.imageUrl} // imageUrl을 imageSrc로 매핑
-            isSelected={selectedIndex === index} // 선택된 카드인지 여부
-            onClick={() => handleCardClick(index)} // 카드 클릭 시 처리
+            title={item.name}
+            date={item.createDate}
+            tags={item.tagList}
+            imageSrc={item.imageUrl}
+            isSelected={selectedIndex === index}
+            onClick={() => handleCardClick(index)}
           />
         ))}
       </CardContainer>
