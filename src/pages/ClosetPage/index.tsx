@@ -27,7 +27,7 @@ export default function ClosetPage() {
     queryKey: ['closet'],
   });
 
-  const closet = useMutation({
+  const closetDelete = useMutation({
     mutationFn: (id: number) => deleteCloset(id),
     onSuccess: (_, id) => {
       queryClient.setQueryData(
@@ -66,7 +66,7 @@ export default function ClosetPage() {
         {data?.clothes?.map((item: ClosetCardInfo) => (
           <CardContainer key={item.id}>
             {showDeleteButton && (
-              <DeleteButton onClick={() => closet.mutate(item.id)}>
+              <DeleteButton onClick={() => closetDelete.mutate(item.id)}>
                 <img src={x} alt="x" width="8px" />
               </DeleteButton>
             )}
