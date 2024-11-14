@@ -6,7 +6,7 @@ import { ReactComponent as Plus } from '../../../assets/plus.svg';
 const AddClothesButton: React.FC = () => {
   return (
     <ButtonLayout>
-      <Link to="/profile/register/add-clothes">
+      <Link to="/profile/register/">
         <ButtonContainer>
           <Plus/>
         </ButtonContainer>
