@@ -20,14 +20,14 @@ export default function SelectVirtualFittingPage() {
       name: "하의",
       createDate: "2024.11.11",
       tagList: ["봄", "가을"],
-      imageUrl: "https://githubsalt-bucket.s3.ap-northeast-2.amazonaws.com/users/a/items/closet/lower.jpg",
+      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230712/3404705/3404705_17134029927665_big.jpg?w=1200",
     },
     {
       id: 2,
       name: "상의",
       createDate: "2024.11.11",
       tagList: ["여름", "가을"],
-      imageUrl: "https://githubsalt-bucket.s3.ap-northeast-2.amazonaws.com/users/a/items/closet/upper.jpg",
+      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230921/3585220/3585220_17295567374199_big.jpg?w=1200",
     },
   ];
 
