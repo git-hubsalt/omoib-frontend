@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getCloset, deleteCloset } from '../../apis/closet';
 import x from '../../assets/x.svg';
 import { ReactComponent as Spinner } from '../../assets/spin.svg';
+import { SpinnerWrapper } from '../SelectClothesPage/style';
 
 interface ClosetCardInfo {
   id: number;
@@ -48,7 +49,7 @@ export default function ClosetPage() {
     },
   });
   if (isLoading) {
-    return <div><Spinner/></div>;
+    return <SpinnerWrapper><Spinner/></SpinnerWrapper>;
   }
 
   if (isError) {

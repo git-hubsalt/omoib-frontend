@@ -6,6 +6,8 @@ import Tab from '../../components/Tab';
 import { useQuery } from '@tanstack/react-query';
 import { privateAxiosInstance } from '../../apis/axiosInstance';
 import { useNavigate } from 'react-router-dom';
+import { SpinnerWrapper } from '../SelectClothesPage/style';
+import { ReactComponent as Spinner } from '../../assets/spin.svg';
 
 interface Clothes {
   id: number;
@@ -60,13 +62,16 @@ export default function HistoryPage() {
       <div>
         <Tab tabs={['코디 추천', '가상 피팅']} onTabChange={handleTabChange} />
       </div>
-      <ClosetContainer>
+
         {isLoading ? (
-          <p>로딩 중...</p>
+          <SpinnerWrapper>
+            <Spinner/>
+          </SpinnerWrapper>
         ) : isError ? (
           <p>오류가 발생했습니다: {error?.message}</p>
         ) : (
-          cardData.map((item) => (
+          <ClosetContainer>
+            {cardData.map((item) => (
             <Card
               key={item.historyId}
               title={item.filterTagsString}
@@ -75,9 +80,10 @@ export default function HistoryPage() {
               imageSrc={item.fittingImageURL || item.clothesList[0]?.imagePath}
               onClick={() => handleCardClick(item.historyId)}  // 클릭 시 ID 전달
             />
-          ))
+          ))}
+          </ClosetContainer>
         )}
-      </ClosetContainer>
+
     </div>
   );
 }
