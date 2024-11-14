@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../../components/Header';
 import Card from '../../components/Card';
 import { ClosetContainer } from './style';
 import Tab from '../../components/Tab';
 
 export default function HistoryPage() {
-  const cardData = [
+  const [selectedTab, setSelectedTab] = useState('코디 추천');
+
+  const recommendationData = [
     {
       title: '데이트, 꽃, 분홍',
       date: '2024.09.22',
@@ -18,6 +20,9 @@ export default function HistoryPage() {
       tags: ['겨울'],
       imageSrc: 'https://image.msscdn.net/thumbnails/images/goods_img/20240108/3780896/3780896_17065042559824_big.jpg?w=1200',
     },
+  ];
+
+  const fittingData = [
     {
       title: '반팔 티셔츠',
       date: '2024.06.15',
@@ -32,11 +37,18 @@ export default function HistoryPage() {
     },
   ];
 
+  const cardData = selectedTab === '코디 추천' ? recommendationData : fittingData;
+
+  // Type of 'tab' parameter is specified as 'string'
+  const handleTabChange = (tab: string) => {
+    setSelectedTab(tab);
+  };
+
   return (
     <div>
       <Header text="히스토리" />
       <div>
-        <Tab tabs={['코디 추천','가상 피팅']}/>
+        <Tab tabs={['코디 추천', '가상 피팅']} onTabChange={handleTabChange} />
       </div>
       <ClosetContainer>
         {cardData.map((item, index) => (
@@ -46,7 +58,8 @@ export default function HistoryPage() {
             date={item.date}
             tags={item.tags}
             imageSrc={item.imageSrc}
-          />))}
+          />
+        ))}
       </ClosetContainer>
     </div>
   );
