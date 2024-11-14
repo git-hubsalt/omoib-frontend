@@ -22,8 +22,8 @@ const OutfitRecommendations: FC = () => {
   const keywordRef = useRef<HTMLTextAreaElement>(null);
   const navigate = useNavigate();
   const recommend = useMutation({
-    mutationFn: ({ requiredClothes, filterTagList }: PostOutfitRecommendationProps) =>
-      postOutfitRecommendation({ requiredClothes, filterTagList }),
+    mutationFn: ({ clothes, filterTagList }: PostOutfitRecommendationProps) =>
+      postOutfitRecommendation({ clothes, filterTagList }),
     onSuccess: (res) => {
       const message = '추천이 끝나면 \n알림창에서 알려드려요!';
       navigate(`/fallback?message=${message}&isNotification=true`);
@@ -43,7 +43,7 @@ const OutfitRecommendations: FC = () => {
 
   const handleButtonClick = () => {
     const keywords = findKeywords();
-    recommend.mutate({ requiredClothes: clothesInfos, filterTagList: keywords });
+    recommend.mutate({ clothes: clothesInfos, filterTagList: keywords });
   }
 
   const findKeywords: () => string[] = () => {

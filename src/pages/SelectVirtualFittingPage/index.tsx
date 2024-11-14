@@ -4,6 +4,8 @@ import Header from '../../components/Header';
 import Card from '../../components/Card';
 import SelectButton from '../../components/Button/SelectButton';
 import ClickButton from '../../components/Button/ClickButton';
+import { useQuery } from '@tanstack/react-query';
+import { getCloset } from '../../apis/closet';
 
 interface CardData {
   id: number;
@@ -13,25 +15,15 @@ interface CardData {
   imageUrl: string;
 }
 
-export default function SelectClothesPage() {
-  // 데이터가 옷장/위시리스트에 따라 다르게 변하도록 변경
-  const wardrobeData: CardData[] = [
-    {
-      id: 1,
-      name: "하의",
-      createDate: "2024.11.11",
-      tagList: ["봄", "가을"],
-      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230712/3404705/3404705_17134029927665_big.jpg?w=1200",
-    },
-    {
-      id: 2,
-      name: "상의",
-      createDate: "2024.11.11",
-      tagList: ["여름", "가을"],
-      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230921/3585220/3585220_17295567374199_big.jpg?w=1200",
-    },
-  ];
+export default function SelectVirtualFittingPage() {
+  const { isLoading, data } = useQuery({
+    queryFn: getCloset,
+    queryKey: ['closet'],
+  });
 
+  const wardrobeData: CardData[] = data && data.data.clothes ? data.data.clothes : [];
+
+  // 위시리스트 데이터 (임시로 넣은 예시 데이터)
   const wishlistData: CardData[] = [
     {
       id: 3,
@@ -72,12 +64,12 @@ export default function SelectClothesPage() {
         <ButtonGroup>
           {/* SelectButton에 mode와 onChange를 전달하여 모드 변경 */}
           <SelectButton
-            label="옷장"
+            label="코디 추천"
             isSelected={mode === '옷장'}
             onClick={() => handleModeChange('옷장')}
           />
           <SelectButton
-            label="위시리스트"
+            label="직접 선택"
             isSelected={mode === '위시리스트'}
             onClick={() => handleModeChange('위시리스트')}
           />
@@ -87,18 +79,22 @@ export default function SelectClothesPage() {
         </InstructionText>
       </HeaderWrapper>
       <CardContainer>
-        {cardData.map((item, index) => (
-          <Card
-            key={item.id}
-            id={item.id}
-            title={item.name}
-            date={item.createDate}
-            tags={item.tagList}
-            imageSrc={item.imageUrl}
-            isSelected={selectedIndex === index}
-            onClick={() => handleCardClick(index)}
-          />
-        ))}
+        {isLoading ? (
+          <p>로딩 중...</p>  // 로딩 중일 때 표시할 내용
+        ) : (
+          cardData.map((item, index) => (
+            <Card
+              key={item.id}
+              id={item.id}
+              title={item.name}
+              date={item.createDate}
+              tags={item.tagList}
+              imageSrc={item.imageUrl}
+              isSelected={selectedIndex === index}
+              onClick={() => handleCardClick(index)}
+            />
+          ))
+        )}
       </CardContainer>
       <FooterButtonContainer>
         <ClickButton variant="footerButton">다 정했어요</ClickButton>

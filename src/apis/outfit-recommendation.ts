@@ -2,19 +2,19 @@ import { ClothesInfo } from '../types/type';
 import { privateAxiosInstance } from './axiosInstance';
 
 export interface PostOutfitRecommendationProps {
-  requiredClothes: ClothesInfo[];
+  clothes: ClothesInfo[];
   filterTagList: string[];
 }
 
 export const postOutfitRecommendation =
   async ({
-           requiredClothes,
+           clothes,
            filterTagList
   }: PostOutfitRecommendationProps) => {
-  const requiredClothesIdList =  requiredClothes.map((clothes) => clothes.id);
+  const requiredClothes =  clothes.map((item) => item.id);
 
   return privateAxiosInstance.post('/cody-recommendation/recommend', {
-    requiredClothesIdList,
+    requiredClothes,
     filterTagList,
   });
 }
