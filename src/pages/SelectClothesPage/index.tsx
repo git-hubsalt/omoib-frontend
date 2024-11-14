@@ -5,7 +5,9 @@ import Header from '../../components/Header';
 import Card from '../../components/Card';
 import SelectButton from '../../components/Button/SelectButton';
 import ClickButton from '../../components/Button/ClickButton';
-import useClothesSelectorStore from '../../stores/clothesSelectorStore'; // Zustand store 가져오기
+import useClothesSelectorStore from '../../stores/clothesSelectorStore';
+import { useQuery } from '@tanstack/react-query';
+import { getCloset } from '../../apis/closet'; // Zustand store 가져오기
 
 interface CardData {
   id: number;
@@ -20,26 +22,12 @@ interface CardData {
 export default function SelectClothesPage() {
   const navigate = useNavigate(); // useNavigate 훅을 컴포넌트 상위에서 호출
 
-  const wardrobeData: CardData[] = [
-    {
-      id: 1,
-      name: "하의",
-      createDate: "2024.11.11",
-      tagList: ["봄", "가을"],
-      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230712/3404705/3404705_17134029927665_big.jpg?w=1200",
-      seasonTypes: ['봄', '가을'],
-      clothesType: '하의',
-    },
-    {
-      id: 2,
-      name: "상의",
-      createDate: "2024.11.11",
-      tagList: ["여름", "가을"],
-      imageUrl: "https://image.msscdn.net/thumbnails/images/goods_img/20230921/3585220/3585220_17295567374199_big.jpg?w=1200",
-      seasonTypes: ['여름', '가을'],
-      clothesType: '상의',
-    },
-  ];
+  const { data } = useQuery({
+    queryFn: getCloset,
+    queryKey: ['closet'],
+  });
+
+  const wardrobeData: CardData[] = data && data.data.clothes ? data.data.clothes : [];
 
   const wishlistData: CardData[] = [
     {
