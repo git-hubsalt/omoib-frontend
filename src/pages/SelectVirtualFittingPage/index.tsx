@@ -112,7 +112,7 @@ export default function SelectVirtualFittingPage() {
         const clothesInfo = [upperClothes, lowerClothes];
         try {
           await sendClothesInfo(clothesInfo);
-          navigate('/recommendations/outfits');
+          // navigate('/recommendations/outfits');
         } catch (error) {
           console.error('옷 정보 전송 실패', error);
         }

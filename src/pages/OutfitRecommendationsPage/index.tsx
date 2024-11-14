@@ -21,36 +21,39 @@ const OutfitRecommendations: FC = () => {
   const { clothesInfos, removeClothesInfo } = useClothesSelectorStore();
   const keywordRef = useRef<HTMLTextAreaElement>(null);
   const navigate = useNavigate();
+
   const recommend = useMutation({
     mutationFn: ({ clothes, filterTagList }: PostOutfitRecommendationProps) =>
       postOutfitRecommendation({ clothes, filterTagList }),
-    onSuccess: (res) => {
-      const message = '추천이 끝나면 \n알림창에서 알려드려요!';
-      navigate(`/fallback?message=${message}&isNotification=true`);
-    },
     onError: (error) => {
       console.error(error);
     }
   });
 
   const handleCancel = (index: number) => {
-    if (index == currentIndex) {
+    if (index === currentIndex) {
       setCurrentIndex(-1);
     }
-
     removeClothesInfo(clothesInfos[index]);
   }
 
   const handleButtonClick = () => {
+    const message = '추천이 진행 중입니다. 잠시만 기다려주세요!';
+    navigate(`/fallback?message=${message}&isNotification=true`);
+
     const keywords = findKeywords();
-    recommend.mutate({ clothes: clothesInfos, filterTagList: keywords });
+    recommend.mutate({ clothes: clothesInfos, filterTagList: keywords }, {
+      onSuccess: () => {
+        const successMessage = '추천이 완료되었습니다!';
+        navigate(`/fallback?message=${successMessage}&isNotification=true`);
+      }
+    });
   }
 
   const findKeywords: () => string[] = () => {
     if (!keywordRef.current) return [];
 
     const keywordText = keywordRef.current.value;
-
     if (keywordText.length <= 0) {
       console.log('키워드가 비어있어요!');
       return [];
@@ -71,17 +74,16 @@ const OutfitRecommendations: FC = () => {
             currentCount={clothesInfos.length}
             onUpload={() => {}}
           >
-            {(clothesInfos.length > 0) ?
+            {clothesInfos.length > 0 &&
               clothesInfos.map((clothes, index) =>
                 <Uploader.Clothes
                   key={index}
                   index={index}
                   clothes={clothes}
                   onClick={() => {}}
-                  onCancel={handleCancel}
+                  onCancel={() => handleCancel(index)}
                 />
-              ) :
-              null
+              )
             }
           </Uploader>
         </ClothesBox>

@@ -1,4 +1,5 @@
 import { FallbackLayout, ContentsBox, Title, CenterBox, ButtonBox } from './style';
+import React from 'react';
 import FallbackIcon from '../../assets/fallback.svg';
 import BellIcon from '../../assets/bell.svg';
 import Header from '../../components/Header/index';
@@ -23,7 +24,9 @@ const FallbackPage = () => {
         <ButtonBox>
           <ClickButton
             variant={'historyButton'}
-            onClick={() => { navigate('/') }}
+            onClick={() => {
+              navigate('/');
+            }}
           >
             메인으로 가기
           </ClickButton>
@@ -31,6 +34,6 @@ const FallbackPage = () => {
       </CenterBox>
     </FallbackLayout>
   );
-}
+};
 
 export default FallbackPage;
