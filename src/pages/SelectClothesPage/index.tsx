@@ -82,11 +82,9 @@ export default function SelectClothesPage() {
       addClothesInfo(clothesInfo); // Zustand 상태에 정보 추가
     }
 
-    // 페이지 이동
     navigate('/recommendations/outfits'); // navigate 호출은 컴포넌트 내부에서
   };
 
-  // 현재 모드에 맞는 데이터 선택
   const cardData = mode === '옷장' ? wardrobeData : wishlistData;
 
   return (

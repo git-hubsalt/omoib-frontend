@@ -6,6 +6,7 @@ import SelectButton from '../../components/Button/SelectButton';
 import ClickButton from '../../components/Button/ClickButton';
 import { useQuery } from '@tanstack/react-query';
 import { getCloset } from '../../apis/closet';
+import Spinner from '../../assets/spin.svg'
 
 interface CardData {
   id: number;
@@ -80,7 +81,7 @@ export default function SelectVirtualFittingPage() {
       </HeaderWrapper>
       <CardContainer>
         {isLoading ? (
-          <p>로딩 중...</p>  // 로딩 중일 때 표시할 내용
+          <Spinner/>
         ) : (
           cardData.map((item, index) => (
             <Card
