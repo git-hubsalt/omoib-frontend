@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate 훅 가져오기
+import { useNavigate } from 'react-router-dom';
 import { PageContainer, HeaderWrapper, ButtonGroup, InstructionText, CardContainer, FooterButtonContainer } from './style';
 import Header from '../../components/Header';
 import Card from '../../components/Card';
@@ -7,7 +7,7 @@ import SelectButton from '../../components/Button/SelectButton';
 import ClickButton from '../../components/Button/ClickButton';
 import useClothesSelectorStore from '../../stores/clothesSelectorStore';
 import { useQuery } from '@tanstack/react-query';
-import { getCloset } from '../../apis/closet'; // Zustand store 가져오기
+import { getCloset } from '../../apis/closet';
 
 interface CardData {
   id: number;
@@ -20,14 +20,15 @@ interface CardData {
 }
 
 export default function SelectClothesPage() {
-  const navigate = useNavigate(); // useNavigate 훅을 컴포넌트 상위에서 호출
+  const navigate = useNavigate();
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: getCloset,
     queryKey: ['closet'],
   });
 
-  const wardrobeData: CardData[] = data && data.data.clothes ? data.data.clothes : [];
+  // data와 data.data.clothes가 정의되지 않았을 때 빈 배열로 초기화
+  const wardrobeData: CardData[] = data?.data?.clothes || [];
 
   const wishlistData: CardData[] = [
     {
@@ -51,9 +52,9 @@ export default function SelectClothesPage() {
   ];
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [mode, setMode] = useState<'옷장' | '위시리스트'>('옷장'); // '옷장' 모드로 초기화
+  const [mode, setMode] = useState<'옷장' | '위시리스트'>('옷장');
 
-  const { addClothesInfo } = useClothesSelectorStore(); // Zustand 상태 추가 함수
+  const { addClothesInfo } = useClothesSelectorStore();
 
   const handleCardClick = (index: number) => {
     setSelectedIndex(prevIndex => (prevIndex === index ? null : index));
@@ -61,7 +62,7 @@ export default function SelectClothesPage() {
 
   const handleModeChange = (newMode: '옷장' | '위시리스트') => {
     setMode(newMode);
-    setSelectedIndex(null); // 모드 변경 시 선택된 카드 초기화
+    setSelectedIndex(null);
   };
 
   const handleFinishSelection = () => {
@@ -79,15 +80,15 @@ export default function SelectClothesPage() {
         clothesType: selectedItem.clothesType,
       };
 
-      addClothesInfo(clothesInfo); // Zustand 상태에 정보 추가
+      addClothesInfo(clothesInfo);
     }
 
-    // 페이지 이동
-    navigate('/recommendations/outfits'); // navigate 호출은 컴포넌트 내부에서
+    navigate('/recommendations/outfits');
   };
 
-  // 현재 모드에 맞는 데이터 선택
   const cardData = mode === '옷장' ? wardrobeData : wishlistData;
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <PageContainer>
