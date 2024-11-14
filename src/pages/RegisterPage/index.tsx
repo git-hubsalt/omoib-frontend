@@ -29,7 +29,7 @@ const RegisterPage = () => {
       (type === '위시') ? postWish(clothes, images) : postCloset(clothes, images),
     onSuccess: ()=>{
       alert('등록 성공')
-      navigate('/wishlist')
+      navigate(type === '위시' ? '/wishlist' : '/closet'); // 위시일 때는 /wishlist, 옷장일 때는 /closet로 이동
     },
     onError: ()=>{
       alert('등록 실패')
