@@ -60,7 +60,7 @@ export default function ClosetPage() {
       <Header
         text="옷장"
         showDeleteButton={true}
-        onClickDelete={() => setShowDeleteButton(true)}
+        onClickDelete={() => setShowDeleteButton((current) => !current)}
       />
       <ClosetContainer>
         {data?.clothes?.map((item: ClosetCardInfo) => (
