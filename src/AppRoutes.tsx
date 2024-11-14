@@ -18,6 +18,7 @@ import SignupPage from './pages/SignupPage';
 import VirtualFittingPage from './pages/VirtualFittingPage';
 import ReviewPage from './pages/ReviewPage';
 import FallbackPage from './pages/FallbackPage';
+import ResultPage from './pages/ResultPage';
 
 const AppRoutes: React.FC = () => {
   return (
@@ -46,6 +47,7 @@ const AppRoutes: React.FC = () => {
       />
       <Route path="/outfit/select" element={<SelectClothesPage />} />
       <Route path="/fallback" element={<FallbackPage />} />
+        <Route path="/virtual-fitting/result" element={<ResultPage/>} />
     </Routes>
   );
 };

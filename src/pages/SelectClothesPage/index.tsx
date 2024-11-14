@@ -27,7 +27,7 @@ export default function SelectClothesPage() {
     queryKey: ['closet'],
   });
 
-  const wardrobeData: CardData[] = data?.data?.clothes || [];
+  const wardrobeData: CardData[] = (data && data.clothes) ? data.clothes : [];
   const wishlistData: CardData[] = [
     {
       id: 3,
