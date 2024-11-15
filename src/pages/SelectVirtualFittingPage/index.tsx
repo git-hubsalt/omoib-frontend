@@ -110,7 +110,7 @@ export default function SelectVirtualFittingPage() {
 
       if (upperClothes && lowerClothes) {
         const clothesInfo = [upperClothes, lowerClothes];
-        const message = '피팅이 진행 중입니다.<br/>완료되면 알림으로 알려드릴게요';
+        const message = '피팅이 진행 중입니다.완료되면 알림으로 알려드릴게요';
         navigate(`/fallback?message=${encodeURIComponent(message)}&isNotification=true`);
 
         try {

@@ -38,7 +38,7 @@ const OutfitRecommendations: FC = () => {
   }
 
   const handleButtonClick = () => {
-    const message = '추천이 진행 중입니다.<br/>잠시만 기다려주세요!';
+    const message = '추천이 진행 중입니다.잠시만 기다려주세요!';
     navigate(`/fallback?message=${message}&isNotification=true`);
 
     const keywords = findKeywords();
