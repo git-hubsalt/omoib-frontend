@@ -1,38 +1,23 @@
-// src/App.tsx
 import React from 'react';
-import styled from 'styled-components';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { GlobalStyles } from './styles/GlobalStyles';
-import logo from './assets/Logo.svg';
-import kakao from './assets/Kakao.svg';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './AppRoutes'; // 라우트 정의를 별도 파일로 분리
 
-const LogoImage = styled.div`
-    margin-top: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
-const KakaoImage = styled.div`
-    margin-top: 350px;
-    margin-bottom: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
+// QueryClient 생성
+const queryClient = new QueryClient();
 
 const App: React.FC = () => {
-    return (
-        <>
-            <GlobalStyles />
-            <LogoImage>
-                <img src={logo} alt="logo"/>
-            </LogoImage>
-
-            <KakaoImage>
-                <img src={kakao} alt="kakao"/>
-            </KakaoImage>
-        </>
-    );
+  return (
+    <div className="App">
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <GlobalStyles />
+          <AppRoutes />
+        </BrowserRouter>
+      </QueryClientProvider>
+    </div>
+  );
 };
 
 export default App;
