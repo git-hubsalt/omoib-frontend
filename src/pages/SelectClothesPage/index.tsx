@@ -45,30 +45,9 @@ export default function SelectClothesPage() {
     queryFn: getWish,
   });
 
-  // Use closetData or default empty array for wardrobe data
   const wardrobeData: CardData[] = closetData?.clothes || [];
 
-  // Use wishData or default items for wishlist data
-  const wishlistData: CardData[] = wishData?.clothes || [
-    {
-      id: 3,
-      name: '자켓',
-      createDate: '2024.11.11',
-      tagList: ['겨울', '가을'],
-      imageUrl: 'https://image.msscdn.net/thumbnails/images/goods_img/20230803/3505201/3505201_18243790561663_big.jpg?w=1200',
-      seasonTypes: ['겨울', '가을'],
-      clothesType: '아우터',
-    },
-    {
-      id: 4,
-      name: '원피스',
-      createDate: '2024.11.11',
-      tagList: ['여름', '봄'],
-      imageUrl: 'https://image.msscdn.net/thumbnails/images/goods_img/20230921/3585220/3585220_17295567374199_big.jpg?w=1200',
-      seasonTypes: ['여름', '봄'],
-      clothesType: '기타',
-    },
-  ];
+  const wishlistData: CardData[] = wishData?.clothes || [];
 
   const isLoading = isClosetLoading || isWishLoading;
 

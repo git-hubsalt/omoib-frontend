@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from '../../components/Header';
 import NoticeItem from '../../components/NoticeItem';
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { AxiosResponse } from 'axios';
 import { getNotifications } from "../../apis/notification";
 import { SpinnerWrapper } from '../SelectClothesPage/style';
 import { ReactComponent as Spinner } from '../../assets/spin.svg';
@@ -14,12 +15,14 @@ interface NotificationInfo {
 }
 
 export default function NoticePage() {
-  const { isLoading, data } = useQuery({
+  const { isLoading, data } = useQuery<AxiosResponse<NotificationInfo[]>, Error>({
     queryFn: getNotifications,
     queryKey: ['notification'],
-  });
+    staleTime: 1000 * 60 * 5, // 5분 동안 데이터가 최신 상태로 유지
+    cacheTime: 1000 * 60 * 10, // 10분 동안 캐시에 데이터 보관
+  } as UseQueryOptions<AxiosResponse<NotificationInfo[]>, Error>);
 
-  const notifications = (data && data.data) ? data.data as NotificationInfo[] : [];
+  const notifications = data?.data || [];
 
   return (
     <div>

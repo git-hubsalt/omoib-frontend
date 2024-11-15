@@ -38,7 +38,7 @@ const OutfitRecommendations: FC = () => {
   }
 
   const handleButtonClick = () => {
-    const message = '추천이 진행 중입니다. 잠시만 기다려주세요!';
+    const message = '추천이 진행 중입니다.<br/>잠시만 기다려주세요!';
     navigate(`/fallback?message=${message}&isNotification=true`);
 
     const keywords = findKeywords();
@@ -64,7 +64,7 @@ const OutfitRecommendations: FC = () => {
 
   return (
     <OutfitRecommendationsLayout>
-      <Header text="코디 추천" /> {/* 헤더에 텍스트 전달 */}
+      <Header text="코디 추천" />
       <ContentsBox>
         <ClothesBox>
           <TextBox>이 아이템은 꼭 넣고 싶어요!</TextBox>
