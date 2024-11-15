@@ -46,7 +46,6 @@ export const FooterButtonContainer = styled.div`
     bottom: 0;
     max-width: 393px;
     width: 100%;
-    padding: 10px;
 `;
 
 export const SpinnerWrapper = styled.div`
