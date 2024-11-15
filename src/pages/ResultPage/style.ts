@@ -10,9 +10,13 @@ export const ShowResultBox = styled.div`
 export const Result = styled.div`
   margin: 20px 25px 25px 25px;
   border-radius: 10px;
+  max-width: 393px;
   height: 432px;
-  background-color : var(--gray--2);
+  //background-color: var(--gray--2);
+  display: flex;
+  justify-content: center;
 `;
+
 
 export const DateText = styled.div`
   font-size: 18px;

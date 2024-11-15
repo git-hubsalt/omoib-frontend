@@ -47,7 +47,7 @@ const AppRoutes: React.FC = () => {
       />
       <Route path="/outfit/select" element={<SelectClothesPage />} />
       <Route path="/fallback" element={<FallbackPage />} />
-        <Route path="/virtual-fitting/result" element={<ResultPage/>} />
+        <Route path="/result" element={<ResultPage/>} />
     </Routes>
   );
 };
