@@ -104,7 +104,8 @@ const ShowResult: React.FC= () => {
   };
 
   const handleClick = () => {
-    console.log('Button clicked!');
+    // console.log('Button clicked!');
+    navigate(`/virtual-fitting/select}`);
   };
 
   return (

@@ -4,36 +4,50 @@ import {
   JoinLayout,
   NoticeText,
   InputTextBox,
-  WelcomeTitle, ContentsBox, FooterBox
+  WelcomeTitle,
+  ContentsBox,
+  FooterBox
 } from "./style";
-import React, {ChangeEvent, useState} from "react";
+import React, { ChangeEvent, useState } from "react";
 import Input from "../../components/Input/index";
 import ClickButton from "../../components/Button/ClickButton";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BodyImageUploader from '../../components/Uploader/BodyImageUploader';
 import { useMutation } from '@tanstack/react-query';
-import { postSignup } from '../../apis/user';
+import { postBodyMasking, postSignup } from '../../apis/user';
 import useAuthStore from "../../stores/authStore";
-import useUserInfoStore from "../../stores/userStore"; // useNavigate 추가
+import useUserInfoStore from "../../stores/userStore";
 
 const SignupPage = () => {
   const [nickname, setNickname] = useState<string>('');
   const [bodyImage, setBodyImage] = useState<File | null>(null);
   const authStore = useAuthStore();
   const { setUserInfo } = useUserInfoStore();
+  const navigate = useNavigate();
+
   const signup = useMutation({
     mutationFn: ({ username, image }: { username: string; image: File }) => postSignup(username, image),
     onSuccess: () => {
-      navigate('/');
-      //임시 알림 메시지
-      alert('오모입에 오신 걸 환영해요!')
+      // 회원가입 성공 시 신체 사진 마스킹 호출
+      if (bodyImage) {
+        bodyMasking.mutate({ image: bodyImage });
+      }
     },
     onError: () => {
       alert('회원가입 중 오류가 발생했어요...');
     }
   });
 
-  const navigate = useNavigate(); // useNavigate 훅 사용
+  const bodyMasking = useMutation({
+    mutationFn: ({ image }: { image: File }) => postBodyMasking(image),
+    onSuccess: () => {
+      alert('오모입에 오신 걸 환영해요!');
+      navigate('/');
+    },
+    onError: () => {
+      alert('신체 마스킹 중 오류가 발생했습니다.');
+    }
+  });
 
   const handleBodyImageChange = (image: File) => {
     setBodyImage(image);
@@ -45,9 +59,10 @@ const SignupPage = () => {
 
   const handleButtonClick = () => {
     if (bodyImage) {
-      console.log(`signup token: ${authStore.accessToken}`);
       setUserInfo({ username: nickname, profileUrl: null });
       signup.mutate({ username: nickname, image: bodyImage });
+    } else {
+      alert('신체 사진을 등록해주세요.');
     }
   };
 
