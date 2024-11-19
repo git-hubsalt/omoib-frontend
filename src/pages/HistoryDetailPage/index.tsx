@@ -104,7 +104,7 @@ const HistoryDetailPage: React.FC = () => {
   };
 
   const handleVirtualFittingClick = () => {
-    navigate(`/virtual-fitting`);
+    navigate(`/virtual-fitting/select`);
   };
 
   const handleClick = () => {

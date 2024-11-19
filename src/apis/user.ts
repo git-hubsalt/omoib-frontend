@@ -13,3 +13,11 @@ export const postSignup = async(username: string, bodyImage: File) => {
   return await privateFormDataAxiosInstance.post('/signup', formData)
     .then((response) => { response.data });
 }
+
+export const postBodyMasking = async(image: File) => {
+  const formData = new FormData();
+  formData.append('image', image);
+
+  return await privateFormDataAxiosInstance.post('/bodymasking', formData)
+    .then((response) => { response.data });
+}
