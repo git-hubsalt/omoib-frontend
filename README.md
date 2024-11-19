@@ -1,46 +1,17 @@
-# Getting Started with Create React App
+# 오늘 모 입지? 오모입!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="./src/assets/readme_1.png">
 
-## Available Scripts
+## 프로젝트 소개
 
-In the project directory, you can run:
+- 오모입은 날씨, 상황, 기분에 따라 적절한 옷차림을 추천해주는 서비스입니다.
+- 사용자가 자신의 옷장의 옷을 등록하면 해당 옷을 기반으로 코디를 추천해봅니다.
+- 인터넷에서 옷을 검색하여 등록하고 가상피팅을 통해 입어볼 수도 있습니다.
 
-### `npm start`
+## 팀원 정보
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<div align="center">
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+|                                                               **사민주**                                                               |                                                                 **황수민**                                                                 |                                                                 **정찬우**                                                                  |                                                              **조다운**                                                               |
+|:-----------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------:|
+| [<img src="https://avatars.githubusercontent.com/u/106991852?v=4" height=150 width=150> <br/> @MJspace](https://github.com/MJspace) |     [<img src="https://avatars.githubusercontent.com/u/163857590?v=4" height=150 width=150> <br/> @tnals0924](https://github.com/tnals0924)      | [<img src="https://avatars.githubusercontent.com/u/66253711?v=4" height=150 width=150> <br/> @chanwoo000](https://github.com/chanwoo000) | [<img src="https://avatars.githubusercontent.com/u/105338882?v=4" height=150 width=150> <br/> @daun-up](https://github.com/daun-up) |
